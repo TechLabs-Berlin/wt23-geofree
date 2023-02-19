@@ -1,18 +1,11 @@
 import React from "react";
 import { LoadScript, GoogleMap } from "@react-google-maps/api";
 
-// Initial map position:
-
-// const center = { lat: 52.520008, lng: 13.404954 };
-
-// Map size:
-
 const containerStyle = {
   width: "100%",
-  height: "100%",
+  height: "100vh",
 };
-
-// Turning off unnecessary labels:
+// Hiding unnecessary labels. DOESN'T WORK!!! API Key?
 
 const myStyles = [
   {
@@ -54,24 +47,21 @@ class Map extends React.Component {
   }
 
   render() {
-    // Loading and displaying Google Maps API:
-
     return (
-      <LoadScript googleMapsApiKey="AIzaSyCo8xQ2sDMy3KMcyC8KL3tT7pSXj5ydV5k">
-        <div style={{ height: "100vh", width: "100%" }}>
-          <GoogleMap
-            center={this.state}
-            zoom={15}
-            mapContainerStyle={containerStyle}
-            options={{
-              zoomControl: false,
-              streetViewControl: false,
-              mapTypeControl: false,
-              fullscreenControl: false,
-              styles: myStyles,
-            }}
-          ></GoogleMap>
-        </div>
+      <LoadScript googleMapsApiKey={process.env.REACT_APP_GOOGLE_MAPS_API_KEY}>
+        <GoogleMap
+          mapContainerStyle={containerStyle}
+          styles={myStyles}
+          center={this.state}
+          zoom={15}
+          options={{
+            zoomControl: false,
+            streetViewControl: false,
+            mapTypeControl: false,
+            fullscreenControl: false,
+            styles: myStyles,
+          }}
+        ></GoogleMap>
       </LoadScript>
     );
   }
