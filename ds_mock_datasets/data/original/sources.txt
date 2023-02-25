@@ -1,0 +1,2 @@
+Sources
+Zip codes Germany: https://gist.github.com/jbspeakr/4565964#file-german-zip-codes-csv
