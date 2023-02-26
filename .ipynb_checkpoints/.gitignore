@@ -1,0 +1,11 @@
+# system files
+.DS_Store
+.ipynb_checkpoints
+
+# folders
+samples/
+data/
+images/
+
+# files
+sandbox.ipynb
