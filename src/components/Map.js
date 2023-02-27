@@ -1,11 +1,13 @@
 import React from "react";
-import { LoadScript, GoogleMap } from "@react-google-maps/api";
+import { GoogleMap, MarkerF } from "@react-google-maps/api";
+
 
 const containerStyle = {
   width: "100%",
   height: "100vh",
 };
-// Hiding unnecessary labels. DOESN'T WORK!!! API Key?
+
+// Hiding unnecessary labels:
 
 const myStyles = [
   {
@@ -28,41 +30,37 @@ const myStyles = [
 // Map component:
 
 class Map extends React.Component {
-  constructor(props) {
-    super(props);
+  state = { lat: 0, lng: 0, errorMessage: "" };
 
-    this.state = { lat: null, lng: null };
-
+  componentDidMount() {
     // Getting user geolocation:
-
     window.navigator.geolocation.getCurrentPosition(
-      (position) => {
+      (position) =>
         this.setState({
           lat: parseFloat(position.coords.latitude),
           lng: parseFloat(position.coords.longitude),
-        });
-      },
+        }),
       (err) => console.log(err)
     );
   }
 
   render() {
     return (
-      <LoadScript googleMapsApiKey={process.env.REACT_APP_GOOGLE_MAPS_API_KEY}>
-        <GoogleMap
-          mapContainerStyle={containerStyle}
-          styles={myStyles}
-          center={this.state}
-          zoom={15}
-          options={{
-            zoomControl: false,
-            streetViewControl: false,
-            mapTypeControl: false,
-            fullscreenControl: false,
-            styles: myStyles,
-          }}
-        ></GoogleMap>
-      </LoadScript>
+      <GoogleMap
+        mapContainerStyle={containerStyle}
+        styles={myStyles}
+        center={this.state}
+        zoom={15}
+        options={{
+          zoomControl: false,
+          streetViewControl: false,
+          mapTypeControl: false,
+          fullscreenControl: false,
+          styles: myStyles,
+        }}
+      >
+        <MarkerF clickable={true} position={this.state} draggable={true} />
+      </GoogleMap>
     );
   }
 }
