@@ -1,5 +1,6 @@
 import React from "react";
 import Item from "./Item";
+import Search from "./Search";
 import Couch from "../images/Couch.jpg";
 import Chair from "../images/Chair.jpg";
 import Lamp from "../images/Lamp.jpg";
@@ -8,6 +9,7 @@ class List extends React.Component {
   render() {
     return (
       <div>
+        <Search />
         <Item
           id="1"
           image={Couch}
