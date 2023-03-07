@@ -5,7 +5,7 @@ venv
 .venv
 
 # folder
-temp/a
+temp/
 data/
 
 # MicrosoftOffice.gitignore
@@ -27,4 +27,4 @@ Backup of *.doc*
 ~$*.ppt*
 
 # temp requirements Python env
-requeriments.txt
+requirements.txt
