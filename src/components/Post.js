@@ -1,97 +1,112 @@
-import React from "react";
-import UploadImage from "./UploadImage";
+import React, { useState } from "react";
 import Location from "./Location";
 
-class Post extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      title: "",
-      description: "",
-      lat: null,
-      lng: null,
-      condition: "",
-    };
+const Post = () => {
+  const [title, setTitle] = useState("");
+  const [description, setDescription] = useState("");
+  const [lat, setLat] = useState(null);
+  const [lng, setLng] = useState(null);
+  const [condition, setCondition] = useState("");
+  const [myImage, setMyImage] = useState(null);
 
-    this.handleChange = this.handleChange.bind(this);
-  }
-
-  handleChange(event) {
-    event.preventDefault();
-
-    const target = event.target;
-    const value = target.value;
-    const name = target.name;
-    const lat = target.value;
-    const lng = target.value;
-    const condition = target.value;
-
-    this.setState({
-      [name]: value,
-      [lat]: value,
-      [lng]: value,
-      [condition]: value,
-    });
-  }
-
-  submitHandle() {
+  const submitHandle = (e) => {
+    e.preventDefault();
     const uploadData = new FormData();
-    uploadData.append("uploaded_images", this.myImage, this.myImage.name);
-    uploadData.append("title", this.title);
-    uploadData.append("description", this.description);
-    uploadData.append("latitude", this.lat);
-    uploadData.append("longitude", this.lng);
-    uploadData.append("condition", this.condition);
+    uploadData.append("uploaded_images", myImage, myImage.name);
+    uploadData.append("title", title);
+    uploadData.append("description", description);
+    uploadData.append("latitude", lat);
+    uploadData.append("longitude", lng);
+    uploadData.append("condition", condition);
     fetch("http://127.0.0.1:8000/api/item-create/", {
       method: "POST",
       body: uploadData,
     })
       .then((res) => console.log(res))
       .catch((error) => console.log(error));
-  }
+  };
 
-  render() {
-    return (
-      <div>
-        <form>
+  return (
+    <div>
+      <form>
+        {/* Title form: */}
+
+        <label>
+          Title:
+          <input
+            name="title"
+            type="text"
+            value={title}
+            onChange={(e) => setTitle(e.target.value)}
+          />
+        </label>
+
+        {/* Description form: */}
+
+        <label>
+          Description:
+          <textarea
+            name="description"
+            value={description}
+            onChange={(e) => setDescription(e.target.value)}
+          />
+        </label>
+
+        {/* Upload image: */}
+
+        <div>
           <label>
-            Title:
+            Select Image:
+            {myImage && (
+              <div>
+                <img
+                  alt="not found"
+                  width={"250px"}
+                  src={URL.createObjectURL(myImage)}
+                />
+                <br />
+                <button onClick={() => setMyImage(null)}>Remove</button>
+              </div>
+            )}
             <input
-              name="title"
-              type="text"
-              value={this.state.title}
-              onChange={this.handleChange}
+              type="file"
+              name="myImage"
+              required
+              multiple="multiple"
+              onChange={(event) => {
+                console.log(event.target.files[0]);
+                setMyImage(event.target.files[0]);
+              }}
             />
           </label>
-          <label>
-            Description:
-            <textarea
-              name="description"
-              value={this.state.description}
-              onChange={this.handleChange}
-            />
-          </label>
+        </div>
 
-          <UploadImage />
-          <label>
-            Condition:
-            <select
-              name="condition"
-              value={this.state.condition}
-              onChange={this.handleChange}
-            >
-              <option value="">Choose condition</option>
-              <option value="good">Good</option>
-              <option value="okay">Okay</option>
-              <option value="bad">Bad</option>
-            </select>
-          </label>
-          <Location />
-          <input type="submit" onClick={this.submitHandle} />
-        </form>
-      </div>
-    );
-  }
-}
+        {/* Condition dropdown: */}
+
+        <label>
+          Condition:
+          <select
+            name="condition"
+            value={condition}
+            onChange={(e) => setCondition(e.target.value)}
+          >
+            <option value="">Choose condition</option>
+            <option value="good">Good</option>
+            <option value="okay">Okay</option>
+            <option value="bad">Bad</option>
+          </select>
+        </label>
+
+        {/* Geolocation: */}
+
+        <Location
+          onChange={(e) => setLat(e.target.value) && setLng(e.target.value)}
+        />
+
+        <input type="submit" onSubmit={submitHandle} />
+      </form>
+    </div>
+  );
+};
 
 export default Post;

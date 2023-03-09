@@ -19,9 +19,9 @@ class Location extends React.Component {
     return (
       <p>
         <strong>Latitude:</strong>
-        {this.state.lat || "(empty)"}
+        {this.state.lat || "(Loading...)"}
         <strong>Longitude:</strong>
-        {this.state.lng || "(empty)"}
+        {this.state.lng || "(Loading...)"}
         <input type="hidden" name="lat" value={this.state.lat} />
         <input type="hidden" name="lng" value={this.state.lng} />
       </p>

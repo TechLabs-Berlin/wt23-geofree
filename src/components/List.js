@@ -6,10 +6,16 @@ import Chair from "../images/Chair.jpg";
 import Lamp from "../images/Lamp.jpg";
 
 class List extends React.Component {
+
+
+  onSearchSubmit(term) {
+    console.log(term);
+  }
+
   render() {
     return (
       <div>
-        <Search />
+        <Search onSubmit={this.onSearchSubmit} />
         <Item
           id="1"
           image={Couch}
