@@ -1,22 +1,32 @@
 import React from "react";
-import Item from "./Item";
+// import Item from "./Item";
 import Search from "./Search";
-import Couch from "../images/Couch.jpg";
-import Chair from "../images/Chair.jpg";
-import Lamp from "../images/Lamp.jpg";
 
 class List extends React.Component {
+  state = { items: [] };
 
-
-  onSearchSubmit(term) {
-    console.log(term);
+  componentDidMount() {
+    const loadSearchResults = async () => {
+      try {
+        const res = await fetch("http://127.0.0.1:8000/api/item-list/");
+        const data = await res.json();
+      } catch (e) {
+        console.log("ERROR", e);
+      }
+    };
+    loadSearchResults();
   }
 
   render() {
     return (
       <div>
-        <Search onSubmit={this.onSearchSubmit} />
-        <Item
+        <Search />
+        <div>
+          <ul>
+            <div></div>
+          </ul>
+        </div>
+        {/* <Item
           id="1"
           image={Couch}
           title="sofa"
@@ -40,7 +50,7 @@ class List extends React.Component {
           description="white pendant lamp"
           location="Berlin"
           state="ok"
-        />
+        /> */}
       </div>
     );
   }
