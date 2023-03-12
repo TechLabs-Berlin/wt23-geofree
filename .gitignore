@@ -9,6 +9,7 @@ venv
 # folder
 temp/
 data/
+sandbox/
 
 # MicrosoftOffice.gitignore
 *.tmp
