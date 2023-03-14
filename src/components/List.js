@@ -1,59 +1,80 @@
-import React from "react";
-// import Item from "./Item";
-import Search from "./Search";
+import React, { useState, useEffect } from "react";
 
-class List extends React.Component {
-  state = { items: [] };
+function List() {
+  const [allData, setAllData] = useState([]);
+  const [filteredData, setFilteredData] = useState(allData);
 
-  componentDidMount() {
-    const loadSearchResults = async () => {
-      try {
-        const res = await fetch("http://127.0.0.1:8000/api/item-list/");
-        const data = await res.json();
-      } catch (e) {
+  const handleSearch = (event) => {
+    let value = event.target.value.toLowerCase();
+    let result = [];
+    console.log(value);
+    result = allData.filter((data) => {
+      return data.title.search(value) != -1;
+    });
+    setFilteredData(result);
+  };
+
+  // const handleSubmit = (event) => {
+  //   event.preventDefault();
+  // };
+
+  useEffect(() => {
+    fetch("http://127.0.0.1:8000/api/item-list/")
+      .then((res) => {
+        console.log(res);
+        return res.json();
+      })
+      .then((data) => {
+        console.log(data);
+        setAllData(data);
+        setFilteredData(data);
+      })
+      .catch((e) => {
         console.log("ERROR", e);
-      }
-    };
-    loadSearchResults();
-  }
+      });
+  }, []);
 
-  render() {
-    return (
+  return (
+    <div>
       <div>
-        <Search />
-        <div>
-          <ul>
-            <div></div>
-          </ul>
-        </div>
-        {/* <Item
-          id="1"
-          image={Couch}
-          title="sofa"
-          description="green velvet sofa"
-          location="my backyard"
-          state="very good"
-        />
-
-        <Item
-          id="2"
-          image={Chair}
-          title="chair"
-          description="black chair"
-          location="Berlin"
-          state="good"
-        />
-        <Item
-          id="3"
-          image={Lamp}
-          title="lamp"
-          description="white pendant lamp"
-          location="Berlin"
-          state="ok"
-        /> */}
+        <form>
+          <label>
+            Search:
+            <input
+              type="text"
+              onChange={(event) => {
+                event.preventDefault();
+                handleSearch(event);
+              }}
+            />
+          </label>
+        </form>
       </div>
-    );
-  }
+      <div>
+        {filteredData.map((value) => {
+          return (
+            <div key={value.id}>
+              <div>Id:{value.id}</div>
+              <div>Title:{value.title}</div>
+              <div>Description: {value.description}</div>
+              <div>Condition: {value.condition}</div>
+              <div>
+                <strong>Location</strong>
+                <div>Latitude: {value.latitude}</div>
+                <div>Longitude: {value.longitude}</div>
+              </div>
+              <div>
+                <img
+                  alt="test"
+                  width={"250px"}
+                  src={`http://127.0.0.1:8000` + value.images[0].image}
+                />
+              </div>
+            </div>
+          );
+        })}
+      </div>
+    </div>
+  );
 }
-
 export default List;

@@ -5,7 +5,6 @@ class Location extends React.Component {
     super(props);
 
     this.state = {
-      // This is unused but maybe you can set it in the error portion of getCurrentPosition and then conditionally render it
       errorMessage: "",
     };
   }
