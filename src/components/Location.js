@@ -1,16 +1,22 @@
 import React from "react";
 
 class Location extends React.Component {
-  state = { lat: 0, lng: 0, errorMessage: "" };
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      // This is unused but maybe you can set it in the error portion of getCurrentPosition and then conditionally render it
+      errorMessage: "",
+    };
+  }
 
   componentDidMount() {
     // Getting user geolocation:
     window.navigator.geolocation.getCurrentPosition(
-      (position) =>
-        this.setState({
-          lat: parseFloat(position.coords.latitude),
-          lng: parseFloat(position.coords.longitude),
-        }),
+      (position) => {
+        this.props.setLng(parseFloat(position.coords.longitude));
+        this.props.setLat(parseFloat(position.coords.latitude));
+      },
       (err) => console.log(err)
     );
   }
@@ -19,11 +25,11 @@ class Location extends React.Component {
     return (
       <p>
         <strong>Latitude:</strong>
-        {this.state.lat || "(Loading...)"}
+        {this.props.lat || "(Loading...)"}
         <strong>Longitude:</strong>
-        {this.state.lng || "(Loading...)"}
-        <input type="hidden" name="lat" value={this.state.lat} />
-        <input type="hidden" name="lng" value={this.state.lng} />
+        {this.props.lng || "(Loading...)"}
+        <input type="hidden" name="lat" value={this.props.lat} />
+        <input type="hidden" name="lng" value={this.props.lng} />
       </p>
     );
   }

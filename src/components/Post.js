@@ -1,18 +1,23 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import Location from "./Location";
 
 const Post = () => {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
-  const [lat, setLat] = useState(null);
-  const [lng, setLng] = useState(null);
+  const [lat, setLat] = useState("");
+  const [lng, setLng] = useState("");
   const [condition, setCondition] = useState("");
-  const [myImage, setMyImage] = useState(null);
+  const [myImage, setMyImage] = useState();
+  const ref = useRef();
 
-  const submitHandle = (e) => {
-    e.preventDefault();
+  const submitHandle = () => {
     const uploadData = new FormData();
-    uploadData.append("uploaded_images", myImage, myImage.name);
+
+    // Loop oveer myImage array
+    for (let i = 0; i < myImage.length; i++) {
+      uploadData.append(`uploaded_images[${i}]`, myImage[0], myImage.name);
+    }
+
     uploadData.append("title", title);
     uploadData.append("description", description);
     uploadData.append("latitude", lat);
@@ -26,9 +31,15 @@ const Post = () => {
       .catch((error) => console.log(error));
   };
 
+  const reset = (e) => {
+    e.preventDefault();
+    ref.current.value = null;
+    setMyImage(null);
+  };
+
   return (
     <div>
-      <form>
+      <form onSubmit={() => submitHandle()}>
         {/* Title form: */}
 
         <label>
@@ -57,25 +68,30 @@ const Post = () => {
         <div>
           <label>
             Select Image:
-            {myImage && (
+            {myImage ? (
               <div>
-                <img
-                  alt="not found"
-                  width={"250px"}
-                  src={URL.createObjectURL(myImage)}
-                />
-                <br />
-                <button onClick={() => setMyImage(null)}>Remove</button>
+                {Array.from(myImage).map((item) => {
+                  return (
+                    <img
+                      key={item.name}
+                      alt="not found"
+                      width={"250px"}
+                      src={URL.createObjectURL(item)}
+                    />
+                  );
+                })}
+
+                <button onClick={reset}>Remove</button>
               </div>
-            )}
+            ) : null}
             <input
               type="file"
               name="myImage"
-              required
-              multiple="multiple"
+              accept="image/*"
+              ref={ref}
+              multiple
               onChange={(event) => {
-                console.log(event.target.files[0]);
-                setMyImage(event.target.files[0]);
+                setMyImage(event.target.files);
               }}
             />
           </label>
@@ -99,11 +115,9 @@ const Post = () => {
 
         {/* Geolocation: */}
 
-        <Location
-          onChange={(e) => setLat(e.target.value) && setLng(e.target.value)}
-        />
+        <Location setLat={setLat} setLng={setLng} lat={lat} lng={lng} />
 
-        <input type="submit" onSubmit={submitHandle} />
+        <input type="submit" />
       </form>
     </div>
   );
