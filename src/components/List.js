@@ -14,12 +14,8 @@ function List() {
     setFilteredData(result);
   };
 
-  // const handleSubmit = (event) => {
-  //   event.preventDefault();
-  // };
-
   useEffect(() => {
-    fetch("http://127.0.0.1:8000/api/item-list/")
+    fetch("https://geofree.pythonanywhere.com/api/item-list/")
       .then((res) => {
         console.log(res);
         return res.json();
@@ -67,7 +63,10 @@ function List() {
                 <img
                   alt="test"
                   width={"250px"}
-                  src={`http://127.0.0.1:8000` + value.images[0].image}
+                  src={
+                    `https://geofree.pythonanywhere.com/` +
+                    value.images[0].image
+                  }
                 />
               </div>
             </div>

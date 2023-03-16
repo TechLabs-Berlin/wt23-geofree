@@ -1,7 +1,6 @@
 import React from "react";
 import { GoogleMap, MarkerF } from "@react-google-maps/api";
 
-
 const containerStyle = {
   width: "100%",
   height: "100vh",

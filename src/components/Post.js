@@ -1,4 +1,5 @@
 import React, { useState, useRef } from "react";
+import { useNavigate } from "react-router-dom";
 import Location from "./Location";
 
 const Post = () => {
@@ -9,8 +10,10 @@ const Post = () => {
   const [condition, setCondition] = useState("");
   const [myImage, setMyImage] = useState();
   const ref = useRef();
+  const navigate = useNavigate();
 
-  const submitHandle = () => {
+  const submitHandle = (e) => {
+    e.preventDefault();
     const uploadData = new FormData();
 
     // Loop oveer myImage array
@@ -23,12 +26,14 @@ const Post = () => {
     uploadData.append("latitude", lat);
     uploadData.append("longitude", lng);
     uploadData.append("condition", condition);
-    fetch("http://127.0.0.1:8000/api/item-create/", {
+    fetch("https://geofree.pythonanywhere.com/api/item-create/", {
       method: "POST",
       body: uploadData,
     })
       .then((res) => console.log(res))
       .catch((error) => console.log(error));
+
+    navigate("/list");
   };
 
   const reset = (e) => {
@@ -39,7 +44,7 @@ const Post = () => {
 
   return (
     <div>
-      <form onSubmit={() => submitHandle()}>
+      <form onSubmit={submitHandle}>
         {/* Title form: */}
 
         <label>
