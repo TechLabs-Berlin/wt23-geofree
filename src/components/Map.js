@@ -83,7 +83,7 @@ function Map() {
         })}
       </GoogleMap>
 
-      <div>
+      {/* <div>
         {filteredData.map((value) => {
           return (
             <div key={value.id}>
@@ -109,7 +109,7 @@ function Map() {
             </div>
           );
         })}
-      </div>
+      </div> */}
     </div>
   );
 }
