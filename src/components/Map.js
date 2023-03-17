@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { GoogleMap, MarkerF } from "@react-google-maps/api";
 
 const containerStyle = {
@@ -28,27 +28,43 @@ const myStyles = [
 
 // Map component:
 
-class Map extends React.Component {
-  state = { lat: 0, lng: 0, errorMessage: "" };
+function Map() {
+  const [lat, setLat] = useState(0);
+  const [lng, setLng] = useState(0);
+  const [allData, setAllData] = useState([]);
+  const [filteredData, setFilteredData] = useState([]);
 
-  componentDidMount() {
-    // Getting user geolocation:
-    window.navigator.geolocation.getCurrentPosition(
-      (position) =>
-        this.setState({
-          lat: parseFloat(position.coords.latitude),
-          lng: parseFloat(position.coords.longitude),
-        }),
-      (err) => console.log(err)
-    );
-  }
+  // Getting user geolocation:
+  window.navigator.geolocation.getCurrentPosition(
+    (position) => {
+      setLat(parseFloat(position.coords.latitude));
+      setLng(parseFloat(position.coords.longitude));
+    },
+    (err) => console.log(err)
+  );
 
-  render() {
-    return (
+  useEffect(() => {
+    fetch("https://geofree.pythonanywhere.com/api/item-list/")
+      .then((res) => {
+        console.log(res);
+        return res.json();
+      })
+      .then((data) => {
+        console.log(data);
+        setAllData(data);
+        setFilteredData(data);
+      })
+      .catch((e) => {
+        console.log("ERROR", e);
+      });
+  }, []);
+
+  return (
+    <div>
       <GoogleMap
         mapContainerStyle={containerStyle}
         styles={myStyles}
-        center={this.state}
+        center={{ lat, lng }}
         zoom={15}
         options={{
           zoomControl: false,
@@ -58,10 +74,44 @@ class Map extends React.Component {
           styles: myStyles,
         }}
       >
-        <MarkerF clickable={true} position={this.state} draggable={true} />
+        {filteredData.map((value) => {
+          const position = { lat: value.latitude, lng: value.longitude };
+
+          return (
+            <MarkerF clickable={true} position={position} key={value.id} />
+          );
+        })}
       </GoogleMap>
-    );
-  }
+
+      <div>
+        {filteredData.map((value) => {
+          return (
+            <div key={value.id}>
+              <div>Id:{value.id}</div>
+              <div>Title:{value.title}</div>
+              <div>Description: {value.description}</div>
+              <div>Condition: {value.condition}</div>
+              <div>
+                <strong>Location</strong>
+                <div>Latitude: {value.latitude}</div>
+                <div>Longitude: {value.longitude}</div>
+              </div>
+              <div>
+                <img
+                  alt="test"
+                  width={"250px"}
+                  src={
+                    `https://geofree.pythonanywhere.com/` +
+                    value.images[0].image
+                  }
+                />
+              </div>
+            </div>
+          );
+        })}
+      </div>
+    </div>
+  );
 }
 
 export default Map;
