@@ -43,6 +43,8 @@ function Map() {
     (err) => console.log(err)
   );
 
+  console.log(allData);
+
   useEffect(() => {
     fetch("https://geofree.pythonanywhere.com/api/item-list/")
       .then((res) => {
