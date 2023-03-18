@@ -6,7 +6,7 @@ Data projects are studies of exploratory analysis that provide a basis for subse
 ### Data collection
 A free JSON API about disturbances in Berlin from the [Ordnungsamt](https://daten.berlin.de/datensaetze/ordnungsamt-online) in the category of waste thrown out on streets were used for our data project.
 
-### Exploratory Data Analysis if text with wordcould
+### Exploratory Data Analysis of text with wordcould
 An analysis of the text from "situation description” in the "Sachverhalt" column found the items with higher occurrences, considering the original text in German and the translation in English to reduce inconsistencies that occurred because of English compound words.
 
 The most cited items in English were:
