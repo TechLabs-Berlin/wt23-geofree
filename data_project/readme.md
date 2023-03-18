@@ -1,4 +1,5 @@
-## Data Project
+# Data Project
+Author: Karina Condeixa
 
 Data projects are studies of exploratory analysis that provide a basis for subsequent analysis and processing of data. They help us to understand the domain and support insights about the specifics of the dataset we are going to work with. We made analysis and visualisation to answer questions about the data and give us insights that can support us to build a better ML model.
 
