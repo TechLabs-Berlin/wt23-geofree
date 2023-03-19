@@ -1,0 +1,1 @@
+![Alt text](images/data_collection.png "data_collection")
