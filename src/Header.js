@@ -1,5 +1,6 @@
 import React from "react";
 // import { styled, alpha } from "@mui/material/styles";
+import { Link as RouterLink } from "react-router-dom";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
@@ -70,7 +71,8 @@ const Header = () => {
               size="small"
               aria-label="main logo"
               color="inherit"
-              href="/list"
+              component={RouterLink}
+              to="/list"
             >
               <img src={Logo} alt="logo" width="100px"></img>
             </IconButton>
@@ -90,7 +92,8 @@ const Header = () => {
                 size="large"
                 aria-label="go to map view"
                 color="inherit"
-                href="/map"
+                component={RouterLink}
+                to="/map"
               >
                 <FmdGoodOutlinedIcon />
               </IconButton>
@@ -99,7 +102,8 @@ const Header = () => {
                 size="large"
                 aria-label="go to post item page"
                 color="inherit"
-                href="/post"
+                component={RouterLink}
+                to="/post"
               >
                 <FileUploadOutlinedIcon />
               </IconButton>
