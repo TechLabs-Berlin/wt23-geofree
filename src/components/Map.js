@@ -35,6 +35,7 @@ function Map() {
   const [filteredData, setFilteredData] = useState([]);
 
   // Getting user geolocation:
+
   window.navigator.geolocation.getCurrentPosition(
     (position) => {
       setLat(parseFloat(position.coords.latitude));
@@ -43,7 +44,19 @@ function Map() {
     (err) => console.log(err)
   );
 
-  console.log(allData);
+  // Searching through markers:
+
+  const handleSearch = (event) => {
+    let value = event.target.value.toLowerCase();
+    let result = [];
+    console.log(value);
+    result = allData.filter((data) => {
+      return data.title.search(value) !== -1;
+    });
+    setFilteredData(result);
+  };
+
+  // Fetching data:
 
   useEffect(() => {
     fetch("https://geofree.pythonanywhere.com/api/item-list/")
@@ -63,6 +76,20 @@ function Map() {
 
   return (
     <div>
+      <div>
+        <form>
+          <label>
+            Search:
+            <input
+              type="text"
+              onChange={(event) => {
+                event.preventDefault();
+                handleSearch(event);
+              }}
+            />
+          </label>
+        </form>
+      </div>
       <GoogleMap
         mapContainerStyle={containerStyle}
         styles={myStyles}
