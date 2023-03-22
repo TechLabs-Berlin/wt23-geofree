@@ -4,7 +4,7 @@ import Header from "./Header";
 import Map from "./components/Map";
 import Home from "./components/Home";
 // import List from "./components/List";
-import Item from "./components/Item";
+import ItemDetail from "./components/ItemDetail";
 import Post from "./components/Post";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 import CssBaseline from "@mui/material/CssBaseline";
@@ -48,7 +48,7 @@ const App = () => {
           <Routes>
             <Route path="/" exact element={<Home />} />
             <Route path="/map" element={<Map />} />
-            <Route path="/item" element={<Item />} />
+            <Route path="/item/:id" element={<ItemDetail />} />
             <Route path="/post" element={<Post />} />
           </Routes>
         </BrowserRouter>

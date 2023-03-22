@@ -6,10 +6,6 @@ import SearchIcon from "@mui/icons-material/Search";
 const Home = () => {
   const [allData, setAllData] = useState([]);
   const [filteredData, setFilteredData] = useState(allData);
-  // const [lat, setLat] = useState("");
-  // const [lng, setLng] = useState("");
-  // const [distance, setDistance] = useState(1000);
-  // const [posts, setPosts] = useState([]);
   const navigate = useNavigate();
 
   const handleSearch = (event) => {
@@ -22,27 +18,9 @@ const Home = () => {
     setFilteredData(result);
   };
 
-  const navigateToItem = () => {
-    navigate("/item");
+  const navigateToItem = (itemId) => {
+    navigate(`/item/${itemId}`);
   };
-
-  // const routeChange = () => {
-  //   let path = `https://geofree.pythonanywhere.com/api/item-detail/${key.id}`;
-  //   navigate(path);
-  // };
-
-  // useEffect(() => {
-  //   fetch(
-  //     `https://geofree.pythonanywhere.com/api/item-list-distance/?distance=${distance}&lat=${lat}&lng=${lng}`
-  //   )
-  //     .then((res) => res.json())
-  //     .then((data) => {
-  //       setPosts(data);
-  //     })
-  //     .catch((e) => {
-  //       console.log("ERROR", e.json());
-  //     });
-  // });
 
   useEffect(() => {
     fetch("https://geofree.pythonanywhere.com/api/item-list/")
@@ -129,20 +107,13 @@ const Home = () => {
                     <div>Condition: {value.condition}</div>
                     <div>
                       <strong>Location</strong>
-
-                      {/* <div>Latitude: {value.latitude}</div>
-                      <div>Longitude: {value.longitude}</div> */}
                     </div>
                   </div>
                   <Button
                     variant="contained"
                     type="submit"
                     color="secondary"
-                    onClick={navigateToItem}
-                    // key={value.id}
-                    // title={value.title}
-                    // description={value.description}
-                    // condition={value.condition}
+                    onClick={() => navigateToItem(value.id)}
                   >
                     Go to item
                   </Button>
