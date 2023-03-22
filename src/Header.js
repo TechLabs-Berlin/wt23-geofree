@@ -1,18 +1,18 @@
 import React from "react";
-// import { styled, alpha } from "@mui/material/styles";
 import { Link as RouterLink } from "react-router-dom";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
 import IconButton from "@mui/material/IconButton";
-// import InputBase from "@mui/material/InputBase";
 import MenuItem from "@mui/material/MenuItem";
 import Menu from "@mui/material/Menu";
 import MenuIcon from "@mui/icons-material/Menu";
-// import SearchIcon from "@mui/icons-material/Search";
 import FmdGoodOutlinedIcon from "@mui/icons-material/FmdGoodOutlined";
 import FileUploadOutlinedIcon from "@mui/icons-material/FileUploadOutlined";
 import AccountCircleOutlinedIcon from "@mui/icons-material/AccountCircleOutlined";
+import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
+import FormatListBulletedIcon from "@mui/icons-material/FormatListBulleted";
+import SettingsOutlinedIcon from "@mui/icons-material/SettingsOutlined";
 import Logo from "./images/Logo_L.png";
 
 const Header = () => {
@@ -44,11 +44,25 @@ const Header = () => {
       }}
       open={isMenuOpen}
       onClose={handleMenuClose}
+      sx={{ p: 2 }}
     >
-      <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
-      <MenuItem onClick={handleMenuClose}>Favorites</MenuItem>
-      <MenuItem onClick={handleMenuClose}>My listings</MenuItem>
-      <MenuItem onClick={handleMenuClose}>Settings</MenuItem>
+      <MenuItem onClick={handleMenuClose}>
+        <AccountCircleOutlinedIcon sx={{ m: 1 }} />
+        Profile
+      </MenuItem>
+      <MenuItem onClick={handleMenuClose}>
+        <FavoriteBorderIcon sx={{ m: 1 }} />
+        Favorites
+      </MenuItem>
+      <MenuItem onClick={handleMenuClose}>
+        {" "}
+        <FormatListBulletedIcon sx={{ m: 1 }} />
+        My listings
+      </MenuItem>
+      <MenuItem onClick={handleMenuClose}>
+        <SettingsOutlinedIcon sx={{ m: 1 }} />
+        Settings
+      </MenuItem>
     </Menu>
   );
 

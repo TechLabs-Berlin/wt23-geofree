@@ -23,7 +23,7 @@ const Home = () => {
   };
 
   const navigateToItem = () => {
-    navigate("/Item");
+    navigate("/item");
   };
 
   // const routeChange = () => {
@@ -139,6 +139,10 @@ const Home = () => {
                     type="submit"
                     color="secondary"
                     onClick={navigateToItem}
+                    // key={value.id}
+                    // title={value.title}
+                    // description={value.description}
+                    // condition={value.condition}
                   >
                     Go to item
                   </Button>

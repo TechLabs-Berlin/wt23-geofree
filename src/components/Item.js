@@ -1,23 +1,21 @@
-import React, { useEffect } from "react";
+import React from "react";
 
-const Item = ({ key, title, description }) => {
-  useEffect(() => {
-    fetch(`https://geofree.pythonanywhere.com/api/item-detail/${key}`)
-      .then((res) => {
-        console.log(res);
-        return res.json();
-      })
-      .then((data) => {
-        console.log(data);
-        setAllData(data);
-        setFilteredData(data);
-      })
-      .catch((e) => {
-        console.log("ERROR", e);
-      });
-  }, []);
+const Item = () => {
+  // useEffect(() => {
+  //   fetch(`https://geofree.pythonanywhere.com/api/item-detail/`)
+  //     .then((res) => {
+  //       console.log(res);
+  //       return res.json();
+  //     })
+  //     .then((data) => {
+  //       console.log(data);
+  //     })
+  //     .catch((e) => {
+  //       console.log("ERROR", e);
+  //     });
+  // }, []);
 
-  return <div>Item</div>;
+  return <div>Item page</div>;
 };
 
 export default Item;
