@@ -31,7 +31,7 @@ const Post = () => {
   const [lng, setLng] = useState("");
   const [condition, setCondition] = useState("");
   const [myImage, setMyImage] = useState();
-  const [category, setCategory] = useState("");
+  const [category] = useState("");
   const [open, setOpen] = React.useState(false);
   const [selectedIndex, setSelectedIndex] = React.useState(0);
   const ref = useRef();
