@@ -1,28 +1,35 @@
-import React from "react";
+// import React, { useState, useEffect } from "react";
 
-class Search extends React.Component {
-  state = { term: "" };
+// function Search() {
+//   const [allData, setAllData] = useState([]);
+//   const [filteredData, setFilteredData] = useState(allData);
 
-  onFormSubmit = (event) => {
-    event.preventDefault();
-    this.props.onSubmit(this.state.term);
-  };
+//   const handleSearch = (event) => {
+//     let value = event.target.value.toLowerCase();
+//     let result = [];
+//     console.log(value);
+//     result = allData.filter((data) => {
+//       return data.title.search(value) !== -1;
+//     });
+//     setFilteredData(result);
+//   };
 
-  render() {
-    return (
-      <div>
-        <form onSubmit={this.onFormSubmit}>
-          <label>Search: </label>
-          <input
-            type="text"
-            placeholder="Search here"
-            value={this.state.term}
-            onChange={(e) => this.setState({ term: e.target.value })}
-          />
-          <input type="submit" />
-        </form>
-      </div>
-    );
-  }
-}
-export default Search;
+//   return (
+//     <div>
+//       <form>
+//         <label>
+//           Search:
+//           <input
+//             type="text"
+//             onChange={(event) => {
+//               event.preventDefault();
+//               handleSearch(event);
+//             }}
+//           />
+//         </label>
+//       </form>
+//     </div>
+//   );
+// }
+
+// export default Search;

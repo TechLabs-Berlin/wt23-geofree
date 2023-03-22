@@ -54,8 +54,10 @@ const Header = () => {
 
   return (
     <div>
-      <Box sx={{ flexGrow: 1 }}>
-        <AppBar position="static">
+      <Box
+        sx={{ m: 0, flexGrow: 1, borderBottom: 1, borderColor: "border.main" }}
+      >
+        <AppBar position="static" elevation={0}>
           <Toolbar>
             <IconButton
               size="large"
@@ -72,19 +74,10 @@ const Header = () => {
               aria-label="main logo"
               color="inherit"
               component={RouterLink}
-              to="/list"
+              to="/"
             >
               <img src={Logo} alt="logo" width="100px"></img>
             </IconButton>
-
-            {/* <Typography
-              variant="h6"
-              noWrap
-              component="div"
-              sx={{ display: { sm: "block" } }}
-            >
-              Geofree
-            </Typography> */}
 
             <Box sx={{ flexGrow: 1 }} />
             <Box sx={{ display: { md: "flex" } }}>

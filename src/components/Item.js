@@ -1,25 +1,23 @@
-import React from "react";
+import React, { useEffect } from "react";
 
-const Item = ({ id, image, title, description, location, state }) => {
-  return (
-    <div>
-      <div>Item Card</div>
+const Item = ({ key, title, description }) => {
+  useEffect(() => {
+    fetch(`https://geofree.pythonanywhere.com/api/item-detail/${key}`)
+      .then((res) => {
+        console.log(res);
+        return res.json();
+      })
+      .then((data) => {
+        console.log(data);
+        setAllData(data);
+        setFilteredData(data);
+      })
+      .catch((e) => {
+        console.log("ERROR", e);
+      });
+  }, []);
 
-      <div>
-        <figure>
-          <img src={image} style={{ width: "20%" }} alt=""></img>
-        </figure>
-      </div>
-
-      <div>
-        <p>ID: {id}</p>
-        <p>Title: {title}</p>
-        <p>Description: {description}</p>
-        <p>Location: {location}</p>
-        <p>State: {state}</p>
-      </div>
-    </div>
-  );
+  return <div>Item</div>;
 };
 
 export default Item;
