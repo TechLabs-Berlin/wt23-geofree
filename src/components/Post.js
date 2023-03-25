@@ -77,7 +77,7 @@ const Post = () => {
 
     // Loop oveer myImage array
     for (let i = 0; i < myImage.length; i++) {
-      uploadData.append(`uploaded_images[${i}]`, myImage[0], myImage.name);
+      uploadData.append(`uploaded_images[${i}]`, myImage[i], myImage.name);
     }
 
     uploadData.append("title", title);
