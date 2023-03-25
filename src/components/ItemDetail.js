@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import { Box, Grid } from "@mui/material";
+import { Box } from "@mui/material";
+import Slider from "react-slick";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 
 const ItemDetail = () => {
   const { id } = useParams();
@@ -22,39 +25,48 @@ const ItemDetail = () => {
     return <div>Loading...</div>;
   }
 
+  const settings = {
+    dots: true,
+    infinite: true,
+    slidesToShow: 1,
+    slidesToScroll: 1,
+  };
+
   return (
     <div>
-      <Grid container spacing={1} sx={{ m: 1 }}>
-        <Grid item xs={6}>
+      <Slider {...settings}>
+        {item.images.map((image, index) => (
           <Box
+            key={index}
             component="img"
             sx={{
-              width: 200,
-              height: 200,
+              maxHeight: 400,
+              height: "100%",
               border: 1,
               borderColor: "border.main",
-              objectFit: "cover",
-              borderRadius: 0.3,
+              objectFit: "contain",
+              display: "block",
             }}
-            alt="item"
-            src={`https://geofree.pythonanywhere.com/` + item.images[0].image}
-          ></Box>
-        </Grid>
+            alt=""
+            src={`https://geofree.pythonanywhere.com${image.image}`}
+            onError={(e) => console.log("Error loading image", e)}
+          />
+        ))}
+      </Slider>
 
-        <Grid item xs={6}>
-          <div key={item.id}>
-            <div>Id:{item.id}</div>
-            <div>
-              <strong>{item.title}</strong>
-            </div>
-            <div>{item.description}</div>
-            <div>Condition: {item.condition}</div>
-            <div>
-              <strong>Location</strong>
-            </div>
+      <Box>
+        <div key={item.id}>
+          <div>Id:{item.id}</div>
+          <div>
+            <strong>{item.title}</strong>
           </div>
-        </Grid>
-      </Grid>
+          <div>{item.description}</div>
+          <div>Condition: {item.condition}</div>
+          <div>
+            <strong>Location</strong>
+          </div>
+        </div>
+      </Box>
     </div>
   );
 };
