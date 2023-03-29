@@ -1,5 +1,6 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+
 import {
   CardContent,
   TextField,
@@ -11,13 +12,7 @@ import {
   Fab,
   Button,
 } from "@mui/material";
-import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
-import ClickAwayListener from "@mui/material/ClickAwayListener";
-import Grow from "@mui/material/Grow";
-import Paper from "@mui/material/Paper";
-import Popper from "@mui/material/Popper";
-import MenuItem from "@mui/material/MenuItem";
-import MenuList from "@mui/material/MenuList";
+import Multiselect from "multiselect-react-dropdown";
 
 import DriveFolderUploadOutlinedIcon from "@mui/icons-material/DriveFolderUploadOutlined";
 import ClearOutlinedIcon from "@mui/icons-material/ClearOutlined";
@@ -31,51 +26,41 @@ const Post = () => {
   const [lng, setLng] = useState("");
   const [condition, setCondition] = useState("");
   const [myImage, setMyImage] = useState();
-  const [category] = useState("");
-  const [open, setOpen] = React.useState(false);
-  const [selectedIndex, setSelectedIndex] = React.useState(0);
-  const ref = useRef();
-  const anchorRef = React.useRef(null);
   const navigate = useNavigate();
+  const [categories, setCategories] = useState([]); // state() that stores the categories selected by the user to do the query
+  const [categoriesSelected, setCategoriesSelected] = useState([]); //state() that stores the choices of
+  const ref = useRef();
+  const [addCategory, setAddCategory] = useState(false); //state() that will conditionally display the input of a new category
+  const [newCategory, setNewCategory] = useState(); // state() that stores the new category created by the user
 
-  // Category dropdown:
-
-  const options = [
-    "Category",
-    "Furniture",
-    "Clothes",
-    "Kitchen utensils",
-    "Kids",
-    "Books",
-    "Other",
-  ];
-
-  const handleClick = () => {
-    console.info(`You clicked ${options[selectedIndex]}`);
+  const handleChange = (event) => {
+    setCategories(event.target.value);
   };
 
-  const handleMenuItemClick = (event, index) => {
-    setSelectedIndex(index);
-    setOpen(false);
-  };
+  //fetch the GeoFree categories
+  useEffect(() => {
+    fetch("https://geofree.pythonanywhere.com/api/get-categories/")
+      .then((res) => {
+        return res.json();
+      })
+      .then((data) => {
+        setCategories(data);
+      })
+      .catch((e) => {
+        console.log("ERROR", e);
+      });
+  }, []);
 
-  const handleToggle = () => {
-    setOpen((prevOpen) => !prevOpen);
-  };
-
-  const handleClose = (event) => {
-    if (anchorRef.current && anchorRef.current.contains(event.target)) {
-      return;
-    }
-
-    setOpen(false);
-  };
+  //building the categories array to show in Multiselect component
+  const option = [];
+  for (let i = 0; i < categories.length; i++) {
+    option.push(categories[i].name);
+  }
 
   const submitHandle = (e) => {
     e.preventDefault();
     const uploadData = new FormData();
-
-    // Loop oveer myImage array
+    // Loop over myImage array
     for (let i = 0; i < myImage.length; i++) {
       uploadData.append(`uploaded_images[${i}]`, myImage[i], myImage.name);
     }
@@ -85,6 +70,7 @@ const Post = () => {
     uploadData.append("latitude", lat);
     uploadData.append("longitude", lng);
     uploadData.append("condition", condition);
+    uploadData.append("categories", categoriesSelected); //Array of categories added to the item3
     fetch("https://geofree.pythonanywhere.com/api/item-create/", {
       method: "POST",
       body: uploadData,
@@ -93,6 +79,27 @@ const Post = () => {
       .catch((error) => console.log(error));
 
     navigate("/");
+  };
+
+  //If user adds a new category, it will be added to the category DB
+  const addCategoryHandle = (event) => {
+    event.preventDefault();
+    if (option.includes(newCategory)) {
+      setNewCategory("Category already exists");
+    } else {
+      categoriesSelected.push(newCategory);
+      fetch("http://127.0.0.1:8000/api/category-create/", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name: newCategory,
+        }),
+      })
+        .then((response) => console.log(response))
+        .catch((error) => console.log(error));
+      setAddCategory(false);
+      setNewCategory(null);
+    }
   };
 
   const reset = (e) => {
@@ -161,13 +168,7 @@ const Post = () => {
 
       {/* Form: */}
 
-      <Stack
-        direction="column"
-        spacing={2}
-        display="flex"
-        // justifyContent="space-between"
-        alignItems="center"
-      >
+      <Stack direction="column" spacing={2} display="flex" alignItems="center">
         {/* Title form: */}
         <Box>
           <label>
@@ -206,64 +207,56 @@ const Post = () => {
           </label>
         </Box>
 
-        {/* Categories: */}
-        <ButtonGroup
-          variant="contained"
-          ref={anchorRef}
-          aria-label="split button"
-          sx={{ minWidth: "50vw" }}
-          value={category}
-        >
-          <Button fullWidth onClick={handleClick}>
-            {options[selectedIndex]}
-          </Button>
-          <Button
-            size="small"
-            aria-controls={open ? "split-button-menu" : undefined}
-            aria-expanded={open ? "true" : undefined}
-            aria-label="select merge strategy"
-            aria-haspopup="menu"
-            onClick={handleToggle}
-          >
-            <ArrowDropDownIcon />
-          </Button>
-        </ButtonGroup>
-        <Popper
-          sx={{
-            zIndex: 1,
-          }}
-          open={open}
-          anchorEl={anchorRef.current}
-          role={undefined}
-          transition
-          disablePortal
-        >
-          {({ TransitionProps, placement }) => (
-            <Grow
-              {...TransitionProps}
-              style={{
-                transformOrigin:
-                  placement === "bottom" ? "center top" : "center bottom",
-              }}
+        {/* Category dropdown:
+        <Box sx={{ minWidth: 120 }}>
+          <FormControl fullWidth>
+            <InputLabel id="demo-simple-select-label">Category</InputLabel>
+            <Select
+              labelId="demo-simple-select-label"
+              id="demo-simple-select"
+              value={categories}
+              label="Category"
+              onChange={handleChange}
+              sx={{ minWidth: "90vw" }}
             >
-              <Paper>
-                <ClickAwayListener onClickAway={handleClose}>
-                  <MenuList id="split-button-menu" autoFocusItem>
-                    {options.map((option, index) => (
-                      <MenuItem
-                        key={option}
-                        selected={index === selectedIndex}
-                        onClick={(event) => handleMenuItemClick(event, index)}
-                      >
-                        {option}
-                      </MenuItem>
-                    ))}
-                  </MenuList>
-                </ClickAwayListener>
-              </Paper>
-            </Grow>
-          )}
-        </Popper>
+              <MenuItem value="Curniture">Furniture</MenuItem>
+              <MenuItem value="Clothes">Clothes</MenuItem>
+              <MenuItem value="Kitchen">Kitchen</MenuItem>
+              <MenuItem value="Kids">Kids</MenuItem>
+              <MenuItem value="Books">Books</MenuItem>
+              <MenuItem value="Other">Other</MenuItem>
+            </Select>
+          </FormControl>
+        </Box> */}
+
+        <label>
+          Category
+          <Multiselect
+            avoidHighlightFirstOption={true}
+            isObject={false}
+            options={option}
+            onRemove={(event) => {
+              setCategoriesSelected(event);
+            }}
+            onSelect={(event) => {
+              setCategoriesSelected(event);
+            }}
+            onChange={(event) => {
+              setCategoriesSelected(event);
+            }}
+          />
+          <div onClick={() => setAddCategory(true)}>Add Category</div>
+          {addCategory ? (
+            <div>
+              <input
+                value={newCategory}
+                onChange={(e) => setNewCategory(e.target.value)}
+              />
+              <button onClick={addCategoryHandle}>Add</button>
+              <div onClick={() => setAddCategory(false)}>(X)</div>
+            </div>
+          ) : null}
+        </label>
 
         {/* Condition dropdown: */}
         <Box>
@@ -279,7 +272,7 @@ const Post = () => {
               fullWidth
               sx={{ minWidth: "90vw" }}
             >
-              <Button value="likenew">Like new</Button>
+              <Button value="like new">Like new</Button>
               <Button value="good">Good</Button>
               <Button value="acceptable">Acceptable</Button>
               <Button value="poor">Poor</Button>

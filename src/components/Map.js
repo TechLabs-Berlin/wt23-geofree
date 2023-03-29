@@ -1,12 +1,14 @@
 import React, { useState, useEffect } from "react";
+import { useParams } from "react-router-dom";
 import { GoogleMap, MarkerF } from "@react-google-maps/api";
+import ItemCard from "./ItemCard";
+import { IconButton } from "@mui/material";
+import CloseIcon from "@mui/icons-material/Close";
 
 const containerStyle = {
   width: "100%",
   height: "100vh",
 };
-
-// Hiding unnecessary labels:
 
 const myStyles = [
   {
@@ -26,15 +28,14 @@ const myStyles = [
   },
 ];
 
-// Map component:
-
 function Map() {
+  const { id } = useParams();
   const [lat, setLat] = useState(0);
   const [lng, setLng] = useState(0);
   const [allData, setAllData] = useState([]);
   const [filteredData, setFilteredData] = useState([]);
-
-  // Getting user geolocation:
+  const [isOpen, setIsOpen] = useState(false);
+  const [item, setItem] = useState(null);
 
   window.navigator.geolocation.getCurrentPosition(
     (position) => {
@@ -43,20 +44,6 @@ function Map() {
     },
     (err) => console.log(err)
   );
-
-  // Searching through markers:
-
-  const handleSearch = (event) => {
-    let value = event.target.value.toLowerCase();
-    let result = [];
-    console.log(value);
-    result = allData.filter((data) => {
-      return data.title.search(value) !== -1;
-    });
-    setFilteredData(result);
-  };
-
-  // Fetching data:
 
   useEffect(() => {
     fetch("https://geofree.pythonanywhere.com/api/item-list/")
@@ -72,24 +59,19 @@ function Map() {
       .catch((e) => {
         console.log("ERROR", e);
       });
-  }, []);
+  }, [id]);
+
+  const handleMarkerClick = (item) => {
+    console.log(item);
+    setItem(item);
+  };
+
+  useEffect(() => {
+    setIsOpen(item !== null);
+  }, [item]);
 
   return (
     <div>
-      <div>
-        <form>
-          <label>
-            Search:
-            <input
-              type="text"
-              onChange={(event) => {
-                event.preventDefault();
-                handleSearch(event);
-              }}
-            />
-          </label>
-        </form>
-      </div>
       <GoogleMap
         mapContainerStyle={containerStyle}
         styles={myStyles}
@@ -107,38 +89,41 @@ function Map() {
           const position = { lat: value.latitude, lng: value.longitude };
 
           return (
-            <MarkerF clickable={true} position={position} key={value.id} />
+            <MarkerF
+              clickable={true}
+              position={position}
+              key={value.id}
+              onClick={() => handleMarkerClick(value)}
+            />
           );
         })}
-      </GoogleMap>
+        {item && (
+          <div>
+            <ItemCard
+              key={item.id}
+              title={item.title}
+              description={item.description}
+              image={item.images}
+              id={item.id}
+              onClose={() => {
+                setIsOpen(false);
+                setItem(null);
+              }}
+            />
 
-      {/* <div>
-        {filteredData.map((value) => {
-          return (
-            <div key={value.id}>
-              <div>Id:{value.id}</div>
-              <div>Title:{value.title}</div>
-              <div>Description: {value.description}</div>
-              <div>Condition: {value.condition}</div>
-              <div>
-                <strong>Location</strong>
-                <div>Latitude: {value.latitude}</div>
-                <div>Longitude: {value.longitude}</div>
-              </div>
-              <div>
-                <img
-                  alt="test"
-                  width={"250px"}
-                  src={
-                    `https://geofree.pythonanywhere.com/` +
-                    value.images[0].image
-                  }
-                />
-              </div>
-            </div>
-          );
-        })}
-      </div> */}
+            <IconButton
+              variant="contained"
+              onClick={() => {
+                setIsOpen(false);
+                setItem(null);
+              }}
+              style={{ position: "absolute", top: 208, right: 325 }}
+            >
+              <CloseIcon />
+            </IconButton>
+          </div>
+        )}
+      </GoogleMap>
     </div>
   );
 }

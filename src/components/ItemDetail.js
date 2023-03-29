@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import { Box } from "@mui/material";
+import { Box, Typography } from "@mui/material";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
@@ -32,6 +32,10 @@ const ItemDetail = () => {
     slidesToScroll: 1,
   };
 
+  const onError = (error) => {
+    return console.log("Error loading image", error);
+  };
+
   return (
     <div>
       <Slider {...settings}>
@@ -47,24 +51,21 @@ const ItemDetail = () => {
               objectFit: "contain",
               display: "block",
             }}
-            alt=""
+            alt="donated items"
             src={`https://geofree.pythonanywhere.com${image.image}`}
-            onError={(e) => console.log("Error loading image", e)}
+            onError={onError}
           />
         ))}
       </Slider>
 
-      <Box>
+      <Box sx={{ p: 5 }} width="100%">
         <div key={item.id}>
-          <div>Id:{item.id}</div>
-          <div>
-            <strong>{item.title}</strong>
-          </div>
-          <div>{item.description}</div>
-          <div>Condition: {item.condition}</div>
-          <div>
-            <strong>Location</strong>
-          </div>
+          <Typography variant="h5">{item.title}</Typography>
+
+          <Typography variant="body1">{item.description}</Typography>
+          <Typography variant="body1">Condition: {item.condition}</Typography>
+          <Typography variant="body1">Category: {item.categories}</Typography>
+          <Typography variant="body1">Location</Typography>
         </div>
       </Box>
     </div>

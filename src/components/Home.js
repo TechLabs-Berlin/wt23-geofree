@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { Box, TextField, Grid, InputAdornment, Button } from "@mui/material";
+import ListCategory from "./ListCategory";
+import { Box, TextField, Grid, InputAdornment, Card } from "@mui/material";
+import { CardActionArea } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
 
 const Home = () => {
@@ -9,7 +11,7 @@ const Home = () => {
   const navigate = useNavigate();
 
   const handleSearch = (event) => {
-    let value = event.target.value.toLowerCase();
+    let value = event.target.value;
     let result = [];
     console.log(value);
     result = allData.filter((data) => {
@@ -42,6 +44,7 @@ const Home = () => {
     <div>
       {/* Search bar: */}
       <Box>
+        <ListCategory />
         <TextField
           placeholder="Search"
           fullWidth
@@ -67,7 +70,7 @@ const Home = () => {
       <div>
         {filteredData.map((value) => {
           return (
-            <Box
+            <Card
               display="flex"
               justifyContent="center"
               sx={{
@@ -75,51 +78,46 @@ const Home = () => {
                 flexGrow: 1,
                 borderBottom: 1,
                 borderColor: "border.main",
+                borderRadius: 0,
+                backgroundColor: "background.default",
               }}
             >
-              <Grid container spacing={1} sx={{ m: 1 }}>
-                <Grid item xs={6}>
-                  <Box
-                    component="img"
-                    sx={{
-                      width: 200,
-                      height: 200,
-                      border: 1,
-                      borderColor: "border.main",
-                      objectFit: "cover",
-                      borderRadius: 0.3,
-                    }}
-                    alt="item"
-                    src={
-                      `https://geofree.pythonanywhere.com/` +
-                      value.images[0].image
-                    }
-                  ></Box>
-                </Grid>
+              <CardActionArea onClick={() => navigateToItem(value.id)}>
+                <Grid container spacing={1} sx={{ m: 1 }}>
+                  <Grid item xs={6}>
+                    <Box
+                      component="img"
+                      sx={{
+                        width: 200,
+                        height: 200,
+                        border: 1,
+                        borderColor: "border.main",
+                        objectFit: "cover",
+                        borderRadius: 0.3,
+                      }}
+                      alt="item"
+                      src={
+                        `https://geofree.pythonanywhere.com/` +
+                        value.images[0].image
+                      }
+                    ></Box>
+                  </Grid>
 
-                <Grid item xs={6}>
-                  <div key={value.id}>
-                    <div>Id:{value.id}</div>
-                    <div>
-                      <strong>{value.title}</strong>
+                  <Grid item xs={6}>
+                    <div key={value.id}>
+                      <div>
+                        <strong>{value.title}</strong>
+                      </div>
+                      <div>{value.description}</div>
+                      <div>Condition: {value.condition}</div>
+                      <div>
+                        <strong>Location</strong>
+                      </div>
                     </div>
-                    <div>{value.description}</div>
-                    <div>Condition: {value.condition}</div>
-                    <div>
-                      <strong>Location</strong>
-                    </div>
-                  </div>
-                  <Button
-                    variant="contained"
-                    type="submit"
-                    color="secondary"
-                    onClick={() => navigateToItem(value.id)}
-                  >
-                    Go to item
-                  </Button>
+                  </Grid>
                 </Grid>
-              </Grid>
-            </Box>
+              </CardActionArea>
+            </Card>
           );
         })}
       </div>
