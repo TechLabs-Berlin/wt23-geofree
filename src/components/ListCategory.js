@@ -29,7 +29,7 @@ function ListCategory() {
   const submitSearch = (event) => {
     event.preventDefault();
     fetch(
-      `http://127.0.0.1:8000/api/item-categories-list/?categories=${categoriesSelected}`
+      `https://geofree.pythonanywhere.com/api/get-categories/?categories=${categoriesSelected}`
     )
       .then((res) => res.json())
       .then((data) => {
@@ -95,7 +95,7 @@ function ListCategory() {
                       <img
                         alt="test"
                         width={"250px"}
-                        src={`http://127.0.0.1:8000` + x.image}
+                        src={`https://geofree.pythonanywhere.com/` + x.image}
                       />
                     </div>
                   );

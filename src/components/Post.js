@@ -33,10 +33,6 @@ const Post = () => {
   const [addCategory, setAddCategory] = useState(false); //state() that will conditionally display the input of a new category
   const [newCategory, setNewCategory] = useState(); // state() that stores the new category created by the user
 
-  const handleChange = (event) => {
-    setCategories(event.target.value);
-  };
-
   //fetch the GeoFree categories
   useEffect(() => {
     fetch("https://geofree.pythonanywhere.com/api/get-categories/")

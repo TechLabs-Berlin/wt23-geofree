@@ -32,8 +32,10 @@ function Map() {
   const { id } = useParams();
   const [lat, setLat] = useState(0);
   const [lng, setLng] = useState(0);
+  // eslint-disable-next-line no-unused-vars
   const [allData, setAllData] = useState([]);
   const [filteredData, setFilteredData] = useState([]);
+  // eslint-disable-next-line no-unused-vars
   const [isOpen, setIsOpen] = useState(false);
   const [item, setItem] = useState(null);
 
