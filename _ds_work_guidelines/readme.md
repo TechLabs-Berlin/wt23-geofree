@@ -6,4 +6,4 @@
 
 ![slide4](images/ds_proposals/Slide4.jpeg "slide4")
 
-![slide5](images/ds_proposals/Slide5.jpeg "slide4")s
+![slide5](images/ds_proposals/Slide5.jpeg "slide4")
