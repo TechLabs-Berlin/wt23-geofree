@@ -3,14 +3,10 @@
 
 Author: Karina Condeixa
 
-Cronology of the study by files:
+Files:
 
 1- `mock_datasets_classif_reco.ipynb`
 
-2- `ml_classification_1.ipynb`
+2- `ml_EDA.jpynb`
 
-
-
-
-
-s
+3- `ml_classification_rfc.ipynb`
