@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { GoogleMap, MarkerF } from "@react-google-maps/api";
 import ItemCard from "./ItemCard";
-import { IconButton } from "@mui/material";
+import { IconButton, Box } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
 
 const containerStyle = {
@@ -100,7 +100,7 @@ function Map() {
           );
         })}
         {item && (
-          <div>
+          <Box>
             <ItemCard
               key={item.id}
               title={item.title}
@@ -112,18 +112,16 @@ function Map() {
                 setItem(null);
               }}
             />
-
             <IconButton
               variant="contained"
               onClick={() => {
                 setIsOpen(false);
                 setItem(null);
               }}
-              style={{ position: "absolute", top: 208, right: 325 }}
             >
               <CloseIcon />
             </IconButton>
-          </div>
+          </Box>
         )}
       </GoogleMap>
     </div>

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import ListCategory from "./ListCategory";
+import Search from "./Search";
 import { Box, TextField, Grid, InputAdornment, Card } from "@mui/material";
 import { CardActionArea } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
@@ -10,15 +10,15 @@ const Home = () => {
   const [filteredData, setFilteredData] = useState(allData);
   const navigate = useNavigate();
 
-  const handleSearch = (event) => {
-    let value = event.target.value;
-    let result = [];
-    console.log(value);
-    result = allData.filter((data) => {
-      return data.title.search(value) !== -1;
-    });
-    setFilteredData(result);
-  };
+  // const handleSearch = (event) => {
+  //   let value = event.target.value;
+  //   let result = [];
+  //   console.log(value);
+  //   result = allData.filter((data) => {
+  //     return data.title.search(value) !== -1;
+  //   });
+  //   setFilteredData(result);
+  // };
 
   const navigateToItem = (itemId) => {
     navigate(`/item/${itemId}`);
@@ -42,9 +42,8 @@ const Home = () => {
 
   return (
     <div>
-      {/* Search bar: */}
+      {/* Search bar:
       <Box>
-        <ListCategory />
         <TextField
           placeholder="Search"
           fullWidth
@@ -63,9 +62,10 @@ const Home = () => {
           }}
           sx={{ borderBottom: 1, borderColor: "border.main" }}
         />
-      </Box>
+      </Box> */}
 
       {/* <Search /> */}
+      <Search />
 
       <div>
         {filteredData.map((value) => {
@@ -110,6 +110,7 @@ const Home = () => {
                       </div>
                       <div>{value.description}</div>
                       <div>Condition: {value.condition}</div>
+                      <div>Category: {value.categories}</div>
                       <div>
                         <strong>Location</strong>
                       </div>

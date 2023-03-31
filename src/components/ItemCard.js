@@ -1,9 +1,14 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import Card from "@mui/material/Card";
-import CardContent from "@mui/material/CardContent";
-import Typography from "@mui/material/Typography";
-import { CardActionArea } from "@mui/material";
+import Shoes from "../images/shoes.jpeg";
+
+import {
+  CardActionArea,
+  Box,
+  Card,
+  CardContent,
+  Typography,
+} from "@mui/material";
 
 export default function ItemCard(props) {
   console.log(props);
@@ -28,23 +33,19 @@ export default function ItemCard(props) {
       }}
     >
       <CardActionArea onClick={() => navigateToItem(props.id)}>
-        {/* <CardMedia component="image" src={props.image} title="item photo" /> */}
-
-        {/* <Box
-        key={props.id}
-        component="img"
-        sx={{
-          maxHeight: 400,
-          height: "100%",
-          border: 1,
-          borderColor: "border.main",
-          objectFit: "contain",
-          display: "block",
-        }}
-        alt="donated items"
-        src="./images/images (1).jpeg"
-        onError={onError}
-      /> */}
+        <Box
+          key={props.id}
+          component="img"
+          sx={{
+            maxHeight: "100%",
+            height: 200,
+            width: "100%",
+            border: 1,
+            borderColor: "border.main",
+            objectFit: "cover",
+          }}
+          src={Shoes}
+        />
 
         <CardContent>
           <Typography

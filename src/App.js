@@ -3,7 +3,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Header from "./Header";
 import Map from "./components/Map";
 import Home from "./components/Home";
-// import List from "./components/List";
+
 import ItemDetail from "./components/ItemDetail";
 import Post from "./components/Post";
 import { ThemeProvider, createTheme } from "@mui/material/styles";

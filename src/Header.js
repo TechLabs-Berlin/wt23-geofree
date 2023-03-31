@@ -13,6 +13,7 @@ import AccountCircleOutlinedIcon from "@mui/icons-material/AccountCircleOutlined
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import FormatListBulletedIcon from "@mui/icons-material/FormatListBulleted";
 import SettingsOutlinedIcon from "@mui/icons-material/SettingsOutlined";
+import SearchIcon from "@mui/icons-material/Search";
 import Logo from "./images/Logo_L.png";
 
 const Header = () => {
@@ -114,6 +115,7 @@ const Header = () => {
               >
                 <FileUploadOutlinedIcon />
               </IconButton>
+
               <IconButton
                 size="large"
                 edge="end"
