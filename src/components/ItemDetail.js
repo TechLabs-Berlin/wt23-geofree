@@ -26,11 +26,46 @@ const ItemDetail = () => {
     return <div>Loading...</div>;
   }
 
+  const PrevArrow = (props) => {
+    const { className, onClick } = props;
+    return (
+      <div
+        className={className}
+        style={{
+          display: "block",
+          color: "#FFFFFF",
+          zIndex: 999,
+          left: "20px",
+        }}
+        onClick={onClick}
+      ></div>
+    );
+  };
+
+  const NextArrow = (props) => {
+    const { className, onClick } = props;
+    return (
+      <div
+        className={className}
+        style={{
+          display: "block",
+          color: "#000000",
+          zIndex: 999,
+          right: "20px",
+        }}
+        onClick={onClick}
+      ></div>
+    );
+  };
+
   const settings = {
+    arrows: true,
     dots: true,
     infinite: true,
     slidesToShow: 1,
     slidesToScroll: 1,
+    prevArrow: <PrevArrow />,
+    nextArrow: <NextArrow />,
   };
 
   const onError = (error) => {
@@ -40,7 +75,7 @@ const ItemDetail = () => {
   return (
     <div>
       <SearchButton />
-      <Slider {...settings}>
+      <Slider {...settings} prevArrow={<PrevArrow />} nextArrow={<NextArrow />}>
         {item.images.map((image, index) => (
           <Box
             key={index}
@@ -50,7 +85,7 @@ const ItemDetail = () => {
               height: "100%",
               border: 1,
               borderColor: "border.main",
-              objectFit: "contain",
+              objectFit: "cover",
               display: "block",
             }}
             alt="donated items"

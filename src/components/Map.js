@@ -102,7 +102,7 @@ function Map() {
           );
         })}
         {item && (
-          <Box>
+          <Box sx={{ position: "fixed", left: "50%", top: "50%" }}>
             <ItemCard
               key={item.id}
               title={item.title}
@@ -113,9 +113,16 @@ function Map() {
                 setIsOpen(false);
                 setItem(null);
               }}
-            />
+            ></ItemCard>
             <IconButton
               variant="contained"
+              sx={{
+                zIndex: 999,
+                position: "absolute",
+                left: "122px",
+                top: "-140px",
+                color: "primary.main",
+              }}
               onClick={() => {
                 setIsOpen(false);
                 setItem(null);
