@@ -1,6 +1,8 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import Shoes from "../images/shoes.jpeg";
+import Slider from "react-slick";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 
 import {
   CardActionArea,
@@ -18,6 +20,17 @@ export default function ItemCard(props) {
     navigate(`/item/${itemId}`);
   };
 
+  const onError = (error) => {
+    return console.log("Error loading image", error);
+  };
+
+  const settings = {
+    dots: false,
+    infinite: true,
+    slidesToShow: 1,
+    slidesToScroll: 1,
+  };
+
   return (
     <Card
       id={props.id}
@@ -32,22 +45,26 @@ export default function ItemCard(props) {
         backgroundColor: "#FFFFFF",
       }}
     >
+      <Slider {...settings}>
+        {props.image.map((image, index) => (
+          <Box
+            key={index}
+            component="img"
+            sx={{
+              height: "175px",
+              width: "100%",
+              border: 1,
+              borderColor: "border.main",
+              objectFit: "cover",
+            }}
+            alt="donated items"
+            src={`https://geofree.pythonanywhere.com${image.image}`}
+            onError={onError}
+          />
+        ))}
+      </Slider>
       <CardActionArea onClick={() => navigateToItem(props.id)}>
-        <Box
-          key={props.id}
-          component="img"
-          sx={{
-            maxHeight: "100%",
-            height: 200,
-            width: "100%",
-            border: 1,
-            borderColor: "border.main",
-            objectFit: "cover",
-          }}
-          src={Shoes}
-        />
-
-        <CardContent>
+        <CardContent sx={{ pb: 3 }}>
           <Typography
             gutterBottom
             variant="h5"
