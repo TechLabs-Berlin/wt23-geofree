@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
+import SearchButton from "./SearchButton";
 import { Box, Typography } from "@mui/material";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
@@ -38,6 +39,7 @@ const ItemDetail = () => {
 
   return (
     <div>
+      <SearchButton />
       <Slider {...settings}>
         {item.images.map((image, index) => (
           <Box

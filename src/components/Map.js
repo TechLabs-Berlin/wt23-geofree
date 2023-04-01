@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { GoogleMap, MarkerF } from "@react-google-maps/api";
 import ItemCard from "./ItemCard";
+import SearchButton from "./SearchButton";
 import { IconButton, Box } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
 
@@ -74,6 +75,7 @@ function Map() {
 
   return (
     <div>
+      <SearchButton />
       <GoogleMap
         mapContainerStyle={containerStyle}
         styles={myStyles}

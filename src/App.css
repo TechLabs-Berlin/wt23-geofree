@@ -1,0 +1,43 @@
+.input-label {
+  color: #000000 !important;
+}
+
+/* {
+  multiselectcontainer: {
+    width: 500px;
+    radius: 20px;
+  }
+  ,
+  searchbox: {
+    // To change search box element look
+    border: none;
+    font-size: 10px;
+    min-height: 50px;
+    radius: 50px;
+  }
+  ,
+  inputfield: {
+    // To change input field position or margin
+    margin: 5px;
+    radius: 50px;
+  }
+  ,
+  chips: {
+    // To change css chips(Selected options)
+    background: "#000000";
+  }
+  ,
+  optioncontainer: {
+    // To change css for option container
+    border: 2px solid;
+  }
+  option: {
+    // To change css for dropdown options
+    color: blue;
+  }
+  ,
+  groupheading: {
+    // To chanage group heading style
+    ....;
+  }
+} */

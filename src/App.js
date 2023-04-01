@@ -3,7 +3,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Header from "./Header";
 import Map from "./components/Map";
 import Home from "./components/Home";
-
+import Search from "./components/Search";
 import ItemDetail from "./components/ItemDetail";
 import Post from "./components/Post";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
@@ -36,6 +36,9 @@ const theme = createTheme({
   shape: {
     borderRadius: 30,
   },
+  input: {
+    background: "background.default",
+  },
 });
 
 const App = () => {
@@ -50,6 +53,7 @@ const App = () => {
             <Route path="/map" element={<Map />} />
             <Route path="/item/:id" element={<ItemDetail />} />
             <Route path="/post" element={<Post />} />
+            <Route path="/search" element={<Search />} />
           </Routes>
         </BrowserRouter>
       </ThemeProvider>

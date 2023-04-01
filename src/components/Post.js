@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-
+import SearchButton from "./SearchButton";
 import {
   CardContent,
   TextField,
@@ -105,105 +105,112 @@ const Post = () => {
   };
 
   return (
-    <form onSubmit={submitHandle}>
-      {/* Upload image: */}
+    <div>
+      <SearchButton />
+      <form onSubmit={submitHandle}>
+        {/* Upload image: */}
 
-      <Card
-        sx={{
-          minHeight: 250,
-          border: 1,
-          borderColor: "border.main",
-          backgroundColor: "text.disabled",
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-          borderRadius: 0,
-        }}
-      >
-        <CardContent>
-          <Grid container>
-            {myImage ? (
-              <div>
-                {Array.from(myImage).map((item) => {
-                  return (
-                    <img
-                      key={item.name}
-                      alt="not found"
-                      width={"250px"}
-                      src={URL.createObjectURL(item)}
-                    />
-                  );
-                })}
+        <Card
+          sx={{
+            minHeight: 250,
+            border: 1,
+            borderColor: "border.main",
+            backgroundColor: "text.disabled",
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            borderRadius: 0,
+          }}
+        >
+          <CardContent>
+            <Grid container>
+              {myImage ? (
+                <div>
+                  {Array.from(myImage).map((item) => {
+                    return (
+                      <img
+                        key={item.name}
+                        alt="not found"
+                        width={"250px"}
+                        src={URL.createObjectURL(item)}
+                      />
+                    );
+                  })}
 
-                <Fab component="span" onClick={reset}>
-                  <ClearOutlinedIcon />
+                  <Fab component="span" onClick={reset}>
+                    <ClearOutlinedIcon />
+                  </Fab>
+                </div>
+              ) : null}
+              <input
+                type="file"
+                name="myImage"
+                id="uploadimage"
+                accept="image/*"
+                ref={ref}
+                multiple
+                hidden
+                onChange={(event) => {
+                  setMyImage(event.target.files);
+                }}
+              />
+
+              <label htmlFor="uploadimage">
+                <Fab component="span">
+                  <DriveFolderUploadOutlinedIcon />
                 </Fab>
-              </div>
-            ) : null}
-            <input
-              type="file"
-              name="myImage"
-              id="uploadimage"
-              accept="image/*"
-              ref={ref}
-              multiple
-              hidden
-              onChange={(event) => {
-                setMyImage(event.target.files);
-              }}
-            />
+              </label>
+            </Grid>
+          </CardContent>
+        </Card>
 
-            <label htmlFor="uploadimage">
-              <Fab component="span">
-                <DriveFolderUploadOutlinedIcon />
-              </Fab>
+        {/* Form: */}
+
+        <Stack
+          direction="column"
+          spacing={2}
+          display="flex"
+          alignItems="center"
+        >
+          {/* Title form: */}
+          <Box>
+            <label>
+              Name
+              <br />
+              <TextField
+                name="title"
+                type="text"
+                label="Title"
+                variant="outlined"
+                value={title}
+                onChange={(e) => setTitle(e.target.value)}
+                sx={{ minWidth: "90vw" }}
+              ></TextField>
             </label>
-          </Grid>
-        </CardContent>
-      </Card>
-
-      {/* Form: */}
-
-      <Stack direction="column" spacing={2} display="flex" alignItems="center">
-        {/* Title form: */}
-        <Box>
-          <label>
-            Name
             <br />
-            <TextField
-              name="title"
-              type="text"
-              label="Title"
-              variant="outlined"
-              value={title}
-              onChange={(e) => setTitle(e.target.value)}
-              sx={{ minWidth: "90vw" }}
-            ></TextField>
-          </label>
-          <br />
-        </Box>
+          </Box>
 
-        {/* Description form: */}
-        <Box>
-          <label>
-            Description
-            <br />
-            <TextField
-              name="description"
-              type="text"
-              label="Description"
-              variant="outlined"
-              value={description}
-              onChange={(e) => setDescription(e.target.value)}
-              sx={{
-                minWidth: "90vw",
-              }}
-            ></TextField>
-            <br />
-          </label>
-        </Box>
+          {/* Description form: */}
+          <Box>
+            <label>
+              Description
+              <br />
+              <TextField
+                name="description"
+                type="text"
+                label="Description"
+                variant="outlined"
+                value={description}
+                onChange={(e) => setDescription(e.target.value)}
+                sx={{
+                  minWidth: "90vw",
+                }}
+              ></TextField>
+              <br />
+            </label>
+          </Box>
 
-        {/* Category dropdown:
+          {/* Category dropdown:
         <Box sx={{ minWidth: 120 }}>
           <FormControl fullWidth>
             <InputLabel id="demo-simple-select-label">Category</InputLabel>
@@ -225,65 +232,66 @@ const Post = () => {
           </FormControl>
         </Box> */}
 
-        <label>
-          Category
-          <Multiselect
-            avoidHighlightFirstOption={true}
-            isObject={false}
-            options={option}
-            onRemove={(event) => {
-              setCategoriesSelected(event);
-            }}
-            onSelect={(event) => {
-              setCategoriesSelected(event);
-            }}
-            onChange={(event) => {
-              setCategoriesSelected(event);
-            }}
-          />
-          <div onClick={() => setAddCategory(true)}>Add Category</div>
-          {addCategory ? (
-            <div>
-              <input
-                value={newCategory}
-                onChange={(e) => setNewCategory(e.target.value)}
-              />
-              <button onClick={addCategoryHandle}>Add</button>
-              <div onClick={() => setAddCategory(false)}>(X)</div>
-            </div>
-          ) : null}
-        </label>
-
-        {/* Condition dropdown: */}
-        <Box>
           <label>
-            Object condition:
-            <br />
-            <ButtonGroup
-              name="condition"
-              value={condition}
-              onClick={(e) => setCondition(e.target.value)}
-              variant="contained"
-              aria-label="outlined primary button group"
-              fullWidth
-              sx={{ minWidth: "90vw" }}
-            >
-              <Button value="like new">Like new</Button>
-              <Button value="good">Good</Button>
-              <Button value="acceptable">Acceptable</Button>
-              <Button value="poor">Poor</Button>
-            </ButtonGroup>
+            Category
+            <Multiselect
+              avoidHighlightFirstOption={true}
+              isObject={false}
+              options={option}
+              onRemove={(event) => {
+                setCategoriesSelected(event);
+              }}
+              onSelect={(event) => {
+                setCategoriesSelected(event);
+              }}
+              onChange={(event) => {
+                setCategoriesSelected(event);
+              }}
+            />
+            <div onClick={() => setAddCategory(true)}>Add Category</div>
+            {addCategory ? (
+              <div>
+                <input
+                  value={newCategory}
+                  onChange={(e) => setNewCategory(e.target.value)}
+                />
+                <button onClick={addCategoryHandle}>Add</button>
+                <div onClick={() => setAddCategory(false)}>(X)</div>
+              </div>
+            ) : null}
           </label>
-        </Box>
 
-        <Box sx={{ minWidth: "90vw" }}>
-          <Location setLat={setLat} setLng={setLng} lat={lat} lng={lng} />
-          <Button variant="contained" type="submit" color="secondary">
-            Submit
-          </Button>
-        </Box>
-      </Stack>
-    </form>
+          {/* Condition dropdown: */}
+          <Box>
+            <label>
+              Object condition:
+              <br />
+              <ButtonGroup
+                name="condition"
+                value={condition}
+                onClick={(e) => setCondition(e.target.value)}
+                variant="contained"
+                aria-label="outlined primary button group"
+                fullWidth
+                sx={{ minWidth: "90vw" }}
+              >
+                <Button value="like new">Like new</Button>
+                <Button value="good">Good</Button>
+                <Button value="acceptable">Acceptable</Button>
+                <Button value="poor">Poor</Button>
+              </ButtonGroup>
+            </label>
+          </Box>
+
+          <Box sx={{ minWidth: "90vw" }}>
+            <Location setLat={setLat} setLng={setLng} lat={lat} lng={lng} />
+            <Button variant="contained" type="submit" color="secondary">
+              Submit
+            </Button>
+          </Box>
+        </Stack>
+      </form>
+    </div>
   );
 };
 
