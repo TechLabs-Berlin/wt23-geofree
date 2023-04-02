@@ -6,6 +6,14 @@ import Home from "./components/Home";
 import Search from "./components/Search";
 import ItemDetail from "./components/ItemDetail";
 import Post from "./components/Post";
+import Listings from "./components/Listings";
+import UserSettings from "./components/UserSettings";
+import Hello from "./components/Hello";
+// import Login from "./components/Login";
+// import Register from "./components/Register";
+import UserProfile from "./components/UserProfile";
+import Favorites from "./components/Favorites";
+
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 import CssBaseline from "@mui/material/CssBaseline";
 
@@ -18,16 +26,16 @@ const theme = createTheme({
       default: "#FFFEF9", //background
     },
     border: {
-      main: "#5C9E28", //input radius
+      main: "#5C9E28", //input border
     },
     secondary: {
       main: "#B8E173", //green buttons
     },
     info: {
-      main: "#F3F0DC",
+      main: "#F3F0DC", // input background
     },
     input: {
-      default: "#F3F0DC",
+      default: "#5C9E28",
     },
     text: {
       disabled: "#EFEFF0",
@@ -35,9 +43,6 @@ const theme = createTheme({
   },
   shape: {
     borderRadius: 30,
-  },
-  input: {
-    background: "background.default",
   },
 });
 
@@ -54,6 +59,13 @@ const App = () => {
             <Route path="/item/:id" element={<ItemDetail />} />
             <Route path="/post" element={<Post />} />
             <Route path="/search" element={<Search />} />
+            <Route path="/listings" element={<Listings />} />
+            <Route path="/settings" element={<UserSettings />} />
+            <Route path="/hello" element={<Hello />} />
+            {/* <Route path="/login" element={<Login />} /> */}
+            {/* <Route path="/register" element={<Register />} /> */}
+            <Route path="/profile" element={<UserProfile />} />
+            <Route path="/favorites" element={<Favorites />} />
           </Routes>
         </BrowserRouter>
       </ThemeProvider>

@@ -1,12 +1,12 @@
 import React from "react";
 import { Card, CardActionArea, Box } from "@mui/material";
 import { useNavigate } from "react-router-dom";
-
 import SearchIcon from "@mui/icons-material/Search";
 
 const SearchButton = () => {
-  const navigate = useNavigate();
+  // Navigating to Search
 
+  const navigate = useNavigate();
   const navigateToSearch = () => {
     navigate(`/search`);
   };

@@ -10,6 +10,8 @@ const ItemDetail = () => {
   const { id } = useParams();
   const [item, setItem] = useState(null);
 
+  // Fetching item with specific id
+
   useEffect(() => {
     fetch(`https://geofree.pythonanywhere.com/api/item-detail/${id}`)
       .then((res) => res.json())
@@ -22,9 +24,13 @@ const ItemDetail = () => {
       });
   }, [id]);
 
+  // If unavailable
+
   if (!item) {
     return <div>Loading...</div>;
   }
+
+  // Display arrows
 
   const PrevArrow = (props) => {
     const { className, onClick } = props;
@@ -58,6 +64,8 @@ const ItemDetail = () => {
     );
   };
 
+  // Slider settings
+
   const settings = {
     arrows: true,
     dots: true,
@@ -68,6 +76,8 @@ const ItemDetail = () => {
     nextArrow: <NextArrow />,
   };
 
+  // If error
+
   const onError = (error) => {
     return console.log("Error loading image", error);
   };
@@ -75,6 +85,9 @@ const ItemDetail = () => {
   return (
     <div>
       <SearchButton />
+
+      {/* Image slider */}
+
       <Slider {...settings} prevArrow={<PrevArrow />} nextArrow={<NextArrow />}>
         {item.images.map((image, index) => (
           <Box
@@ -94,6 +107,8 @@ const ItemDetail = () => {
           />
         ))}
       </Slider>
+
+      {/* Item information */}
 
       <Box sx={{ p: 5 }} width="100%">
         <div key={item.id}>

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import SearchButton from "./SearchButton";
+import Hello from "./Hello";
 import { Box, Grid, Card } from "@mui/material";
 import { CardActionArea } from "@mui/material";
 
@@ -11,9 +12,30 @@ const Home = () => {
   console.log(categoriesSelected);
   const location = useLocation();
 
+  // Getting categories from BurgerMenu
+
   useEffect(() => {
-    setCategoriesSelected(location.state?.categoriesSelected || "furniture");
+    setCategoriesSelected(location.state?.categoriesSelected || "");
   }, [location.state?.categoriesSelected]);
+
+  // Fetching all items
+
+  useEffect(() => {
+    fetch("URL/item-list/")
+      .then((res) => {
+        console.log(res);
+        return res.json();
+      })
+      .then((data) => {
+        console.log(data);
+        setAllData(data);
+      })
+      .catch((e) => {
+        console.log("ERROR", e);
+      });
+  }, []);
+
+  // Fetching data of selected categories
 
   useEffect(() => {
     fetch(
@@ -32,6 +54,8 @@ const Home = () => {
       });
   }, [categoriesSelected]);
 
+  // Navigating to specific item
+
   const navigateToItem = (itemId) => {
     navigate(`/item/${itemId}`);
   };
@@ -39,6 +63,7 @@ const Home = () => {
   return (
     <div>
       <SearchButton />
+      <Hello />
       <div>
         {allData.map((post) => {
           return (

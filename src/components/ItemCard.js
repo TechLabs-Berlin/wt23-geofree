@@ -13,22 +13,17 @@ import {
 } from "@mui/material";
 
 export default function ItemCard(props) {
-  console.log(props);
+  // Navigating to specific item
 
   const navigate = useNavigate();
   const navigateToItem = (itemId) => {
     navigate(`/item/${itemId}`);
   };
 
+  // If error
+
   const onError = (error) => {
     return console.log("Error loading image", error);
-  };
-
-  const settings = {
-    dots: false,
-    infinite: true,
-    slidesToShow: 1,
-    slidesToScroll: 1,
   };
 
   return (
@@ -45,7 +40,9 @@ export default function ItemCard(props) {
         backgroundColor: "#FFFFFF",
       }}
     >
-      <Slider {...settings}>
+      {/* Image display */}
+
+      <Slider>
         {props.image.map((image, index) => (
           <Box
             key={index}
@@ -64,6 +61,8 @@ export default function ItemCard(props) {
         ))}
       </Slider>
       <CardActionArea onClick={() => navigateToItem(props.id)}>
+        {/* Item information */}
+
         <CardContent sx={{ pb: 3 }}>
           <Typography
             gutterBottom

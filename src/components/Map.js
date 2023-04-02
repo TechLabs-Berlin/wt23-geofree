@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { useParams } from "react-router-dom";
 import { GoogleMap, MarkerF } from "@react-google-maps/api";
 import ItemCard from "./ItemCard";
@@ -33,21 +33,25 @@ function Map() {
   const { id } = useParams();
   const [lat, setLat] = useState(0);
   const [lng, setLng] = useState(0);
-  // eslint-disable-next-line no-unused-vars
   const [allData, setAllData] = useState([]);
   const [filteredData, setFilteredData] = useState([]);
-  // eslint-disable-next-line no-unused-vars
   const [isOpen, setIsOpen] = useState(false);
   const [item, setItem] = useState(null);
 
-  window.navigator.geolocation.getCurrentPosition(
-    (position) => {
-      setLat(parseFloat(position.coords.latitude));
-      setLng(parseFloat(position.coords.longitude));
-    },
-    (err) => console.log(err)
-  );
+  const mapRef = useRef(null);
 
+  // Getting user position
+  useEffect(() => {
+    window.navigator.geolocation.getCurrentPosition(
+      (position) => {
+        setLat(parseFloat(position.coords.latitude));
+        setLng(parseFloat(position.coords.longitude));
+      },
+      (err) => console.log(err)
+    );
+  }, []);
+
+  // Fetching all items
   useEffect(() => {
     fetch("https://geofree.pythonanywhere.com/api/item-list/")
       .then((res) => {
@@ -73,20 +77,34 @@ function Map() {
     setIsOpen(item !== null);
   }, [item]);
 
+  useEffect(() => {
+    if (mapRef.current && filteredData.length > 0) {
+      const bounds = new window.google.maps.LatLngBounds();
+      filteredData.forEach((value) => {
+        const position = { lat: value.latitude, lng: value.longitude };
+        bounds.extend(position);
+      });
+      mapRef.current.fitBounds(bounds);
+    }
+  }, [mapRef, filteredData]);
+
   return (
     <div>
       <SearchButton />
       <GoogleMap
         mapContainerStyle={containerStyle}
         styles={myStyles}
-        center={{ lat, lng }}
-        zoom={15}
+        center={mapRef}
+        // zoom={6}
         options={{
           zoomControl: false,
           streetViewControl: false,
           mapTypeControl: false,
           fullscreenControl: false,
           styles: myStyles,
+        }}
+        onLoad={(map) => {
+          mapRef.current = map;
         }}
       >
         {filteredData.map((value) => {

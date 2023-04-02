@@ -1,23 +1,22 @@
 import React, { useState, useRef, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import SearchButton from "./SearchButton";
+import Location from "./Location";
 import {
   CardContent,
   TextField,
   Card,
   Box,
   Stack,
-  ButtonGroup,
   Grid,
   Fab,
   Button,
+  FormControl,
 } from "@mui/material";
+import ButtonGroup from "@mui/material/ButtonGroup";
 import Multiselect from "multiselect-react-dropdown";
-
 import DriveFolderUploadOutlinedIcon from "@mui/icons-material/DriveFolderUploadOutlined";
 import ClearOutlinedIcon from "@mui/icons-material/ClearOutlined";
-
-import Location from "./Location";
 
 const Post = () => {
   const [title, setTitle] = useState("");
@@ -34,6 +33,7 @@ const Post = () => {
   const [newCategory, setNewCategory] = useState(); // state() that stores the new category created by the user
 
   //fetch the GeoFree categories
+
   useEffect(() => {
     fetch("https://geofree.pythonanywhere.com/api/get-categories/")
       .then((res) => {
@@ -48,6 +48,7 @@ const Post = () => {
   }, []);
 
   //building the categories array to show in Multiselect component
+
   const option = [];
   for (let i = 0; i < categories.length; i++) {
     option.push(categories[i].name);
@@ -66,7 +67,7 @@ const Post = () => {
     uploadData.append("latitude", lat);
     uploadData.append("longitude", lng);
     uploadData.append("condition", condition);
-    uploadData.append("categories", categoriesSelected); //Array of categories added to the item3
+    uploadData.append("categories", categoriesSelected); //Array of categories added to the item
     fetch("https://geofree.pythonanywhere.com/api/item-create/", {
       method: "POST",
       body: uploadData,
@@ -78,6 +79,7 @@ const Post = () => {
   };
 
   //If user adds a new category, it will be added to the category DB
+
   const addCategoryHandle = (event) => {
     event.preventDefault();
     if (option.includes(newCategory)) {
@@ -98,6 +100,8 @@ const Post = () => {
     }
   };
 
+  //Remove selected image
+
   const reset = (e) => {
     e.preventDefault();
     ref.current.value = null;
@@ -107,6 +111,7 @@ const Post = () => {
   return (
     <div>
       <SearchButton />
+
       <form onSubmit={submitHandle}>
         {/* Upload image: */}
 
@@ -173,6 +178,7 @@ const Post = () => {
           alignItems="center"
         >
           {/* Title form: */}
+
           <Box>
             <label>
               Name
@@ -191,6 +197,7 @@ const Post = () => {
           </Box>
 
           {/* Description form: */}
+
           <Box>
             <label>
               Description
@@ -204,33 +211,15 @@ const Post = () => {
                 onChange={(e) => setDescription(e.target.value)}
                 sx={{
                   minWidth: "90vw",
+                  border: "1px solid border.main",
+                  background: "background.default",
                 }}
               ></TextField>
               <br />
             </label>
           </Box>
 
-          {/* Category dropdown:
-        <Box sx={{ minWidth: 120 }}>
-          <FormControl fullWidth>
-            <InputLabel id="demo-simple-select-label">Category</InputLabel>
-            <Select
-              labelId="demo-simple-select-label"
-              id="demo-simple-select"
-              value={categories}
-              label="Category"
-              onChange={handleChange}
-              sx={{ minWidth: "90vw" }}
-            >
-              <MenuItem value="Curniture">Furniture</MenuItem>
-              <MenuItem value="Clothes">Clothes</MenuItem>
-              <MenuItem value="Kitchen">Kitchen</MenuItem>
-              <MenuItem value="Kids">Kids</MenuItem>
-              <MenuItem value="Books">Books</MenuItem>
-              <MenuItem value="Other">Other</MenuItem>
-            </Select>
-          </FormControl>
-        </Box> */}
+          {/* Category dropdown */}
 
           <label>
             Category
@@ -247,6 +236,27 @@ const Post = () => {
               onChange={(event) => {
                 setCategoriesSelected(event);
               }}
+              style={{
+                multiselectContainer: {
+                  border: "1px solid #5C9E28",
+                  borderRadius: "30px",
+                  backgroundColor: "#F3F0DC",
+                  width: "90vw",
+                  height: "60px",
+                  padding: "0.7em",
+                },
+                chips: { background: "#5C9E28" },
+                searchBox: {
+                  border: "none",
+                },
+                optionContainer: {
+                  border: "1px solid border.main",
+                  borderRadius: "15px",
+                },
+                selectedOption: {
+                  background: "#5C9E28",
+                },
+              }}
             />
             <div onClick={() => setAddCategory(true)}>Add Category</div>
             {addCategory ? (
@@ -262,30 +272,41 @@ const Post = () => {
           </label>
 
           {/* Condition dropdown: */}
+
           <Box>
-            <label>
-              Object condition:
-              <br />
-              <ButtonGroup
-                name="condition"
-                value={condition}
-                onClick={(e) => setCondition(e.target.value)}
-                variant="contained"
-                aria-label="outlined primary button group"
-                fullWidth
-                sx={{ minWidth: "90vw" }}
-              >
-                <Button value="like new">Like new</Button>
-                <Button value="good">Good</Button>
-                <Button value="acceptable">Acceptable</Button>
-                <Button value="poor">Poor</Button>
-              </ButtonGroup>
-            </label>
+            <label>Object condition:</label>
+
+            <ButtonGroup
+              name="condition"
+              value={condition}
+              onClick={(e) => setCondition(e.target.value)}
+              variant="contained"
+              aria-label="item condition selection"
+              fullWidth
+              disableElevation
+              sx={{
+                width: "90vw",
+              }}
+            >
+              <Button value="like new">Like new</Button>
+              <Button value="good">Good</Button>
+              <Button value="acceptable">Acceptable</Button>
+              <Button value="poor">Poor</Button>
+            </ButtonGroup>
           </Box>
 
-          <Box sx={{ minWidth: "90vw" }}>
+          {/* Location */}
+          <Box>
             <Location setLat={setLat} setLng={setLng} lat={lat} lng={lng} />
-            <Button variant="contained" type="submit" color="secondary">
+            <Button
+              variant="contained"
+              type="submit"
+              color="secondary"
+              sx={{
+                m: 10,
+                height: "60px",
+              }}
+            >
               Submit
             </Button>
           </Box>

@@ -9,13 +9,19 @@ export default function BurgerMenu() {
   const [categoriesSelected, setCategoriesSelected] = React.useState(null);
   const navigate = useNavigate();
 
+  //Clicking menu button
+
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
   };
 
+  // Closing menu button
+
   const handleClose = () => {
     setAnchorEl(null);
   };
+
+  // Clicking catogories
 
   const handleMenuItemClick = (categoriesSelected) => {
     setCategoriesSelected(categoriesSelected);
@@ -50,7 +56,7 @@ export default function BurgerMenu() {
           "aria-labelledby": "basic-button",
         }}
       >
-        <MenuItem onClick={() => handleMenuItemClick("all")}>All</MenuItem>
+        <MenuItem onClick={() => handleMenuItemClick("")}>All</MenuItem>
         <MenuItem onClick={() => handleMenuItemClick("furniture")}>
           Furniture
         </MenuItem>

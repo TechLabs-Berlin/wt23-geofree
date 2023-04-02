@@ -11,6 +11,7 @@ class Location extends React.Component {
 
   componentDidMount() {
     // Getting user geolocation:
+
     window.navigator.geolocation.getCurrentPosition(
       (position) => {
         this.props.setLng(parseFloat(position.coords.longitude));

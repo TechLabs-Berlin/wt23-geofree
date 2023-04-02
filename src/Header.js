@@ -47,19 +47,24 @@ const Header = () => {
       onClose={handleMenuClose}
       sx={{ p: 2 }}
     >
-      <MenuItem onClick={handleMenuClose}>
+      <MenuItem onClick={handleMenuClose} component={RouterLink} to="/profile">
         <AccountCircleOutlinedIcon sx={{ m: 1 }} />
         Profile
       </MenuItem>
-      <MenuItem onClick={handleMenuClose}>
+
+      <MenuItem
+        onClick={handleMenuClose}
+        component={RouterLink}
+        to="/favorites"
+      >
         <FavoriteBorderIcon sx={{ m: 1 }} />
         Favorites
       </MenuItem>
-      <MenuItem onClick={handleMenuClose}>
+      <MenuItem onClick={handleMenuClose} component={RouterLink} to="/listings">
         <FormatListBulletedIcon sx={{ m: 1 }} />
         My listings
       </MenuItem>
-      <MenuItem onClick={handleMenuClose}>
+      <MenuItem onClick={handleMenuClose} component={RouterLink} to="/settings">
         <SettingsOutlinedIcon sx={{ m: 1 }} />
         Settings
       </MenuItem>

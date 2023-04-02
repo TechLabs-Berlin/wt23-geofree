@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import Location from "./Location";
 import {
   Box,
   Grid,
@@ -10,13 +11,9 @@ import {
   Button,
 } from "@mui/material";
 import { CardActionArea } from "@mui/material";
-
-import Location from "./Location";
 import Multiselect from "multiselect-react-dropdown";
 
 const Search = () => {
-  // eslint-disable-next-line
-  const [allData, setAllData] = useState([]);
   const navigate = useNavigate();
   const [categoriesSelected, setCategoriesSelected] = useState([]); // state() that stores the categories selected by the user to do the query
   const [categories, setCategories] = useState([]); //state() that stores the choices of categories available in the backend
@@ -32,21 +29,6 @@ const Search = () => {
       })
       .then((data) => {
         setCategories(data);
-      })
-      .catch((e) => {
-        console.log("ERROR", e);
-      });
-  }, []);
-
-  useEffect(() => {
-    fetch("https://geofree.pythonanywhere.com/api/item-list/")
-      .then((res) => {
-        console.log(res);
-        return res.json();
-      })
-      .then((data) => {
-        console.log(data);
-        setAllData(data);
       })
       .catch((e) => {
         console.log("ERROR", e);
@@ -79,6 +61,8 @@ const Search = () => {
     }
   }
 
+  // Navigating to selected item
+
   const navigateToItem = (itemId) => {
     navigate(`/item/${itemId}`);
   };
@@ -88,6 +72,8 @@ const Search = () => {
       <div>
         <Box display="flex" justifyContent="center" sx={{ mt: 10 }}>
           <FormControl onSubmit={submitSearch}>
+            {/* Multiselect display */}
+
             <Multiselect
               avoidHighlightFirstOption={true}
               isObject={false}
@@ -128,6 +114,8 @@ const Search = () => {
 
             <Location setLat={setLat} setLng={setLng} lat={lat} lng={lng} />
 
+            {/* Range dropdown */}
+
             <Select
               id="range"
               name="distance"
@@ -140,6 +128,7 @@ const Search = () => {
               <MenuItem value={3000}>3 km</MenuItem>
               <MenuItem value={5000}>5 km</MenuItem>
               <MenuItem value={10000}>10 km</MenuItem>
+              <MenuItem value={20000}>20 km</MenuItem>
             </Select>
 
             <Button
