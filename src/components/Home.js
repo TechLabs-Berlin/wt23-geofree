@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
-import SearchButton from "./SearchButton";
+import Search from "./Search";
 import Hello from "./Hello";
 import { Box, Grid, Card } from "@mui/material";
 import { CardActionArea } from "@mui/material";
@@ -62,7 +62,7 @@ const Home = () => {
 
   return (
     <div>
-      <SearchButton />
+      <Search />
       <Hello />
       <div>
         {allData.map((post) => {

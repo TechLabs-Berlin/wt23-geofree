@@ -9,9 +9,12 @@ import {
   MenuItem,
   FormControl,
   Button,
+  Collapse,
+  CardActionArea,
 } from "@mui/material";
-import { CardActionArea } from "@mui/material";
+
 import Multiselect from "multiselect-react-dropdown";
+import SearchIcon from "@mui/icons-material/Search";
 
 const Search = () => {
   const navigate = useNavigate();
@@ -21,6 +24,7 @@ const Search = () => {
   const [lat, setLat] = useState("");
   const [lng, setLng] = useState("");
   const [distance, setDistance] = useState(1000);
+  const [open, setOpen] = useState(false);
 
   useEffect(() => {
     fetch("https://geofree.pythonanywhere.com/api/get-categories/")
@@ -67,141 +71,177 @@ const Search = () => {
     navigate(`/item/${itemId}`);
   };
 
+  const handleCollapse = () => {
+    setOpen(!open);
+  };
+
   return (
     <div>
-      <div>
-        <Box display="flex" justifyContent="center" sx={{ mt: 10 }}>
-          <FormControl onSubmit={submitSearch}>
-            {/* Multiselect display */}
+      {/* Search bar */}
+      <Card
+        display="flex"
+        justify="center"
+        sx={{ borderBottom: 1, borderColor: "border.main", borderRadius: 0 }}
+      >
+        <CardActionArea>
+          <Box
+            sx={{
+              height: 40,
+              backgroundColor: "background.default",
+            }}
+            onClick={handleCollapse}
+          >
+            <SearchIcon fontSize="large" sx={{ ml: 2, mt: 0.4 }} />
+          </Box>
+        </CardActionArea>
+      </Card>
 
-            <Multiselect
-              avoidHighlightFirstOption={true}
-              isObject={false}
-              options={option}
-              onRemove={(event) => {
-                setCategoriesSelected(event);
-              }}
-              onSelect={(event) => {
-                setCategoriesSelected(event);
-              }}
-              onChange={(event) => {
-                setCategoriesSelected(event);
-              }}
-              placeholder="What do you need?"
-              id="css_custom"
-              style={{
-                multiselectContainer: {
-                  border: "1px solid #5C9E28",
-                  borderRadius: "30px",
-                  backgroundColor: "#F3F0DC",
-                  width: "90vw",
-                  height: "60px",
-                  padding: "0.7em",
-                },
-                chips: { background: "#5C9E28" },
-                searchBox: {
-                  border: "none",
-                },
-                optionContainer: {
-                  border: "1px solid #5C9E28",
-                  borderRadius: "15px",
-                },
-                selectedOption: {
-                  background: "#5C9E28",
-                },
-              }}
-            />
-
-            <Location setLat={setLat} setLng={setLng} lat={lat} lng={lng} />
-
-            {/* Range dropdown */}
-
-            <Select
-              id="range"
-              name="distance"
-              value={distance}
-              onChange={(e) => setDistance(e.target.value)}
-              sx={{ border: "1px solid #5C9E28", backgroundColor: "#F3F0DC" }}
-            >
-              <MenuItem value={1000}>1 km</MenuItem>
-              <MenuItem value={2000}>2 km</MenuItem>
-              <MenuItem value={3000}>3 km</MenuItem>
-              <MenuItem value={5000}>5 km</MenuItem>
-              <MenuItem value={10000}>10 km</MenuItem>
-              <MenuItem value={20000}>20 km</MenuItem>
-            </Select>
-
-            <Button
-              variant="contained"
-              type="submit"
-              color="secondary"
-              onClick={submitSearch}
-              sx={{
-                m: 10,
-                height: "60px",
-              }}
-            >
-              Search
-            </Button>
-          </FormControl>
-        </Box>
-      </div>
-
-      {posts.map((post) => {
-        return (
+      <Collapse in={open}>
+        <Card
+          sx={{
+            borderColor: "border.main",
+            borderRadius: 0,
+            backgroundColor: "background.default",
+          }}
+        >
           <div>
-            <Card
-              display="flex"
-              justifyContent="center"
-              sx={{
-                m: 0,
-                flexGrow: 1,
-                borderBottom: 1,
-                borderColor: "border.main",
-                borderRadius: 0,
-                backgroundColor: "background.default",
-              }}
-            >
-              <CardActionArea onClick={() => navigateToItem(post.id)}>
-                <Grid container spacing={1} sx={{ m: 1 }}>
-                  <Grid item xs={6}>
-                    <Box
-                      component="img"
-                      sx={{
-                        width: 200,
-                        height: 200,
-                        border: 1,
-                        borderColor: "border.main",
-                        objectFit: "cover",
-                        borderRadius: 0.3,
-                      }}
-                      alt="item"
-                      src={
-                        `https://geofree.pythonanywhere.com/` +
-                        post.images[0].image
-                      }
-                    ></Box>
-                  </Grid>
+            <Box display="flex" justifyContent="center" sx={{ mt: 10 }}>
+              <FormControl onSubmit={submitSearch}>
+                {/* Multiselect display */}
 
-                  <Grid item xs={6}>
-                    <div key={post.id}>
-                      <div>
-                        <strong>{post.title}</strong>
-                      </div>
-                      <div>{post.description}</div>
-                      <div>Condition: {post.condition}</div>
-                      <div>Category: {post.categories}</div>
-                      <div>
-                        <strong>Location</strong>
-                      </div>
-                    </div>
-                  </Grid>
-                </Grid>
-              </CardActionArea>
-            </Card>
+                <Multiselect
+                  avoidHighlightFirstOption={true}
+                  isObject={false}
+                  options={option}
+                  onRemove={(event) => {
+                    setCategoriesSelected(event);
+                  }}
+                  onSelect={(event) => {
+                    setCategoriesSelected(event);
+                  }}
+                  onChange={(event) => {
+                    setCategoriesSelected(event);
+                  }}
+                  placeholder="What do you need?"
+                  id="css_custom"
+                  style={{
+                    multiselectContainer: {
+                      border: "1px solid #5C9E28",
+                      borderRadius: "30px",
+                      backgroundColor: "#F3F0DC",
+                      width: "90vw",
+                      height: "60px",
+                      padding: "0.7em",
+                    },
+                    chips: { background: "#5C9E28" },
+                    searchBox: {
+                      border: "none",
+                    },
+                    optionContainer: {
+                      border: "1px solid #5C9E28",
+                      borderRadius: "15px",
+                    },
+                    selectedOption: {
+                      background: "#5C9E28",
+                    },
+                  }}
+                />
+
+                <Location setLat={setLat} setLng={setLng} lat={lat} lng={lng} />
+
+                {/* Range dropdown */}
+
+                <Select
+                  id="range"
+                  name="distance"
+                  value={distance}
+                  onChange={(e) => setDistance(e.target.value)}
+                  sx={{
+                    border: "1px solid #5C9E28",
+                    backgroundColor: "#F3F0DC",
+                  }}
+                >
+                  <MenuItem value={1000}>1 km</MenuItem>
+                  <MenuItem value={2000}>2 km</MenuItem>
+                  <MenuItem value={3000}>3 km</MenuItem>
+                  <MenuItem value={5000}>5 km</MenuItem>
+                  <MenuItem value={10000}>10 km</MenuItem>
+                  <MenuItem value={20000}>20 km</MenuItem>
+                </Select>
+
+                <Button
+                  variant="contained"
+                  type="submit"
+                  color="secondary"
+                  onClick={submitSearch}
+                  sx={{
+                    m: 10,
+                    height: "60px",
+                  }}
+                >
+                  Search
+                </Button>
+              </FormControl>
+            </Box>
           </div>
-        );
-      })}
+
+          {/* {posts.map((post) => {
+            return (
+              <div>
+                <Card
+                  display="flex"
+                  justifyContent="center"
+                  sx={{
+                    m: 0,
+                    flexGrow: 1,
+                    borderBottom: 1,
+                    borderColor: "border.main",
+                    borderRadius: 0,
+                    backgroundColor: "background.default",
+                  }}
+                >
+                  <CardActionArea onClick={() => navigateToItem(post.id)}>
+                    <Grid container spacing={1} sx={{ m: 1 }}>
+                      <Grid item xs={6}>
+                        <Box
+                          component="img"
+                          sx={{
+                            width: 200,
+                            height: 200,
+                            border: 1,
+                            borderColor: "border.main",
+                            objectFit: "cover",
+                            borderRadius: 0.3,
+                          }}
+                          alt="item"
+                          src={
+                            `https://geofree.pythonanywhere.com/` +
+                            post.images[0].image
+                          }
+                        ></Box>
+                      </Grid>
+
+                      <Grid item xs={6}>
+                        <div key={post.id}>
+                          <div>
+                            <strong>{post.title}</strong>
+                          </div>
+                          <div>{post.description}</div>
+                          <div>Condition: {post.condition}</div>
+                          <div>Category: {post.categories}</div>
+                          <div>
+                            <strong>Location</strong>
+                          </div>
+                        </div>
+                      </Grid>
+                    </Grid>
+                  </CardActionArea>
+                </Card>
+              </div>
+            );
+          })} */}
+        </Card>
+      </Collapse>
     </div>
   );
 };
