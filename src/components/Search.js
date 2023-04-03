@@ -166,6 +166,7 @@ const Search = ({ onSearch, categoriesSelected, setCategoriesSelected }) => {
                 </Select>
 
                 <Button
+                  onClick={handleCollapse}
                   variant="contained"
                   type="submit"
                   color="secondary"

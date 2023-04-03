@@ -6,7 +6,7 @@ import {
   TextField,
   Card,
   Box,
-  Stack,
+  Paper,
   Grid,
   Fab,
   Button,
@@ -167,15 +167,29 @@ const Post = () => {
 
         {/* Form: */}
 
-        <Stack
+        <Paper
+          position="absolute"
           direction="column"
           spacing={2}
           display="flex"
-          alignItems="center"
+          justifyContent="center"
+          elevation="none"
+          sx={{
+            borderRadius: 0,
+            backgroundColor: "background.default",
+            width: "100%",
+          }}
         >
           {/* Title form: */}
 
-          <Box>
+          <Box
+            sx={{
+              display: "flex",
+              flexDirection: "row",
+              justifyContent: "center",
+              m: 3,
+            }}
+          >
             <label>
               Name
               <br />
@@ -186,7 +200,25 @@ const Post = () => {
                 variant="outlined"
                 value={title}
                 onChange={(e) => setTitle(e.target.value)}
-                sx={{ minWidth: "90vw" }}
+                InputLabelProps={{
+                  shrink: false,
+                }}
+                sx={{
+                  width: "90vw",
+                  mb: 1,
+                  backgroundColor: "info.main",
+                  "& .MuiOutlinedInput-root": {
+                    borderRadius: "40px",
+                    "& fieldset": {
+                      borderColor: "border.main",
+                      borderRadius: 30,
+                    },
+
+                    "&.Mui-focused fieldset": {
+                      borderColor: "green",
+                    },
+                  },
+                }}
               ></TextField>
             </label>
             <br />
@@ -194,7 +226,13 @@ const Post = () => {
 
           {/* Description form: */}
 
-          <Box>
+          <Box
+            sx={{
+              display: "flex",
+              flexDirection: "row",
+              justifyContent: "center",
+            }}
+          >
             <label>
               Description
               <br />
@@ -205,10 +243,24 @@ const Post = () => {
                 variant="outlined"
                 value={description}
                 onChange={(e) => setDescription(e.target.value)}
+                InputLabelProps={{
+                  shrink: false,
+                }}
                 sx={{
-                  minWidth: "90vw",
-                  border: "1px solid border.main",
-                  background: "background.default",
+                  width: "90vw",
+                  mb: 1,
+                  backgroundColor: "info.main",
+                  "& .MuiOutlinedInput-root": {
+                    borderRadius: "40px",
+                    "& fieldset": {
+                      borderColor: "border.main",
+                      borderRadius: 30,
+                    },
+
+                    "&.Mui-focused fieldset": {
+                      borderColor: "green",
+                    },
+                  },
                 }}
               ></TextField>
               <br />
@@ -217,61 +269,132 @@ const Post = () => {
 
           {/* Category dropdown */}
 
-          <label>
-            Category
-            <Multiselect
-              avoidHighlightFirstOption={true}
-              isObject={false}
-              options={option}
-              onRemove={(event) => {
-                setCategoriesSelected(event);
-              }}
-              onSelect={(event) => {
-                setCategoriesSelected(event);
-              }}
-              onChange={(event) => {
-                setCategoriesSelected(event);
-              }}
-              style={{
-                multiselectContainer: {
-                  border: "1px solid #5C9E28",
-                  borderRadius: "30px",
-                  backgroundColor: "#F3F0DC",
-                  width: "90vw",
-                  height: "60px",
-                  padding: "0.7em",
-                },
-                chips: { background: "#5C9E28" },
-                searchBox: {
-                  border: "none",
-                },
-                optionContainer: {
-                  border: "1px solid border.main",
-                  borderRadius: "15px",
-                },
-                selectedOption: {
-                  background: "#5C9E28",
-                },
-              }}
-            />
-            <div onClick={() => setAddCategory(true)}>Add Category</div>
-            {addCategory ? (
-              <div>
-                <input
-                  value={newCategory}
-                  onChange={(e) => setNewCategory(e.target.value)}
-                />
-                <button onClick={addCategoryHandle}>Add</button>
-                <div onClick={() => setAddCategory(false)}>(X)</div>
-              </div>
-            ) : null}
-          </label>
+          <Box
+            sx={{
+              display: "flex",
+              flexDirection: "row",
+              justifyContent: "center",
+              m: 3,
+            }}
+          >
+            <label>
+              Category
+              <Multiselect
+                avoidHighlightFirstOption={true}
+                isObject={false}
+                options={option}
+                onRemove={(event) => {
+                  setCategoriesSelected(event);
+                }}
+                onSelect={(event) => {
+                  setCategoriesSelected(event);
+                }}
+                onChange={(event) => {
+                  setCategoriesSelected(event);
+                }}
+                style={{
+                  multiselectContainer: {
+                    border: "1px solid #5C9E28",
+                    borderRadius: "30px",
+                    backgroundColor: "#F3F0DC",
+                    width: "90vw",
+                    height: "60px",
+                    padding: "0.7em",
+                  },
+                  inputField: {
+                    fontSize: "18px",
+                  },
+                  chips: { background: "#5C9E28" },
+                  searchBox: {
+                    border: "none",
+                  },
+                  optionContainer: {
+                    border: "1px solid border.main",
+                    borderRadius: "15px",
+                  },
+                  selectedOption: {
+                    background: "#5C9E28",
+                  },
+                }}
+              />
+              <Button
+                variant="contained"
+                type="submit"
+                color="secondary"
+                onClick={() => setAddCategory(true)}
+                sx={{ mt: 2 }}
+              >
+                Add Category
+              </Button>
+              {addCategory ? (
+                <Box flexDirection="column">
+                  <TextField
+                    label="Add category"
+                    value={newCategory}
+                    InputLabelProps={{
+                      shrink: false,
+                    }}
+                    onChange={(e) => setNewCategory(e.target.value)}
+                    sx={{
+                      mb: 2,
+                      mt: 2,
+                      backgroundColor: "info.main",
+                      "& .MuiOutlinedInput-root": {
+                        borderRadius: "40px",
+                        "& fieldset": {
+                          borderColor: "border.main",
+                          borderRadius: 30,
+                        },
 
-          {/* Condition dropdown: */}
+                        "&.Mui-focused fieldset": {
+                          borderColor: "green",
+                        },
+                      },
+                    }}
+                  ></TextField>
+                  <br />
 
-          <Box>
+                  <Button
+                    onClick={addCategoryHandle}
+                    variant="contained"
+                    type="submit"
+                    color="secondary"
+                  >
+                    Add
+                  </Button>
+                  <Button
+                    variant="contained"
+                    type="submit"
+                    color="secondary"
+                    sx={{ ml: 1 }}
+                    onClick={() => setAddCategory(false)}
+                  >
+                    Close
+                  </Button>
+                </Box>
+              ) : null}
+            </label>
+          </Box>
+
+          {/* Condition button: */}
+          <Box
+            sx={{
+              display: "start",
+              flexDirection: "row",
+              justifyContent: "center",
+              m: 3,
+            }}
+          >
             <label>Object condition:</label>
-
+          </Box>
+          <Box
+            sx={{
+              display: "flex",
+              flexDirection: "row",
+              justifyContent: "center",
+              m: 3,
+            }}
+          >
             <ButtonGroup
               name="condition"
               value={condition}
@@ -279,20 +402,61 @@ const Post = () => {
               variant="contained"
               aria-label="item condition selection"
               fullWidth
-              disableElevation
               sx={{
                 width: "90vw",
+
+                mb: 3,
+                backgroundColor: "info.main",
+                "& .MuiOutlinedInput-root": {
+                  borderRadius: "40px",
+                  "& fieldset": {
+                    borderColor: "border.main",
+                    borderRadius: 30,
+                  },
+
+                  "&.Mui-focused fieldset": {
+                    borderColor: "green",
+                  },
+                },
               }}
             >
-              <Button value="like new">Like new</Button>
-              <Button value="good">Good</Button>
-              <Button value="acceptable">Acceptable</Button>
-              <Button value="poor">Poor</Button>
+              <Button
+                sx={{ fontSize: 16, textTransform: "lowercase" }}
+                value="like new"
+              >
+                Like new
+              </Button>
+              <Button
+                sx={{ fontSize: 16, textTransform: "lowercase" }}
+                value="good"
+              >
+                Good
+              </Button>
+              <Button
+                sx={{ fontSize: 16, textTransform: "lowercase" }}
+                value="acceptable"
+              >
+                Acceptable
+              </Button>
+              <Button
+                sx={{ fontSize: 16, textTransform: "lowercase" }}
+                value="poor"
+              >
+                Poor
+              </Button>
             </ButtonGroup>
           </Box>
 
           {/* Location */}
-          <Box>
+
+          <Box
+            sx={{
+              justifyContent: "center",
+              flexDirection: "column",
+              alignItems: "center",
+              p: 3,
+            }}
+          >
             <Location setLat={setLat} setLng={setLng} lat={lat} lng={lng} />
             <Button
               variant="contained"
@@ -301,12 +465,13 @@ const Post = () => {
               sx={{
                 m: 10,
                 height: "60px",
+                minWidth: "100%",
               }}
             >
               Submit
             </Button>
           </Box>
-        </Stack>
+        </Paper>
       </form>
     </div>
   );

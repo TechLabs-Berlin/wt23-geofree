@@ -1,17 +1,15 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import { Box, Typography, IconButton, Button } from "@mui/material";
-
+import Location from "./Location";
 import { useNavigate } from "react-router-dom";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import Location from "./Location";
+import { Box, Typography, IconButton, Button } from "@mui/material";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 
 const ItemDetail = () => {
   const { id } = useParams();
-
   const [item, setItem] = useState(null);
   const [distance, setDistance] = useState(null);
   const [lat, setLat] = useState(null);
@@ -180,9 +178,9 @@ const ItemDetail = () => {
           <Typography variant="body1" sx={{ mb: 1 }}>
             <strong>Condition:</strong> {item.condition}
           </Typography>
-          {/* <Typography variant="body1">
+          <Typography variant="body1">
             Posted {Array.from(item.item_age)[0]} days ago
-          </Typography> */}
+          </Typography>
           {/* <Typography variant="body1">Liked {item.likes} times</Typography>
           <Typography variant="body1">Viewed {item.views} times</Typography> */}
           {/* <Typography variant="body1">Category: {item.categories}</Typography> */}

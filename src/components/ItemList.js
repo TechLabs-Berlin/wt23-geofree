@@ -2,6 +2,7 @@ import React from "react";
 import { Box, Grid, Card, Typography } from "@mui/material";
 import { CardActionArea } from "@mui/material";
 import { useNavigate } from "react-router-dom";
+import FmdGoodOutlinedIcon from "@mui/icons-material/FmdGoodOutlined";
 
 function ItemList({ post }) {
   const navigate = useNavigate();
@@ -9,6 +10,7 @@ function ItemList({ post }) {
   const navigateToItem = (itemId) => {
     navigate(`/item/${itemId}`);
   };
+
   return (
     <Box sx={{ display: "flex", justifyContent: "center" }}>
       <Card
@@ -26,7 +28,7 @@ function ItemList({ post }) {
         }}
       >
         <CardActionArea onClick={() => navigateToItem(post.id)}>
-          <Grid direction="row" container wrap="nowrap" sx={{ m: 1 }}>
+          <Grid direction="row" container wrap="nowrap" sx={{ m: 0 }}>
             <Grid item sx={{ m: 1 }}>
               <Box
                 component="img"
@@ -46,13 +48,13 @@ function ItemList({ post }) {
             </Grid>
 
             <Box sx={{ maxwidth: "40%", display: "block" }}>
-              <Grid item sx={{ m: 2, pr: 2 }}>
+              <Grid item sx={{ mt: 1 }}>
                 <div key={post.id}>
-                  <Typography>
+                  <Typography variant="body1">
                     <strong>{post.title}</strong>
                   </Typography>
                   <Typography
-                    variant="body1"
+                    variant="body2"
                     sx={{
                       wordBreak: "break-word",
                       display: "inline-block",
@@ -60,12 +62,19 @@ function ItemList({ post }) {
                   >
                     {post.description}
                   </Typography>
-                  <br />
-                  <br />
-                  <div>
-                    <strong>Location</strong>
-                  </div>
+
+                  <div>{/* <strong>Location: {post.latitude}</strong> */}</div>
                 </div>
+              </Grid>
+
+              <FmdGoodOutlinedIcon sx={{ mt: 3 }} />
+            </Box>
+
+            <Box>
+              <Grid item sx={{ mt: 1, mr: 1 }}>
+                <Typography variant="caption">
+                  {Array.from(post.item_age)[0]} days ago
+                </Typography>
               </Grid>
             </Box>
           </Grid>
