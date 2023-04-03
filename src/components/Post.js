@@ -190,7 +190,7 @@ const Post = () => {
               m: 3,
             }}
           >
-            <label>
+            <label style={{ fontSize: "23px" }}>
               Name
               <br />
               <TextField
@@ -233,7 +233,7 @@ const Post = () => {
               justifyContent: "center",
             }}
           >
-            <label>
+            <label style={{ fontSize: "23px" }}>
               Description
               <br />
               <TextField
@@ -268,112 +268,114 @@ const Post = () => {
           </Box>
 
           {/* Category dropdown */}
-
           <Box
             sx={{
-              display: "flex",
+              m: 3,
+            }}
+          >
+            <label style={{ fontSize: "23px" }}>Category</label>
+          </Box>
+          <Box
+            sx={{
               flexDirection: "row",
               justifyContent: "center",
               m: 3,
             }}
           >
-            <label>
-              Category
-              <Multiselect
-                avoidHighlightFirstOption={true}
-                isObject={false}
-                options={option}
-                onRemove={(event) => {
-                  setCategoriesSelected(event);
-                }}
-                onSelect={(event) => {
-                  setCategoriesSelected(event);
-                }}
-                onChange={(event) => {
-                  setCategoriesSelected(event);
-                }}
-                style={{
-                  multiselectContainer: {
-                    border: "1px solid #5C9E28",
-                    borderRadius: "30px",
-                    backgroundColor: "#F3F0DC",
-                    width: "90vw",
-                    height: "60px",
-                    padding: "0.7em",
-                  },
-                  inputField: {
-                    fontSize: "18px",
-                  },
-                  chips: { background: "#5C9E28" },
-                  searchBox: {
-                    border: "none",
-                  },
-                  optionContainer: {
-                    border: "1px solid border.main",
-                    borderRadius: "15px",
-                  },
-                  selectedOption: {
-                    background: "#5C9E28",
-                  },
-                }}
-              />
-              <Button
-                variant="contained"
-                type="submit"
-                color="secondary"
-                onClick={() => setAddCategory(true)}
-                sx={{ mt: 2 }}
-              >
-                Add Category
-              </Button>
-              {addCategory ? (
-                <Box flexDirection="column">
-                  <TextField
-                    label="Add category"
-                    value={newCategory}
-                    InputLabelProps={{
-                      shrink: false,
-                    }}
-                    onChange={(e) => setNewCategory(e.target.value)}
-                    sx={{
-                      mb: 2,
-                      mt: 2,
-                      backgroundColor: "info.main",
-                      "& .MuiOutlinedInput-root": {
-                        borderRadius: "40px",
-                        "& fieldset": {
-                          borderColor: "border.main",
-                          borderRadius: 30,
-                        },
-
-                        "&.Mui-focused fieldset": {
-                          borderColor: "green",
-                        },
+            <Multiselect
+              avoidHighlightFirstOption={true}
+              isObject={false}
+              options={option}
+              onRemove={(event) => {
+                setCategoriesSelected(event);
+              }}
+              onSelect={(event) => {
+                setCategoriesSelected(event);
+              }}
+              onChange={(event) => {
+                setCategoriesSelected(event);
+              }}
+              style={{
+                multiselectContainer: {
+                  border: "1px solid #5C9E28",
+                  borderRadius: "30px",
+                  backgroundColor: "#F3F0DC",
+                  width: "90vw",
+                  height: "60px",
+                  padding: "0.7em",
+                },
+                inputField: {
+                  fontSize: "17px",
+                },
+                chips: { background: "#5C9E28" },
+                searchBox: {
+                  border: "none",
+                },
+                optionContainer: {
+                  border: "1px solid border.main",
+                  borderRadius: "15px",
+                },
+                selectedOption: {
+                  background: "#5C9E28",
+                },
+              }}
+            />
+            <Button
+              variant="contained"
+              type="submit"
+              color="secondary"
+              onClick={() => setAddCategory(true)}
+              sx={{ mt: 2 }}
+            >
+              Add Category
+            </Button>
+            {addCategory ? (
+              <Box flexDirection="column">
+                <TextField
+                  label="Add category"
+                  value={newCategory}
+                  InputLabelProps={{
+                    shrink: false,
+                  }}
+                  onChange={(e) => setNewCategory(e.target.value)}
+                  sx={{
+                    mb: 2,
+                    mt: 2,
+                    backgroundColor: "info.main",
+                    "& .MuiOutlinedInput-root": {
+                      borderRadius: "40px",
+                      "& fieldset": {
+                        borderColor: "border.main",
+                        borderRadius: 30,
                       },
-                    }}
-                  ></TextField>
-                  <br />
 
-                  <Button
-                    onClick={addCategoryHandle}
-                    variant="contained"
-                    type="submit"
-                    color="secondary"
-                  >
-                    Add
-                  </Button>
-                  <Button
-                    variant="contained"
-                    type="submit"
-                    color="secondary"
-                    sx={{ ml: 1 }}
-                    onClick={() => setAddCategory(false)}
-                  >
-                    Close
-                  </Button>
-                </Box>
-              ) : null}
-            </label>
+                      "&.Mui-focused fieldset": {
+                        borderColor: "green",
+                      },
+                    },
+                  }}
+                ></TextField>
+                <br />
+
+                <Button
+                  onClick={addCategoryHandle}
+                  variant="contained"
+                  type="submit"
+                  color="secondary"
+                >
+                  Add
+                </Button>
+                <Button
+                  variant="contained"
+                  type="submit"
+                  color="secondary"
+                  sx={{ ml: 1 }}
+                  onClick={() => setAddCategory(false)}
+                >
+                  Close
+                </Button>
+              </Box>
+            ) : null}
           </Box>
 
           {/* Condition button: */}
@@ -385,7 +387,7 @@ const Post = () => {
               m: 3,
             }}
           >
-            <label>Object condition:</label>
+            <label style={{ fontSize: "23px" }}>Object condition:</label>
           </Box>
           <Box
             sx={{
@@ -404,7 +406,7 @@ const Post = () => {
               fullWidth
               sx={{
                 width: "90vw",
-
+                boxShadow: "0px 0px 0px 1px #5C9E28",
                 mb: 3,
                 backgroundColor: "info.main",
                 "& .MuiOutlinedInput-root": {
@@ -421,25 +423,57 @@ const Post = () => {
               }}
             >
               <Button
-                sx={{ fontSize: 16, textTransform: "lowercase" }}
+                sx={{
+                  fontSize: 16,
+                  textTransform: "lowercase",
+                  "&:hover": {
+                    backgroundColor: "secondary.main",
+                  },
+                  backgroundColor:
+                    condition === "like new" ? "secondary.main" : "",
+                }}
                 value="like new"
               >
                 Like new
               </Button>
               <Button
-                sx={{ fontSize: 16, textTransform: "lowercase" }}
+                sx={{
+                  fontSize: 16,
+                  textTransform: "lowercase",
+                  backgroundColor: condition === "good" ? "secondary.main" : "",
+                  "&:hover": {
+                    backgroundColor: "secondary.main",
+                  },
+                }}
                 value="good"
               >
                 Good
               </Button>
               <Button
-                sx={{ fontSize: 16, textTransform: "lowercase" }}
+                sx={{
+                  fontSize: 16,
+                  textTransform: "lowercase",
+
+                  backgroundColor:
+                    condition === "acceptable" ? "secondary.main" : "",
+                  "&:hover": {
+                    backgroundColor: "secondary.main",
+                  },
+                }}
                 value="acceptable"
               >
                 Acceptable
               </Button>
               <Button
-                sx={{ fontSize: 16, textTransform: "lowercase" }}
+                sx={{
+                  fontSize: 16,
+                  textTransform: "lowercase",
+
+                  backgroundColor: condition === "poor" ? "secondary.main" : "",
+                  "&:hover": {
+                    backgroundColor: "secondary.main",
+                  },
+                }}
                 value="poor"
               >
                 Poor
@@ -457,13 +491,18 @@ const Post = () => {
               p: 3,
             }}
           >
-            <Location setLat={setLat} setLng={setLng} lat={lat} lng={lng} />
+            <Location
+              setLat={setLat}
+              setLng={setLng}
+              lat={lat}
+              lng={lng}
+              hidden
+            />
             <Button
               variant="contained"
               type="submit"
               color="secondary"
               sx={{
-                m: 10,
                 height: "60px",
                 minWidth: "100%",
               }}

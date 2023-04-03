@@ -24,10 +24,10 @@ class Location extends React.Component {
   render() {
     return (
       <p>
-        {/* <strong>Latitude:</strong>
+        <strong>Latitude:</strong>
         {this.props.lat || "(Loading...)"}
         <strong>Longitude:</strong>
-        {this.props.lng || "(Loading...)"} */}
+        {this.props.lng || "(Loading...)"}
         <input type="hidden" name="lat" value={this.props.lat} />
         <input type="hidden" name="lng" value={this.props.lng} />
       </p>
