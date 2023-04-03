@@ -11,7 +11,7 @@ const Home = () => {
   const navigate = useNavigate();
   console.log(categoriesSelected);
   const location = useLocation();
-  const [distance, setDistance] = useState(1000);
+  const [filteredData, setFilteredData] = useState([]);
 
   // Getting categories from BurgerMenu
 
@@ -55,25 +55,23 @@ const Home = () => {
       });
   }, [categoriesSelected]);
 
-  console.log(categoriesSelected);
-
   // Navigating to specific item
 
   const navigateToItem = (itemId) => {
     navigate(`/item/${itemId}`);
   };
 
-  const handleSearch = (categoriesSelected, distance, lat, lng) => {
-    setCategoriesSelected(categoriesSelected);
-    setDistance(distance, lat, lng);
+  const handleFilter = (data) => {
+    setFilteredData(data);
+    console.log(filteredData);
   };
 
-  console.log(categoriesSelected);
+  // console.log(categoriesSelected);
 
   return (
     <div>
       <Search
-        onSearch={handleSearch}
+        onSearch={handleFilter}
         categoriesSelected={categoriesSelected}
         setCategoriesSelected={setCategoriesSelected}
       />

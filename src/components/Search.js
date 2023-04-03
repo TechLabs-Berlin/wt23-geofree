@@ -1,9 +1,7 @@
 import React, { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
 import Location from "./Location";
 import {
   Box,
-  Grid,
   Card,
   Select,
   MenuItem,
@@ -17,14 +15,14 @@ import Multiselect from "multiselect-react-dropdown";
 import SearchIcon from "@mui/icons-material/Search";
 
 const Search = ({ onSearch, categoriesSelected, setCategoriesSelected }) => {
-  const navigate = useNavigate();
-  // const [categoriesSelected, setCategoriesSelected] = useState([]); // state() that stores the categories selected by the user to do the query
   const [categories, setCategories] = useState([]); //state() that stores the choices of categories available in the backend
-  const [posts, setPosts] = useState([]); //state() that stores the backend response with the requested data
+  const [setPosts] = useState([]); //state() that stores the backend response with the requested data
   const [lat, setLat] = useState("");
   const [lng, setLng] = useState("");
   const [distance, setDistance] = useState(1000);
   const [open, setOpen] = useState(false);
+
+  //Fetching categories for Multiselect component
 
   useEffect(() => {
     fetch("https://geofree.pythonanywhere.com/api/get-categories/")
@@ -45,47 +43,46 @@ const Search = ({ onSearch, categoriesSelected, setCategoriesSelected }) => {
     option.push(categories[i].name);
   }
 
-  // useEffect(() => {
-  //   fetch(
-  //     `https://geofree.pythonanywhere.com/api/item-list-distance/?distance=${distance}&lat=${lat}&lng=${lng}`
-  //   )
-  //     .then((res) => res.json())
-  //     .then((data) => {
-  //       setPosts(data);
-  //     })
-  //     .catch((e) => {
-  //       console.log("ERROR", e.json());
+  // async function submitSearch(event) {
+  //   event.preventDefault();
+  //   try {
+  //     const response1 = await fetch(
+  //       `https://geofree.pythonanywhere.com/api/item-categories-list/?categories=${categoriesSelected}`
+  //     );
+  //     const response2 = await fetch(
+  //       `https://geofree.pythonanywhere.com/api/item-list-distance/?distance=${distance}&lat=${lat}&lng=${lng}`
+  //     );
+  //     const data1 = await response1.json();
+  //     const data2 = await response2.json();
+  //     const filteredPosts = data1.filter((post1) => {
+  //       return data2.some((post2) => post1.id === post2.id);
   //     });
-  // }, []);
+  //     setPosts(filteredPosts);
+  //     onFilter(filteredPosts);
+  //   } catch (error) {
+  //     console.error(error);
+  //   }
+  // }
+
+  const handleCategoryChange = (selected) => {
+    setCategoriesSelected(selected.join(","));
+  };
 
   async function submitSearch(event) {
     event.preventDefault();
-    try {
-      const response1 = await fetch(
-        `https://geofree.pythonanywhere.com/api/item-categories-list/?categories=${categoriesSelected}`
-      );
-      const response2 = await fetch(
-        `https://geofree.pythonanywhere.com/api/item-list-distance/?distance=${distance}&lat=${lat}&lng=${lng}`
-      );
-      const data1 = await response1.json();
-      const data2 = await response2.json();
-      const filteredPosts = data1.filter((post1) => {
-        return data2.some((post2) => post1.id === post2.id);
+
+    fetch(
+      `https://geofree.pythonanywhere.com/api/item-list-distance/?distance=${distance}&lat=${lat}&lng=${lng}`
+    )
+      .then((res) => res.json())
+      .then((data) => {
+        setPosts(data);
+        onSearch(data);
+      })
+      .catch((e) => {
+        console.log("ERROR", e.json());
       });
-      setPosts(filteredPosts);
-      setCategoriesSelected(categoriesSelected);
-      onSearch(categoriesSelected, distance, lat, lng);
-      console.log(categoriesSelected);
-    } catch (error) {
-      console.error(error);
-    }
   }
-
-  // // Navigating to selected item
-
-  // const navigateToItem = (itemId) => {
-  //   navigate(`/item/${itemId}`);
-  // };
 
   const handleCollapse = () => {
     setOpen(!open);
@@ -129,15 +126,8 @@ const Search = ({ onSearch, categoriesSelected, setCategoriesSelected }) => {
                   avoidHighlightFirstOption={true}
                   isObject={false}
                   options={option}
-                  onRemove={(event) => {
-                    setCategoriesSelected(event);
-                  }}
-                  onSelect={(event) => {
-                    setCategoriesSelected(event);
-                  }}
-                  onChange={(event) => {
-                    setCategoriesSelected(event);
-                  }}
+                  onSelect={handleCategoryChange}
+                  onRemove={handleCategoryChange}
                   placeholder="What do you need?"
                   id="css_custom"
                   style={{
@@ -199,62 +189,6 @@ const Search = ({ onSearch, categoriesSelected, setCategoriesSelected }) => {
               </FormControl>
             </Box>
           </div>
-
-          {/* {posts.map((post) => {
-            return (
-              <div>
-                <Card
-                  display="flex"
-                  justifyContent="center"
-                  sx={{
-                    m: 0,
-                    flexGrow: 1,
-                    borderBottom: 1,
-                    borderColor: "border.main",
-                    borderRadius: 0,
-                    backgroundColor: "background.default",
-                  }}
-                >
-                  <CardActionArea onClick={() => navigateToItem(post.id)}>
-                    <Grid container spacing={1} sx={{ m: 1 }}>
-                      <Grid item xs={6}>
-                        <Box
-                          component="img"
-                          sx={{
-                            width: 200,
-                            height: 200,
-                            border: 1,
-                            borderColor: "border.main",
-                            objectFit: "cover",
-                            borderRadius: 0.3,
-                          }}
-                          alt="item"
-                          src={
-                            `https://geofree.pythonanywhere.com/` +
-                            post.images[0].image
-                          }
-                        ></Box>
-                      </Grid>
-
-                      <Grid item xs={6}>
-                        <div key={post.id}>
-                          <div>
-                            <strong>{post.title}</strong>
-                          </div>
-                          <div>{post.description}</div>
-                          <div>Condition: {post.condition}</div>
-                          <div>Category: {post.categories}</div>
-                          <div>
-                            <strong>Location</strong>
-                          </div>
-                        </div>
-                      </Grid>
-                    </Grid>
-                  </CardActionArea>
-                </Card>
-              </div>
-            );
-          })} */}
         </Card>
       </Collapse>
     </div>
