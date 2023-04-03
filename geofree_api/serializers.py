@@ -1,13 +1,15 @@
 from rest_framework import serializers
 from .models import Item, ItemImages, Categories
 
+#Serialization of the inbound data.
 
-
+#Categories serialization.
 class CategorySerializers(serializers.ModelSerializer):
     class Meta:
         model = Categories
         fields = ['name']
 
+#Serialization of the list of categories received as a string.
 class CategoriesField(serializers.CharField):
     def to_representation(self, value):
         return value.split(',')
@@ -17,12 +19,14 @@ class CategoriesField(serializers.CharField):
             return ','.join(data)
         return data
 
-
+#Serialization of the images-path table with their respective foreign keys.
 class ItemImageSerializers(serializers.ModelSerializer):
     class Meta:
         model = ItemImages
         fields = ["id", "item", "image"]
 
+#Serialization of the whole Item model. Keep in minf that the "read-only" fields will only be visible in the API view
+#but won't be stored in the database.
 class ItemSerializers(serializers.HyperlinkedModelSerializer):
     images = ItemImageSerializers(many=True, read_only=True)
     uploaded_images = serializers.ListField(

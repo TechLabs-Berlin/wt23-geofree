@@ -1,6 +1,7 @@
 from django.urls import path
 from . import views
 
+#This array contatins all the url paths that represent the rest pints of the API
 
 urlpatterns = [
     path('', views.apiOverview, name="api-overview"),
@@ -16,5 +17,8 @@ urlpatterns = [
     path('get-categories/', views.getCategories, name="get-categories"),
     path('item-categories-list/', views.itemListCategories, name="list-categories"),
     path('item-list-distance/', views.itemListDistance, name="item-list-distance"),
-    path('item-user-distance/', views.calculate_distance, name ="distance-user")
+    path('item-user-distance/', views.calculate_distance, name ="distance-user"),
+    path('item-user-distance-id/', views.calculate_distance_id, name ="distance-user-id"),
+    path('item-ages/', views.getItemAges, name ="item-ages"),
+     path('ml-ranking/', views.getRakingRecomm, name='ranking')
 ]
