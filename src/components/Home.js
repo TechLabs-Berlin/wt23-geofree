@@ -31,6 +31,25 @@ const Home = () => {
       });
   }, []);
 
+  // Fetching data of selected categories
+
+  useEffect(() => {
+    fetch(
+      `https://geofree.pythonanywhere.com/api/item-categories-list/?categories=${categoriesSelected}`
+    )
+      .then((res) => {
+        console.log(res);
+        return res.json();
+      })
+      .then((data) => {
+        console.log(data);
+        setAllData(data);
+      })
+      .catch((e) => {
+        console.log("ERROR", e);
+      });
+  }, [categoriesSelected]);
+
   const handleFilter = (data) => {
     setFilteredData(data);
   };

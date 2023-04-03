@@ -22,7 +22,6 @@ const Login = () => {
           display: "flex",
           flexDirection: "row",
           justifyContent: "center",
-
           m: 3,
         }}
       >

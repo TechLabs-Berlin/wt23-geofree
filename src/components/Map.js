@@ -56,7 +56,7 @@ function Map() {
     );
   }, []);
 
-  // Fetching all items
+  // // Fetching all items
   useEffect(() => {
     fetch("https://geofree.pythonanywhere.com/api/item-list/")
       .then((res) => {
@@ -121,7 +121,10 @@ function Map() {
         }}
       >
         {filteredData.map((value) => {
-          const position = { lat: value.latitude, lng: value.longitude };
+          const position = {
+            lat: value.latitude,
+            lng: value.longitude,
+          };
 
           return (
             <MarkerF

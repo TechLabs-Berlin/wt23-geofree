@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { Box, Typography, IconButton, Button } from "@mui/material";
+
 import { useNavigate } from "react-router-dom";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
@@ -13,8 +14,8 @@ const ItemDetail = () => {
 
   const [item, setItem] = useState(null);
   const [distance, setDistance] = useState(null);
-  const [lat, setLat] = useState(0);
-  const [lng, setLng] = useState(0);
+  const [lat, setLat] = useState(null);
+  const [lng, setLng] = useState(null);
   const navigate = useNavigate();
 
   // Fetching item with specific id
@@ -39,8 +40,6 @@ const ItemDetail = () => {
         .then((res) => res.json())
         .then((data) => {
           setDistance(data.distance_kms);
-          console.log(lat);
-          console.log(lng);
         })
         .catch((e) => {
           console.log("ERROR", e);
@@ -108,9 +107,9 @@ const ItemDetail = () => {
 
   // Navigating to map
 
-  const navigateToItem = ({ lat, lng }) => {
-    navigate(`/map/?lat=${lat}&lng=${lng}`);
-    console.log(lat, lng);
+  const navigateToItem = () => {
+    navigate(`/map/?id=${id}`);
+    console.log(id);
   };
 
   return (
@@ -177,6 +176,7 @@ const ItemDetail = () => {
           <Typography variant="body1" sx={{ mb: 1 }}>
             {item.description}
           </Typography>
+
           <Typography variant="body1" sx={{ mb: 1 }}>
             <strong>Condition:</strong> {item.condition}
           </Typography>
