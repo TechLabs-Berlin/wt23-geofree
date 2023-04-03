@@ -20,5 +20,5 @@ urlpatterns = [
     path('item-user-distance/', views.calculate_distance, name ="distance-user"),
     path('item-user-distance-id/', views.calculate_distance_id, name ="distance-user-id"),
     path('item-ages/', views.getItemAges, name ="item-ages"),
-     path('ml-ranking/', views.getRakingRecomm, name='ranking')
+    path('ml-ranking/', views.getRakingRecomm, name='ranking')
 ]
