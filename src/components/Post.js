@@ -29,6 +29,7 @@ const Post = () => {
   const ref = useRef();
   const [addCategory, setAddCategory] = useState(false); //state() that will conditionally display the input of a new category
   const [newCategory, setNewCategory] = useState(); // state() that stores the new category created by the user
+  const [locationLoaded, setLocationLoaded] = useState(false);
 
   //fetch the GeoFree categories
 
@@ -75,6 +76,12 @@ const Post = () => {
 
     navigate("/");
   };
+
+  useEffect(() => {
+    if (lat && lng) {
+      setLocationLoaded(true);
+    }
+  }, [lat, lng]);
 
   //If user adds a new category, it will be added to the category DB
 
@@ -498,17 +505,31 @@ const Post = () => {
               lng={lng}
               hidden
             />
-            <Button
-              variant="contained"
-              type="submit"
-              color="secondary"
-              sx={{
-                height: "60px",
-                minWidth: "100%",
-              }}
-            >
-              Submit
-            </Button>
+            {locationLoaded ? (
+              <Button
+                variant="contained"
+                type="submit"
+                color="secondary"
+                sx={{
+                  height: "60px",
+                  minWidth: "100%",
+                }}
+              >
+                Submit
+              </Button>
+            ) : (
+              <Button
+                variant="contained"
+                disabled
+                color="secondary"
+                sx={{
+                  height: "60px",
+                  minWidth: "100%",
+                }}
+              >
+                Please allow location
+              </Button>
+            )}
           </Box>
         </Paper>
       </form>
