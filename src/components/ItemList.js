@@ -1,5 +1,5 @@
 import React from "react";
-import { Box, Grid, Card } from "@mui/material";
+import { Box, Grid, Card, Typography } from "@mui/material";
 import { CardActionArea } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 
@@ -10,13 +10,15 @@ function ItemList({ post }) {
     navigate(`/item/${itemId}`);
   };
   return (
-    <div>
+    <Box sx={{ display: "flex", justifyContent: "center" }}>
       <Card
+        position="absolute"
+        spacing={2}
         display="flex"
-        justify="center"
+        elevation="none"
         sx={{
-          m: 0,
-          flexGrow: 1,
+          width: "100%",
+          flexGrow: 0,
           borderBottom: 1,
           borderColor: "border.main",
           borderRadius: 0,
@@ -24,13 +26,13 @@ function ItemList({ post }) {
         }}
       >
         <CardActionArea onClick={() => navigateToItem(post.id)}>
-          <Grid container spacing={1} sx={{ m: 1 }}>
-            <Grid item xs={6}>
+          <Grid direction="row" container wrap="nowrap" sx={{ m: 1 }}>
+            <Grid item sx={{ m: 1 }}>
               <Box
                 component="img"
                 sx={{
-                  width: 200,
-                  height: 200,
+                  width: 120,
+                  height: 120,
                   border: 1,
                   borderColor: "border.main",
                   objectFit: "cover",
@@ -43,23 +45,33 @@ function ItemList({ post }) {
               ></Box>
             </Grid>
 
-            <Grid item xs={6}>
-              <div key={post.id}>
-                <div>
-                  <strong>{post.title}</strong>
+            <Box sx={{ maxwidth: "40%", display: "block" }}>
+              <Grid item sx={{ m: 2, pr: 2 }}>
+                <div key={post.id}>
+                  <Typography>
+                    <strong>{post.title}</strong>
+                  </Typography>
+                  <Typography
+                    variant="body1"
+                    sx={{
+                      wordBreak: "break-word",
+                      display: "inline-block",
+                    }}
+                  >
+                    {post.description}
+                  </Typography>
+                  <br />
+                  <br />
+                  <div>
+                    <strong>Location</strong>
+                  </div>
                 </div>
-                <div>{post.description}</div>
-                <div>Condition: {post.condition}</div>
-                <div>Category: {post.categories}</div>
-                <div>
-                  <strong>Location</strong>
-                </div>
-              </div>
-            </Grid>
+              </Grid>
+            </Box>
           </Grid>
         </CardActionArea>
       </Card>
-    </div>
+    </Box>
   );
 }
 
