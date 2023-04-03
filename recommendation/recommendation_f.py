@@ -32,8 +32,8 @@ def create_ranking_df(chosen_category):
     # ranking_df['age'] = round((pd.Timestamp.now() - ranking_df['creation_date']) / pd.Timedelta(hours=1), 1)
     # create a new copy of the df
     ranking_df_filtered = ranking_df.copy()
-    # filter by categories
-    ranking_df_filtered = ranking_df_clean[ranking_df_clean['categories'] == chosen_category]
+    # filter by categories and available
+    ranking_df_filtered = ranking_df_filtered[(ranking_df_filtered['categories'] == chosen_category) & (ranking_df_filtered['available'] == True)]
     # rank these columns
     ranking_df_filtered['creation_date_rank'] = ranking_df_filtered['creation_date'].rank(method='min', ascending=True)
     ranking_df_filtered['condition_rank'] = ranking_df_filtered['condition'].rank(method='min', ascending=True)
@@ -44,14 +44,11 @@ def create_ranking_df(chosen_category):
     # sort by the higher overall_rank
     ranking_sorted = ranking_df_filtered.sort_values(by='overall_rank', ascending = False)
     # save only the ids
-    ranked_id = ranking_sorted['id']
+    ranked_id = ranking_sorted['id'].head(3) # limit to the 1st, 2nd and 3rd results.
     return ranked_id
 
 
-# chosen_category = 'Furniture'
-chosen_category = 'Clothes'
-chosen_category = chosen_category.upper()
-
-create_ranking_df(chosen_category)
-# prepare_df(ranking_df)
+# chosen_category = 'Clothes'
+# chosen_category = chosen_category.lower()
 # recommend(chosen_category)
+
