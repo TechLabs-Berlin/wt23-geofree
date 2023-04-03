@@ -47,7 +47,7 @@ const Header = () => {
       onClose={handleMenuClose}
       sx={{ p: 2 }}
     >
-      <MenuItem onClick={handleMenuClose} component={RouterLink} to="/profile">
+      <MenuItem onClick={handleMenuClose} component={RouterLink} to="/login">
         <AccountCircleOutlinedIcon sx={{ m: 1 }} />
         Profile
       </MenuItem>

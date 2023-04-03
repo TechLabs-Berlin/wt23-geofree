@@ -1,6 +1,5 @@
 import React, { useState, useRef, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import SearchButton from "./SearchButton";
 import Location from "./Location";
 import {
   CardContent,
@@ -11,7 +10,6 @@ import {
   Grid,
   Fab,
   Button,
-  FormControl,
 } from "@mui/material";
 import ButtonGroup from "@mui/material/ButtonGroup";
 import Multiselect from "multiselect-react-dropdown";
@@ -110,8 +108,6 @@ const Post = () => {
 
   return (
     <div>
-      <SearchButton />
-
       <form onSubmit={submitHandle}>
         {/* Upload image: */}
 

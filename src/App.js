@@ -9,8 +9,8 @@ import Post from "./components/Post";
 import Listings from "./components/Listings";
 import UserSettings from "./components/UserSettings";
 import Hello from "./components/Hello";
-// import Login from "./components/Login";
-// import Register from "./components/Register";
+import Login from "./components/Login";
+import Register from "./components/Register";
 import UserProfile from "./components/UserProfile";
 import Favorites from "./components/Favorites";
 
@@ -26,7 +26,7 @@ const theme = createTheme({
       default: "#FFFEF9", //background
     },
     border: {
-      main: "#5C9E28", //input border
+      main: "#5C9E28", //green border
     },
     secondary: {
       main: "#B8E173", //green buttons
@@ -62,8 +62,8 @@ const App = () => {
             <Route path="/listings" element={<Listings />} />
             <Route path="/settings" element={<UserSettings />} />
             <Route path="/hello" element={<Hello />} />
-            {/* <Route path="/login" element={<Login />} /> */}
-            {/* <Route path="/register" element={<Register />} /> */}
+            <Route path="/login" element={<Login />} />
+            <Route path="/register" element={<Register />} />
             <Route path="/profile" element={<UserProfile />} />
             <Route path="/favorites" element={<Favorites />} />
           </Routes>

@@ -16,9 +16,9 @@ import {
 import Multiselect from "multiselect-react-dropdown";
 import SearchIcon from "@mui/icons-material/Search";
 
-const Search = () => {
+const Search = ({ onSearch, categoriesSelected, setCategoriesSelected }) => {
   const navigate = useNavigate();
-  const [categoriesSelected, setCategoriesSelected] = useState([]); // state() that stores the categories selected by the user to do the query
+  // const [categoriesSelected, setCategoriesSelected] = useState([]); // state() that stores the categories selected by the user to do the query
   const [categories, setCategories] = useState([]); //state() that stores the choices of categories available in the backend
   const [posts, setPosts] = useState([]); //state() that stores the backend response with the requested data
   const [lat, setLat] = useState("");
@@ -45,6 +45,19 @@ const Search = () => {
     option.push(categories[i].name);
   }
 
+  // useEffect(() => {
+  //   fetch(
+  //     `https://geofree.pythonanywhere.com/api/item-list-distance/?distance=${distance}&lat=${lat}&lng=${lng}`
+  //   )
+  //     .then((res) => res.json())
+  //     .then((data) => {
+  //       setPosts(data);
+  //     })
+  //     .catch((e) => {
+  //       console.log("ERROR", e.json());
+  //     });
+  // }, []);
+
   async function submitSearch(event) {
     event.preventDefault();
     try {
@@ -60,16 +73,19 @@ const Search = () => {
         return data2.some((post2) => post1.id === post2.id);
       });
       setPosts(filteredPosts);
+      setCategoriesSelected(categoriesSelected);
+      onSearch(categoriesSelected, distance, lat, lng);
+      console.log(categoriesSelected);
     } catch (error) {
       console.error(error);
     }
   }
 
-  // Navigating to selected item
+  // // Navigating to selected item
 
-  const navigateToItem = (itemId) => {
-    navigate(`/item/${itemId}`);
-  };
+  // const navigateToItem = (itemId) => {
+  //   navigate(`/item/${itemId}`);
+  // };
 
   const handleCollapse = () => {
     setOpen(!open);
@@ -173,7 +189,6 @@ const Search = () => {
                   variant="contained"
                   type="submit"
                   color="secondary"
-                  onClick={submitSearch}
                   sx={{
                     m: 10,
                     height: "60px",

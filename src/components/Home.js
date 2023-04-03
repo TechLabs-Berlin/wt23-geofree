@@ -11,6 +11,7 @@ const Home = () => {
   const navigate = useNavigate();
   console.log(categoriesSelected);
   const location = useLocation();
+  const [distance, setDistance] = useState(1000);
 
   // Getting categories from BurgerMenu
 
@@ -21,7 +22,7 @@ const Home = () => {
   // Fetching all items
 
   useEffect(() => {
-    fetch("URL/item-list/")
+    fetch("https://geofree.pythonanywhere.com/api/item-list/")
       .then((res) => {
         console.log(res);
         return res.json();
@@ -54,15 +55,28 @@ const Home = () => {
       });
   }, [categoriesSelected]);
 
+  console.log(categoriesSelected);
+
   // Navigating to specific item
 
   const navigateToItem = (itemId) => {
     navigate(`/item/${itemId}`);
   };
 
+  const handleSearch = (categoriesSelected, distance, lat, lng) => {
+    setCategoriesSelected(categoriesSelected);
+    setDistance(distance, lat, lng);
+  };
+
+  console.log(categoriesSelected);
+
   return (
     <div>
-      <Search />
+      <Search
+        onSearch={handleSearch}
+        categoriesSelected={categoriesSelected}
+        setCategoriesSelected={setCategoriesSelected}
+      />
       <Hello />
       <div>
         {allData.map((post) => {

@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 import { useParams } from "react-router-dom";
 import { GoogleMap, MarkerF } from "@react-google-maps/api";
 import ItemCard from "./ItemCard";
-import SearchButton from "./SearchButton";
+import Search from "./Search";
 import { IconButton, Box } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
 
@@ -29,7 +29,7 @@ const myStyles = [
   },
 ];
 
-function Map() {
+function Map({}) {
   const { id } = useParams();
   const [lat, setLat] = useState(0);
   const [lng, setLng] = useState(0);
@@ -90,11 +90,11 @@ function Map() {
 
   return (
     <div>
-      <SearchButton />
+      <Search />
       <GoogleMap
         mapContainerStyle={containerStyle}
         styles={myStyles}
-        center={mapRef}
+        center={{ mapRef }}
         // zoom={6}
         options={{
           zoomControl: false,
