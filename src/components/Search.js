@@ -16,7 +16,8 @@ import SearchIcon from "@mui/icons-material/Search";
 
 const Search = ({ onSearch, categoriesSelected, setCategoriesSelected }) => {
   const [categories, setCategories] = useState([]); //state() that stores the choices of categories available in the backend
-  const [setPosts] = useState([]); //state() that stores the backend response with the requested data
+  //eslint-disable-next-line
+  const [posts, setPosts] = useState([]); //state() that stores the backend response with the requested data
   const [lat, setLat] = useState("");
   const [lng, setLng] = useState("");
   const [distance, setDistance] = useState(1000);
@@ -43,45 +44,34 @@ const Search = ({ onSearch, categoriesSelected, setCategoriesSelected }) => {
     option.push(categories[i].name);
   }
 
-  // async function submitSearch(event) {
-  //   event.preventDefault();
-  //   try {
-  //     const response1 = await fetch(
-  //       `https://geofree.pythonanywhere.com/api/item-categories-list/?categories=${categoriesSelected}`
-  //     );
-  //     const response2 = await fetch(
-  //       `https://geofree.pythonanywhere.com/api/item-list-distance/?distance=${distance}&lat=${lat}&lng=${lng}`
-  //     );
-  //     const data1 = await response1.json();
-  //     const data2 = await response2.json();
-  //     const filteredPosts = data1.filter((post1) => {
-  //       return data2.some((post2) => post1.id === post2.id);
-  //     });
-  //     setPosts(filteredPosts);
-  //     onFilter(filteredPosts);
-  //   } catch (error) {
-  //     console.error(error);
-  //   }
-  // }
-
   const handleCategoryChange = (selected) => {
     setCategoriesSelected(selected.join(","));
   };
+  // const option = [];
+  // for (let i = 0; i < categories.length; i++) {
+  //   option.push(categories[i].name);
+  // }
 
   async function submitSearch(event) {
     event.preventDefault();
-
-    fetch(
-      `https://geofree.pythonanywhere.com/api/item-list-distance/?distance=${distance}&lat=${lat}&lng=${lng}`
-    )
-      .then((res) => res.json())
-      .then((data) => {
-        setPosts(data);
-        onSearch(data);
-      })
-      .catch((e) => {
-        console.log("ERROR", e.json());
+    try {
+      const response1 = await fetch(
+        `https://geofree.pythonanywhere.com/api/item-categories-list/?categories=${categoriesSelected}`
+      );
+      const response2 = await fetch(
+        `https://geofree.pythonanywhere.com/api/item-list-distance/?distance=${distance}&lat=${lat}&lng=${lng}`
+      );
+      const data1 = await response1.json();
+      const data2 = await response2.json();
+      const filteredPosts = data1.filter((post1) => {
+        return data2.some((post2) => post1.id === post2.id);
       });
+      setPosts(filteredPosts);
+
+      onSearch(filteredPosts);
+    } catch (error) {
+      console.error(error);
+    }
   }
 
   const handleCollapse = () => {
@@ -117,9 +107,9 @@ const Search = ({ onSearch, categoriesSelected, setCategoriesSelected }) => {
             backgroundColor: "background.default",
           }}
         >
-          <div>
+          <form onSubmit={submitSearch}>
             <Box display="flex" justifyContent="center" sx={{ mt: 10 }}>
-              <FormControl onSubmit={submitSearch}>
+              <FormControl>
                 {/* Multiselect display */}
 
                 <Multiselect
@@ -188,7 +178,7 @@ const Search = ({ onSearch, categoriesSelected, setCategoriesSelected }) => {
                 </Button>
               </FormControl>
             </Box>
-          </div>
+          </form>
         </Card>
       </Collapse>
     </div>

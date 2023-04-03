@@ -29,14 +29,19 @@ const myStyles = [
   },
 ];
 
-function Map({}) {
+function Map() {
   const { id } = useParams();
+  //eslint-disable-next-line
   const [lat, setLat] = useState(0);
+  //eslint-disable-next-line
   const [lng, setLng] = useState(0);
+  //eslint-disable-next-line
   const [allData, setAllData] = useState([]);
   const [filteredData, setFilteredData] = useState([]);
+  //eslint-disable-next-line
   const [isOpen, setIsOpen] = useState(false);
   const [item, setItem] = useState(null);
+  const [categoriesSelected, setCategoriesSelected] = useState("");
 
   const mapRef = useRef(null);
 
@@ -68,6 +73,10 @@ function Map({}) {
       });
   }, [id]);
 
+  const handleFilter = (data) => {
+    setFilteredData(data);
+  };
+
   const handleMarkerClick = (item) => {
     console.log(item);
     setItem(item);
@@ -90,12 +99,16 @@ function Map({}) {
 
   return (
     <div>
-      <Search />
+      <Search
+        onSearch={handleFilter}
+        categoriesSelected={categoriesSelected}
+        setCategoriesSelected={setCategoriesSelected}
+      />
       <GoogleMap
         mapContainerStyle={containerStyle}
         styles={myStyles}
         center={{ mapRef }}
-        // zoom={6}
+        zoom={10}
         options={{
           zoomControl: false,
           streetViewControl: false,

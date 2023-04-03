@@ -64,7 +64,7 @@ const Header = () => {
         <FormatListBulletedIcon sx={{ m: 1 }} />
         My listings
       </MenuItem>
-      <MenuItem onClick={handleMenuClose} component={RouterLink} to="/settings">
+      <MenuItem onClick={handleMenuClose} component={RouterLink} to="/login">
         <SettingsOutlinedIcon sx={{ m: 1 }} />
         Settings
       </MenuItem>
