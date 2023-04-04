@@ -9,6 +9,7 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { Box, Typography, Button } from "@mui/material";
 import LikeButton from "./LikeButton";
+import ItemList from "./ItemList";
 
 const ItemDetail = () => {
   const { id } = useParams();
@@ -260,6 +261,9 @@ const ItemDetail = () => {
         </Box>
       </div>
       {/* Recommendations */}
+
+      {/* <ItemList post={categoryId} /> */}
+      {/* 
       <div>
         <Typography>You might also like:</Typography>
         <Box sx={{ p: 5, flexDirection: "column" }} width="100%">
@@ -275,7 +279,7 @@ const ItemDetail = () => {
             </Typography>
           </div>
         </Box>
-      </div>
+      </div> */}
     </div>
   );
 };
