@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import { Box, Typography, IconButton, Button } from "@mui/material";
+import { Box, Typography, Button } from "@mui/material";
 // import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import LikeButton from "./LikeButton";
 
