@@ -14,7 +14,13 @@ import {
 import Multiselect from "multiselect-react-dropdown";
 import SearchIcon from "@mui/icons-material/Search";
 
-const Search = ({ onSearch, categoriesSelected, setCategoriesSelected, mlItems, setMlItems }) => {
+const Search = ({
+  onSearch,
+  categoriesSelected,
+  setCategoriesSelected,
+  mlItems,
+  setMlItems,
+}) => {
   const [categories, setCategories] = useState([]); //state() that stores the choices of categories available in the backend
   //eslint-disable-next-line
   const [posts, setPosts] = useState([]); //state() that stores the backend response with the requested data
@@ -46,10 +52,10 @@ const Search = ({ onSearch, categoriesSelected, setCategoriesSelected, mlItems, 
   const handleCategoryChange = (selected) => {
     setCategoriesSelected(selected.join(","));
   };
- 
+
   async function submitSearch(event) {
     event.preventDefault();
-    const words = categoriesSelected.split(",")
+    const words = categoriesSelected.split(",");
     try {
       const response1 = await fetch(
         `https://geofree.pythonanywhere.com/api/item-categories-list/?categories=${categoriesSelected}`
@@ -77,7 +83,7 @@ const Search = ({ onSearch, categoriesSelected, setCategoriesSelected, mlItems, 
   const handleCollapse = () => {
     setOpen(!open);
   };
-  
+
   return (
     <div>
       {/* Search bar */}

@@ -124,6 +124,26 @@ const ItemDetail = () => {
 
   const isAvailable = item.available;
 
+  const handleMarkAsTaken = () => {
+    fetch(`https://geofree.pythonanywhere.com/api/item-update/${id}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        available: false,
+      }),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+        setItem(data);
+      })
+      .catch((e) => {
+        console.log("ERROR", e);
+      });
+  };
+
   return (
     <div>
       <div>

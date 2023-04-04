@@ -9,7 +9,7 @@ const Home = () => {
   const [categoriesSelected, setCategoriesSelected] = useState("");
   const location = useLocation();
   const [filteredData, setFilteredData] = useState([]);
- 
+
   // Getting categories from BurgerMenu
 
   useEffect(() => {
@@ -17,7 +17,7 @@ const Home = () => {
   }, [location.state?.categoriesSelected]);
 
   // Fetching all items
- 
+
   useEffect(() => {
     fetch("https://geofree.pythonanywhere.com/api/item-list/")
       .then((res) => {
