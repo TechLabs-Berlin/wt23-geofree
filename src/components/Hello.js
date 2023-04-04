@@ -40,9 +40,14 @@ function Hello({ isFirstTime }) {
           alignItems="center"
           sx={{ maxWidth: "100%", m: 3 }}
         >
-          <DialogTitle>Zu verschenken has never been easier</DialogTitle>
+          <DialogTitle sx={{ textAlign: "center" }} variant="h4">
+            Zu verschenken has never been easier
+          </DialogTitle>
           <DialogContent>
-            <DialogContentText>Thank you for using our app!</DialogContentText>
+            <DialogContentText sx={{ textAlign: "center" }}>
+              Browse free items around you or post an item you would like to get
+              rid of easily with Geofree.
+            </DialogContentText>
           </DialogContent>
           <Button
             variant="contained"
@@ -73,7 +78,7 @@ function Hello({ isFirstTime }) {
               height: "60px",
             }}
           >
-            Share your stuff
+            Give your items away
           </Button>
           <Box
             component="img"
