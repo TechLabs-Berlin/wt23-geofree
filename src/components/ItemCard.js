@@ -1,5 +1,8 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
+import LikeButton from "./LikeButton";
+import Taken from "./Taken";
+import Available from "./Available";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
@@ -26,6 +29,17 @@ export default function ItemCard(props) {
     return console.log("Error loading image", error);
   };
 
+  const availability = () => {
+    if (props.available === false) {
+      return <Taken />;
+    }
+    return <Available />;
+  };
+  console.log(props.available);
+
+  const isAvailable = props.available;
+  console.log(isAvailable);
+
   return (
     <Card
       id={props.id}
@@ -40,8 +54,27 @@ export default function ItemCard(props) {
         backgroundColor: "#FFFFFF",
       }}
     >
-      {/* Image display */}
-
+      {/* Like button */}
+      <Box
+        sx={{
+          display: "flex",
+          flexDirection: "row",
+          position: "relative",
+        }}
+      >
+        <Box
+          sx={{
+            position: "absolute",
+            justifyContent: "flex-end",
+            top: "10px",
+            left: "9px",
+            width: "45px",
+            zIndex: "999",
+          }}
+        >
+          <LikeButton id={props.id} disabled={!isAvailable} />
+        </Box>
+      </Box>
       <Slider>
         {props.image.map((image, index) => (
           <Box
@@ -53,6 +86,7 @@ export default function ItemCard(props) {
               border: 1,
               borderColor: "border.main",
               objectFit: "cover",
+              filter: isAvailable ? "" : "grayscale(100%)",
             }}
             alt="donated items"
             src={`https://geofree.pythonanywhere.com${image.image}`}
@@ -60,6 +94,9 @@ export default function ItemCard(props) {
           />
         ))}
       </Slider>
+      <Box position="absolute" top={145} left={1} sx={{}}>
+        {availability()}
+      </Box>
       <CardActionArea onClick={() => navigateToItem(props.id)}>
         {/* Item information */}
 

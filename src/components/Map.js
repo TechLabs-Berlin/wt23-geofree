@@ -143,6 +143,7 @@ function Map() {
               description={item.description}
               image={item.images}
               id={item.id}
+              available={item.available}
               onClose={() => {
                 setIsOpen(false);
                 setItem(null);
