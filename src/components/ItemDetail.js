@@ -256,6 +256,7 @@ const ItemDetail = () => {
               variant="contained"
               color="secondary"
               onClick={handleMarkAsTaken}
+              disabled={distance >= 0.1}
               sx={{
                 m: 1,
                 height: "40px",
