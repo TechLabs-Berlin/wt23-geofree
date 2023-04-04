@@ -5,10 +5,11 @@ import App from "./App";
 
 const el = document.getElementById("root");
 const root = ReactDOM.createRoot(el);
+const apiKey = process.env.REACT_APP_GOOGLE_MAPS_API_KEY;
 
 root.render(
   <React.StrictMode>
-    <LoadScript googleMapsApiKey={process.env.REACT_APP_GOOGLE_MAPS_API_KEY}>
+    <LoadScript googleMapsApiKey={apiKey}>
       <App />
     </LoadScript>
   </React.StrictMode>
