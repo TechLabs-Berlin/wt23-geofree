@@ -18,7 +18,6 @@ const ItemDetail = () => {
   const [distance, setDistance] = useState(null);
   const [lat, setLat] = useState(null);
   const [lng, setLng] = useState(null);
-  // const [chosenCategory, setChosenCategory] = useState(null);
 
   const navigate = useNavigate();
 
@@ -50,41 +49,6 @@ const ItemDetail = () => {
         });
     }
   }, [id, lat, lng]);
-
-  // useEffect(() => {
-  //   fetch(
-  //     `https://geofree.pythonanywhere.com/api/ml-ranking/?chosen_category=${categoryId}`
-  //   )
-  //     .then((res) => res.json())
-  //     .then((data) => {
-  //       console.log(data);
-  //       setChosenCategory(data);
-  //       console.log("recommended", data);
-  //     })
-  //     .catch((e) => {
-  //       console.log("ERROR", e);
-  //     });
-  // }, [categoryId]);
-
-  const handleMarkAsTaken = () => {
-    fetch(`https://geofree.pythonanywhere.com/api/item-update/${id}`, {
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        available: false,
-      }),
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        console.log(data);
-        setItem(data);
-      })
-      .catch((e) => {
-        console.log("ERROR", e);
-      });
-  };
 
   // If unavailable
 
