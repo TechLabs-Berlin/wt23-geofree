@@ -6,13 +6,10 @@ import Home from "./components/Home";
 import Search from "./components/Search";
 import ItemDetail from "./components/ItemDetail";
 import Post from "./components/Post";
-import Listings from "./components/Listings";
-
+import Submitted from "./components/Submitted";
 import Hello from "./components/Hello";
 import Login from "./components/Login";
 import Register from "./components/Register";
-
-import Favorites from "./components/Favorites";
 
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 import CssBaseline from "@mui/material/CssBaseline";
@@ -59,11 +56,12 @@ const App = () => {
             <Route path="/item/:id" element={<ItemDetail />} />
             <Route path="/post" element={<Post />} />
             <Route path="/search" element={<Search />} />
-            <Route path="/listings" element={<Listings />} />
+
             <Route path="/hello" element={<Hello />} />
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
-            <Route path="/favorites" element={<Favorites />} />
+
+            <Route path="/submitted" element={<Submitted />} />
           </Routes>
         </BrowserRouter>
       </ThemeProvider>

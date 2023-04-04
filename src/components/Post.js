@@ -74,7 +74,7 @@ const Post = () => {
       .then((res) => console.log(res))
       .catch((error) => console.log(error));
 
-    navigate("/");
+    navigate("/submitted");
   };
 
   useEffect(() => {
@@ -413,6 +413,7 @@ const Post = () => {
               fullWidth
               sx={{
                 width: "90vw",
+                height: "50px",
                 boxShadow: "0px 0px 0px 1px #5C9E28",
                 mb: 3,
                 backgroundColor: "info.main",
@@ -431,7 +432,7 @@ const Post = () => {
             >
               <Button
                 sx={{
-                  fontSize: 16,
+                  fontSize: 14,
                   textTransform: "lowercase",
                   "&:hover": {
                     backgroundColor: "secondary.main",
@@ -445,7 +446,7 @@ const Post = () => {
               </Button>
               <Button
                 sx={{
-                  fontSize: 16,
+                  fontSize: 14,
                   textTransform: "lowercase",
                   backgroundColor: condition === "good" ? "secondary.main" : "",
                   "&:hover": {
@@ -458,7 +459,7 @@ const Post = () => {
               </Button>
               <Button
                 sx={{
-                  fontSize: 16,
+                  fontSize: 14,
                   textTransform: "lowercase",
 
                   backgroundColor:
@@ -473,7 +474,7 @@ const Post = () => {
               </Button>
               <Button
                 sx={{
-                  fontSize: 16,
+                  fontSize: 14,
                   textTransform: "lowercase",
 
                   backgroundColor: condition === "poor" ? "secondary.main" : "",

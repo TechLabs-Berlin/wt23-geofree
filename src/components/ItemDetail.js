@@ -6,7 +6,8 @@ import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { Box, Typography, IconButton, Button } from "@mui/material";
-import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
+// import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
+import LikeButton from "./LikeButton";
 
 const ItemDetail = () => {
   const { id } = useParams();
@@ -14,7 +15,7 @@ const ItemDetail = () => {
   const [distance, setDistance] = useState(null);
   const [lat, setLat] = useState(null);
   const [lng, setLng] = useState(null);
-  const [like, setLike] = useState(0);
+  // const [like, setLike] = useState(0);
   const navigate = useNavigate();
 
   // Fetching item with specific id
@@ -107,26 +108,26 @@ const ItemDetail = () => {
   // Navigating to map
 
   const navigateToItem = () => {
-    navigate(`/map/?id=${id}`);
+    navigate(`/map/`);
     console.log(id);
   };
 
-  const handleLikeClick = () => {
-    fetch(`https://geofree.pythonanywhere.com/api/like-item/${id}`, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ like: like + 1 }), // Update like count
-    })
-      .then((res) => {
-        return res.json();
-      })
-      .then((data) => {
-        setLike(data.like); // Update state with new like count from server
-      })
-      .catch((e) => {
-        console.log("ERROR", e);
-      });
-  };
+  // const handleLikeClick = () => {
+  //   fetch(`https://geofree.pythonanywhere.com/api/like-item/${id}`, {
+  //     method: "POST",
+  //     headers: { "Content-Type": "application/json" },
+  //     body: JSON.stringify({ like: like + 1 }), // Update like count
+  //   })
+  //     .then((res) => {
+  //       return res.json();
+  //     })
+  //     .then((data) => {
+  //       setLike(data.like); // Update state with new like count from server
+  //     })
+  //     .catch((e) => {
+  //       console.log("ERROR", e);
+  //     });
+  // };
 
   return (
     <div>
@@ -150,11 +151,12 @@ const ItemDetail = () => {
             borderRadius: 0.2,
           }}
         >
-          <IconButton onClick={handleLikeClick}>
+          <LikeButton id={id} />
+          {/* <IconButton onClick={handleLikeClick}>
             <FavoriteBorderIcon
               sx={{ fontSize: "xl", justifyContent: "center" }}
             />
-          </IconButton>
+          </IconButton> */}
         </Box>
       </Box>
       {/* Image slider */}

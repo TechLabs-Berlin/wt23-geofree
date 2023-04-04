@@ -52,15 +52,11 @@ const Header = () => {
         Profile
       </MenuItem>
 
-      <MenuItem
-        onClick={handleMenuClose}
-        component={RouterLink}
-        to="/favorites"
-      >
+      <MenuItem onClick={handleMenuClose} component={RouterLink} to="/">
         <FavoriteBorderIcon sx={{ m: 1 }} />
         Favorites
       </MenuItem>
-      <MenuItem onClick={handleMenuClose} component={RouterLink} to="/listings">
+      <MenuItem onClick={handleMenuClose} component={RouterLink} to="/">
         <FormatListBulletedIcon sx={{ m: 1 }} />
         My listings
       </MenuItem>

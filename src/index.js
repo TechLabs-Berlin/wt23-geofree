@@ -9,7 +9,7 @@ const root = ReactDOM.createRoot(el);
 root.render(
   <React.StrictMode>
     <LoadScript googleMapsApiKey={process.env.REACT_APP_GOOGLE_MAPS_API_KEY}>
-      <App style={{ backgroundColor: "#FFFEF9" }} />
+      <App />
     </LoadScript>
   </React.StrictMode>
 );
