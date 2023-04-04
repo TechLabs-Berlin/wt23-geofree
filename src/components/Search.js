@@ -14,7 +14,7 @@ import {
 import Multiselect from "multiselect-react-dropdown";
 import SearchIcon from "@mui/icons-material/Search";
 
-const Search = ({ onSearch, categoriesSelected, setCategoriesSelected }) => {
+const Search = ({ onSearch, categoriesSelected, setCategoriesSelected, mlItems, setMlItems }) => {
   const [categories, setCategories] = useState([]); //state() that stores the choices of categories available in the backend
   //eslint-disable-next-line
   const [posts, setPosts] = useState([]); //state() that stores the backend response with the requested data
@@ -22,7 +22,6 @@ const Search = ({ onSearch, categoriesSelected, setCategoriesSelected }) => {
   const [lng, setLng] = useState("");
   const [distance, setDistance] = useState(1000);
   const [open, setOpen] = useState(false);
-
   //Fetching categories for Multiselect component
 
   useEffect(() => {
@@ -47,9 +46,10 @@ const Search = ({ onSearch, categoriesSelected, setCategoriesSelected }) => {
   const handleCategoryChange = (selected) => {
     setCategoriesSelected(selected.join(","));
   };
-
+ 
   async function submitSearch(event) {
     event.preventDefault();
+    const words = categoriesSelected.split(",")
     try {
       const response1 = await fetch(
         `https://geofree.pythonanywhere.com/api/item-categories-list/?categories=${categoriesSelected}`
@@ -57,14 +57,20 @@ const Search = ({ onSearch, categoriesSelected, setCategoriesSelected }) => {
       const response2 = await fetch(
         `https://geofree.pythonanywhere.com/api/item-list-distance/?distance=${distance}&lat=${lat}&lng=${lng}`
       );
+      const response3 = await fetch(
+        `https://geofree.pythonanywhere.com/api/ml-ranking/?chosen_category=${words[0]},`
+      );
       const data1 = await response1.json();
       const data2 = await response2.json();
+      const data3 = await response3.json();
       const filteredPosts = data1.filter((post1) => {
         return data2.some((post2) => post1.id === post2.id);
       });
       setPosts(filteredPosts);
 
       onSearch(filteredPosts);
+      onSearch([...data1, ...data2]); // call the onSearch function and pass the combined data1 and data2
+      setMlItems(data3); // set the mlItems state with the data3
     } catch (error) {
       console.error(error);
     }
@@ -73,7 +79,7 @@ const Search = ({ onSearch, categoriesSelected, setCategoriesSelected }) => {
   const handleCollapse = () => {
     setOpen(!open);
   };
-
+  
   return (
     <div>
       {/* Search bar */}

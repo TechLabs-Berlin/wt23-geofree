@@ -3,13 +3,15 @@ import { useLocation } from "react-router-dom";
 import Search from "./Search";
 import Hello from "./Hello";
 import ItemList from "./ItemList";
+import { Box, Typography } from "@mui/material";
 
 const Home = () => {
   const [allData, setAllData] = useState([]);
   const [categoriesSelected, setCategoriesSelected] = useState("");
   const location = useLocation();
   const [filteredData, setFilteredData] = useState([]);
-
+  const [mlItems, setMlItems] = useState([])
+ 
   // Getting categories from BurgerMenu
 
   useEffect(() => {
@@ -17,7 +19,7 @@ const Home = () => {
   }, [location.state?.categoriesSelected]);
 
   // Fetching all items
-
+ 
   useEffect(() => {
     fetch("https://geofree.pythonanywhere.com/api/item-list/")
       .then((res) => {
@@ -60,6 +62,8 @@ const Home = () => {
         onSearch={handleFilter}
         categoriesSelected={categoriesSelected}
         setCategoriesSelected={setCategoriesSelected}
+        setMlItems={setMlItems}
+        mlItems={mlItems} 
       />
       <Hello />
       <div>
@@ -70,6 +74,30 @@ const Home = () => {
           : allData.map((post) => {
               return <ItemList post={post} />;
             })}
+      </div>
+      <div>
+            {mlItems.length > 0 ? (
+                <div>
+                  <Typography>You might also like:</Typography>
+                  {mlItems.map((x) => {
+                    return (
+                      <Box sx={{ p: 5, flexDirection: "column" }} width="100%">
+                      <div key={x.id}>
+                        <Typography variant="h5" sx={{ fontWeight: "bold", mb: 1 }}>
+                          {x.title}
+                        </Typography>
+                        <Typography variant="h6" sx={{ fontWeight: "bold", mb: 1 }}>
+                          Description
+                        </Typography>
+                        <Typography variant="body1" sx={{ mb: 1 }}>
+                          {x.description}
+                        </Typography>
+                      </div>
+                    </Box>
+                    )
+                  })}
+                </div>
+              ) : (null)}
       </div>
     </div>
   );
