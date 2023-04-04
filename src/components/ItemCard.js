@@ -97,7 +97,10 @@ export default function ItemCard(props) {
       <Box position="absolute" top={145} left={1} sx={{}}>
         {availability()}
       </Box>
-      <CardActionArea onClick={() => navigateToItem(props.id)}>
+      <CardActionArea
+        disabled={!isAvailable}
+        onClick={() => navigateToItem(props.id)}
+      >
         {/* Item information */}
 
         <CardContent sx={{ pb: 3 }}>
