@@ -15,13 +15,13 @@ function ItemList({ post }) {
   };
 
   const availability = () => {
-    if (!post.availability === false) {
+    if (post.available === false) {
       return <Taken />;
     }
     return <Available />;
   };
 
-  const isAvailable = post.availability;
+  const isAvailable = post.available;
 
   return (
     <Box sx={{ display: "flex", justifyContent: "center" }}>
@@ -59,7 +59,7 @@ function ItemList({ post }) {
                 borderColor: "border.main",
                 objectFit: "cover",
                 borderRadius: 0.3,
-                filter: !isAvailable ? "" : "grayscale(100%)",
+                filter: isAvailable ? "" : "grayscale(100%)",
               }}
               alt="item"
               src={`https://geofree.pythonanywhere.com/` + post.images[0].image}
@@ -68,7 +68,10 @@ function ItemList({ post }) {
               {availability()}
             </Box>
           </Grid>
-          <CardActionArea onClick={() => navigateToItem(post.id)}>
+          <CardActionArea
+            disabled={!isAvailable}
+            onClick={() => navigateToItem(post.id)}
+          >
             <Box sx={{ maxwidth: "40%", display: "block" }}>
               <Grid item sx={{ mt: 1 }}>
                 <div key={post.id}>

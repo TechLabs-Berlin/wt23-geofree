@@ -9,16 +9,16 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { Box, Typography, Button } from "@mui/material";
 import LikeButton from "./LikeButton";
-import ItemList from "./ItemList";
+// import ItemList from "./ItemList";
 
 const ItemDetail = () => {
   const { id } = useParams();
-  const { categoryId } = useParams();
+  // const { categoryId } = useParams();
   const [item, setItem] = useState(null);
   const [distance, setDistance] = useState(null);
   const [lat, setLat] = useState(null);
   const [lng, setLng] = useState(null);
-  const [chosenCategory, setChosenCategory] = useState(null);
+  // const [chosenCategory, setChosenCategory] = useState(null);
 
   const navigate = useNavigate();
 
@@ -51,20 +51,40 @@ const ItemDetail = () => {
     }
   }, [id, lat, lng]);
 
-  useEffect(() => {
-    fetch(
-      `https://geofree.pythonanywhere.com/api/ml-ranking/?chosen_category=${categoryId}`
-    )
+  // useEffect(() => {
+  //   fetch(
+  //     `https://geofree.pythonanywhere.com/api/ml-ranking/?chosen_category=${categoryId}`
+  //   )
+  //     .then((res) => res.json())
+  //     .then((data) => {
+  //       console.log(data);
+  //       setChosenCategory(data);
+  //       console.log("recommended", data);
+  //     })
+  //     .catch((e) => {
+  //       console.log("ERROR", e);
+  //     });
+  // }, [categoryId]);
+
+  const handleMarkAsTaken = () => {
+    fetch(`https://geofree.pythonanywhere.com/api/item-update/${id}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        available: false,
+      }),
+    })
       .then((res) => res.json())
       .then((data) => {
         console.log(data);
-        setChosenCategory(data);
-        console.log("recommended", data);
+        setItem(data);
       })
       .catch((e) => {
         console.log("ERROR", e);
       });
-  }, [categoryId]);
+  };
 
   // If unavailable
 
@@ -132,13 +152,13 @@ const ItemDetail = () => {
   };
 
   const availability = () => {
-    if (!item.availability === false) {
+    if (item.available === false) {
       return <Taken />;
     }
     return <Available />;
   };
 
-  const isAvailable = item.availability;
+  const isAvailable = item.available;
 
   return (
     <div>
@@ -177,7 +197,7 @@ const ItemDetail = () => {
                 component="img"
                 sx={{
                   height: 400,
-                  filter: !isAvailable ? "" : "grayscale(100%)",
+                  filter: isAvailable ? "" : "grayscale(100%)",
                   border: 1,
                   borderColor: "border.main",
                   objectFit: "cover",
@@ -231,9 +251,11 @@ const ItemDetail = () => {
               lat={lat}
               lng={lng}
             />
+
             <Button
               variant="contained"
               color="secondary"
+              onClick={handleMarkAsTaken}
               sx={{
                 m: 1,
                 height: "40px",
