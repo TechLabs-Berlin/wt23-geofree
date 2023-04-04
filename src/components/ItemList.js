@@ -87,8 +87,6 @@ function ItemList({ post }) {
                   >
                     {post.description}
                   </Typography>
-
-                  <div>{/* <strong>Location: {post.latitude}</strong> */}</div>
                 </div>
               </Grid>
 
