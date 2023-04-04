@@ -323,7 +323,6 @@ const Post = () => {
             />
             <Button
               variant="contained"
-              type="submit"
               color="secondary"
               onClick={() => setAddCategory(true)}
               sx={{ mt: 2 }}
