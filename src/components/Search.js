@@ -47,10 +47,6 @@ const Search = ({ onSearch, categoriesSelected, setCategoriesSelected }) => {
   const handleCategoryChange = (selected) => {
     setCategoriesSelected(selected.join(","));
   };
-  // const option = [];
-  // for (let i = 0; i < categories.length; i++) {
-  //   option.push(categories[i].name);
-  // }
 
   async function submitSearch(event) {
     event.preventDefault();
@@ -108,7 +104,7 @@ const Search = ({ onSearch, categoriesSelected, setCategoriesSelected }) => {
           }}
         >
           <form onSubmit={submitSearch}>
-            <Box display="flex" justifyContent="center" sx={{ mt: 10 }}>
+            <Box display="flex" justifyContent="center" sx={{ mt: 6 }}>
               <FormControl>
                 {/* Multiselect display */}
 
@@ -143,7 +139,13 @@ const Search = ({ onSearch, categoriesSelected, setCategoriesSelected }) => {
                   }}
                 />
 
-                <Location setLat={setLat} setLng={setLng} lat={lat} lng={lng} />
+                <Location
+                  hidden
+                  setLat={setLat}
+                  setLng={setLng}
+                  lat={lat}
+                  lng={lng}
+                />
 
                 {/* Range dropdown */}
 
@@ -154,6 +156,8 @@ const Search = ({ onSearch, categoriesSelected, setCategoriesSelected }) => {
                   onChange={(e) => setDistance(e.target.value)}
                   sx={{
                     border: "1px solid #5C9E28",
+                    mt: 4,
+
                     backgroundColor: "#F3F0DC",
                   }}
                 >
@@ -171,7 +175,7 @@ const Search = ({ onSearch, categoriesSelected, setCategoriesSelected }) => {
                   type="submit"
                   color="secondary"
                   sx={{
-                    m: 10,
+                    m: 6,
                     height: "60px",
                   }}
                 >

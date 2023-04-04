@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import Location from "./Location";
+import Taken from "./Taken";
+import Available from "./Available";
 import { useNavigate } from "react-router-dom";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
@@ -112,22 +114,14 @@ const ItemDetail = () => {
     console.log(id);
   };
 
-  // const handleLikeClick = () => {
-  //   fetch(`https://geofree.pythonanywhere.com/api/like-item/${id}`, {
-  //     method: "POST",
-  //     headers: { "Content-Type": "application/json" },
-  //     body: JSON.stringify({ like: like + 1 }), // Update like count
-  //   })
-  //     .then((res) => {
-  //       return res.json();
-  //     })
-  //     .then((data) => {
-  //       setLike(data.like); // Update state with new like count from server
-  //     })
-  //     .catch((e) => {
-  //       console.log("ERROR", e);
-  //     });
-  // };
+  const availability = () => {
+    if (!item.availability === false) {
+      return <Taken />;
+    }
+    return <Available />;
+  };
+
+  const isAvailable = item.availability;
 
   return (
     <div>
@@ -140,46 +134,47 @@ const ItemDetail = () => {
         }}
       >
         <Box
-          border="1px solid #5C9E28"
           sx={{
             position: "absolute",
-            backgroundColor: "background.default",
+
             justifyContent: "flex-end",
             top: "-1px",
             width: "45px",
             zIndex: "999",
-            borderRadius: 0.2,
           }}
         >
-          <LikeButton id={id} />
-          {/* <IconButton onClick={handleLikeClick}>
-            <FavoriteBorderIcon
-              sx={{ fontSize: "xl", justifyContent: "center" }}
-            />
-          </IconButton> */}
+          <LikeButton id={id} disabled={!isAvailable} />
         </Box>
       </Box>
       {/* Image slider */}
-
-      <Slider {...settings} prevArrow={<PrevArrow />} nextArrow={<NextArrow />}>
-        {item.images.map((image, index) => (
-          <Box
-            key={index}
-            component="img"
-            sx={{
-              height: 400,
-
-              border: 1,
-              borderColor: "border.main",
-              objectFit: "cover",
-              display: "block",
-            }}
-            alt="donated items"
-            src={`https://geofree.pythonanywhere.com${image.image}`}
-            onError={onError}
-          />
-        ))}
-      </Slider>
+      <Box>
+        <Slider
+          {...settings}
+          prevArrow={<PrevArrow />}
+          nextArrow={<NextArrow />}
+        >
+          {item.images.map((image, index) => (
+            <Box
+              key={index}
+              component="img"
+              sx={{
+                height: 400,
+                filter: !isAvailable ? "" : "grayscale(100%)",
+                border: 1,
+                borderColor: "border.main",
+                objectFit: "cover",
+                display: "block",
+              }}
+              alt="donated items"
+              src={`https://geofree.pythonanywhere.com${image.image}`}
+              onError={onError}
+            />
+          ))}
+        </Slider>
+        <Box position="absolute" top={65} left={0} sx={{}}>
+          {availability()}
+        </Box>
+      </Box>
 
       {/* Item information */}
 
@@ -201,9 +196,7 @@ const ItemDetail = () => {
           <Typography variant="body1">
             Posted {Array.from(item.item_age)[0]} days ago
           </Typography>
-          {/* <Typography variant="body1">Liked {item.likes} times</Typography>
-          <Typography variant="body1">Viewed {item.views} times</Typography> */}
-          {/* <Typography variant="body1">Category: {item.categories}</Typography> */}
+
           {distance ? (
             <Typography variant="body1">
               <strong>Distance:</strong>
@@ -213,7 +206,13 @@ const ItemDetail = () => {
           ) : (
             <Typography variant="body1">Loading distance...</Typography>
           )}
-          <Location setLat={setLat} setLng={setLng} lat={lat} lng={lng} />
+          <Location
+            hidden
+            setLat={setLat}
+            setLng={setLng}
+            lat={lat}
+            lng={lng}
+          />
           <Button
             variant="contained"
             color="secondary"

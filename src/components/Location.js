@@ -20,8 +20,16 @@ class Location extends React.Component {
       (err) => console.log(err)
     );
   }
+  if(hidden) {
+    return null;
+  }
 
   render() {
+    const { hidden } = this.props;
+    if (hidden) {
+      return null;
+    }
+
     return (
       <p>
         <strong>Latitude:</strong>

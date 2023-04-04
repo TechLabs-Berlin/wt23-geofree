@@ -2,6 +2,9 @@ import React from "react";
 import { Box, Grid, Card, Typography } from "@mui/material";
 import { CardActionArea } from "@mui/material";
 import { useNavigate } from "react-router-dom";
+import LikeButton from "./LikeButton";
+import Available from "./Available";
+import Taken from "./Taken";
 import FmdGoodOutlinedIcon from "@mui/icons-material/FmdGoodOutlined";
 
 function ItemList({ post }) {
@@ -10,6 +13,15 @@ function ItemList({ post }) {
   const navigateToItem = (itemId) => {
     navigate(`/item/${itemId}`);
   };
+
+  const availability = () => {
+    if (!post.availability === false) {
+      return <Taken />;
+    }
+    return <Available />;
+  };
+
+  const isAvailable = post.availability;
 
   return (
     <Box sx={{ display: "flex", justifyContent: "center" }}>
@@ -27,26 +39,36 @@ function ItemList({ post }) {
           backgroundColor: "background.default",
         }}
       >
-        <CardActionArea onClick={() => navigateToItem(post.id)}>
-          <Grid direction="row" container wrap="nowrap" sx={{ m: 0 }}>
-            <Grid item sx={{ m: 1 }}>
-              <Box
-                component="img"
-                sx={{
-                  width: 120,
-                  height: 120,
-                  border: 1,
-                  borderColor: "border.main",
-                  objectFit: "cover",
-                  borderRadius: 0.3,
-                }}
-                alt="item"
-                src={
-                  `https://geofree.pythonanywhere.com/` + post.images[0].image
-                }
-              ></Box>
-            </Grid>
-
+        <Grid
+          direction="row"
+          position="relative"
+          container
+          wrap="nowrap"
+          sx={{ m: 0 }}
+        >
+          <Grid item sx={{ m: 1 }}>
+            <Box position="absolute" top={6} left={90}>
+              <LikeButton disabled={!isAvailable} />
+            </Box>
+            <Box
+              component="img"
+              sx={{
+                width: 120,
+                height: 120,
+                border: 1,
+                borderColor: "border.main",
+                objectFit: "cover",
+                borderRadius: 0.3,
+                filter: !isAvailable ? "" : "grayscale(100%)",
+              }}
+              alt="item"
+              src={`https://geofree.pythonanywhere.com/` + post.images[0].image}
+            ></Box>
+            <Box position="absolute" top={15} left={9} sx={{}}>
+              {availability()}
+            </Box>
+          </Grid>
+          <CardActionArea onClick={() => navigateToItem(post.id)}>
             <Box sx={{ maxwidth: "40%", display: "block" }}>
               <Grid item sx={{ mt: 1 }}>
                 <div key={post.id}>
@@ -77,8 +99,8 @@ function ItemList({ post }) {
                 </Typography>
               </Grid>
             </Box>
-          </Grid>
-        </CardActionArea>
+          </CardActionArea>
+        </Grid>
       </Card>
     </Box>
   );

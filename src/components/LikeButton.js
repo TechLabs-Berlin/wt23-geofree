@@ -23,7 +23,9 @@ const LikeButton = (id) => {
 
   return (
     <IconButton onClick={handleLikeClick}>
-      <FavoriteBorderIcon sx={{ fontSize: "xl", justifyContent: "center" }} />
+      <FavoriteBorderIcon
+        sx={{ fontSize: "xl", justifyContent: "center", color: "white" }}
+      />
     </IconButton>
   );
 };

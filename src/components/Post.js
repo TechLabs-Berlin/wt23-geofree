@@ -207,9 +207,6 @@ const Post = () => {
                 variant="outlined"
                 value={title}
                 onChange={(e) => setTitle(e.target.value)}
-                InputLabelProps={{
-                  shrink: false,
-                }}
                 sx={{
                   width: "90vw",
                   mb: 1,
@@ -250,9 +247,6 @@ const Post = () => {
                 variant="outlined"
                 value={description}
                 onChange={(e) => setDescription(e.target.value)}
-                InputLabelProps={{
-                  shrink: false,
-                }}
                 sx={{
                   width: "90vw",
                   mb: 1,
@@ -341,9 +335,6 @@ const Post = () => {
                 <TextField
                   label="Add category"
                   value={newCategory}
-                  InputLabelProps={{
-                    shrink: false,
-                  }}
                   onChange={(e) => setNewCategory(e.target.value)}
                   sx={{
                     mb: 2,
@@ -355,7 +346,6 @@ const Post = () => {
                         borderColor: "border.main",
                         borderRadius: 30,
                       },
-
                       "&.Mui-focused fieldset": {
                         borderColor: "green",
                       },
@@ -528,7 +518,7 @@ const Post = () => {
                   minWidth: "100%",
                 }}
               >
-                Please allow location
+                Location loading
               </Button>
             )}
           </Box>
