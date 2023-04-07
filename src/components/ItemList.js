@@ -7,7 +7,7 @@ import Available from "./Available";
 import Taken from "./Taken";
 import FmdGoodOutlinedIcon from "@mui/icons-material/FmdGoodOutlined";
 
-function ItemList({ post}) {
+function ItemList({ post }) {
   const navigate = useNavigate();
 
   const navigateToItem = (itemId) => {
