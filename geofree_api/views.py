@@ -9,9 +9,8 @@ from django.contrib.gis.geos import Point
 from django.contrib.gis.db.models.functions import Distance
 from django.contrib.gis.measure import D
 from django.shortcuts import get_object_or_404
-#machine learning model function, the folder will be added to this djngo directory in the server virtual machine.
-# from m_l.recommendation.recommendation_f import create_ranking_df
-# Create your views here.
+
+
 
 
 #Item CRUD (Create, Update & Delete) Handles + Queries
@@ -256,21 +255,36 @@ def categoryCreate(request):
         serializer.save()
     return Response({"status": "Category succesfully created"})
 
-#KARINAS MACHINE LEARNING FUNCTION HANDLER
-@api_view(['GET'])
-def getRakingRecomm(request):
-    category_arg = request.query_params.get('chosen_category')
-    # the ML model returns the id of 3 ranked recommended items based on the category selected on the search bar
-    id1, id2, id3 = create_ranking_df(category_arg)
-    obj1 = Item.objects.get(id=id1)
-    obj2 = Item.objects.get(id=id2)
-    obj3 = Item.objects.get(id=id3)
-    ranked_items = []
-    serialized_obj1 = ItemSerializers(obj1).data
-    ranked_items.append(serialized_obj1)
-    serialized_obj2 = ItemSerializers(obj2).data
-    ranked_items.append(serialized_obj2)
-    serialized_obj3 = ItemSerializers(obj3).data
-    ranked_items.append(serialized_obj3)
 
-    return Response(ranked_items)
+## Down Bellow the ML handle functions: 
+## getRankingReccom() is FE and BE integrated integrated in the server however, getSimilarRecomm() has no frontend integration as it worked partially,
+## this was due to the large amount of data needed in order to perform.
+##Their respective functions were manually integrated in the server directory.
+
+#KARINAS MACHINE LEARNING FUNCTION HANDLER
+# @api_view(['GET'])
+# def getRakingRecomm(request):
+#     category_arg = request.query_params.get('chosen_category')
+#     # the ML model returns the id of 3 ranked recommended items based on the category selected on the search bar
+#     id1, id2, id3 = create_ranking_df(category_arg)
+#     obj1 = Item.objects.get(id=id1)
+#     obj2 = Item.objects.get(id=id2)
+#     obj3 = Item.objects.get(id=id3)
+#     ranked_items = []
+#     serialized_obj1 = ItemSerializers(obj1).data
+#     ranked_items.append(serialized_obj1)
+#     serialized_obj2 = ItemSerializers(obj2).data
+#     ranked_items.append(serialized_obj2)
+#     serialized_obj3 = ItemSerializers(obj3).data
+#     ranked_items.append(serialized_obj3)
+
+#     return Response(ranked_items)
+
+#Antoine MACHINE LEARNING FUNCTION HANDLER
+# @api_view(['GET'])
+# def getSimilarRecomm(request):
+#     category_arg = request.query_params.get('chosen_category')
+#     recommended_items = get_the_recommendations(category_arg)
+#     obj = Item.objects.get(id=recommended_items[0])
+#     serialized_obj = ItemSerializers(obj).data
+#     return Response(serialized_obj)
