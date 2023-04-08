@@ -28,3 +28,8 @@ Backup of *.doc*
 
 # PowerPoint temporary
 ~$*.ppt*
+
+# temp requirements Python env
+requirements.txt
+node_modules
+.env.local
