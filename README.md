@@ -12,10 +12,10 @@ With Geofree, users can easily discover and collect donated items, help reduce w
 
 ## Stack
 
-**Frontend**: ReactJS, Material UI, Google Cloud API, Netlify
-**Backend**: Django, DRF (Python), Sqlite3 + Spatialite (ext.)
-**UX Design**: Figma, Miro, Canva
-**Data Science**: Python, Anaconda, Jupyter Notebook, Sqlite3, Pandas, Numpy, Matplotlib, Scikit-learn
+**Frontend**: ReactJS, Material UI, Google Cloud API, Netlify <br>
+**Backend**: Django, DRF (Python), Sqlite3 + Spatialite (ext.) <br>
+**UX Design**: Figma, Miro, Canva <br>
+**Data Science**: Python, Anaconda, Jupyter Notebook, Sqlite3, Pandas, Numpy, Matplotlib, Scikit-learn <br>
 
 ## Setup
 
@@ -66,21 +66,22 @@ To start app:
 
 [Demo](https://www.youtube.com/embed/R4wCXSiiUEk)
 
-Authors
-🧑‍💻**Web Development**
-Joanna Kowalik [LinkedIn](https://www.linkedin.com/in/joanna-kowalik-b8162614a/)
-Felipe Saez [LinkedIn](https://www.linkedin.com/in/felipe-saez-125711181/)
+## Authors <br>
 
-👩‍🎨**UX Design**
-Deniz Kocyigit [LinkedIn]
-Farida Elchuzade [LinkedIn](https://www.linkedin.com/in/farida-elchuzade/)
-Manvitha Konkimalla [LinkedIn](https://www.linkedin.com/in/manvitha-konkimalla/)
+🧑‍💻**Web Development**<br>
+[Joanna Kowalik](https://www.linkedin.com/in/joanna-kowalik-b8162614a/)<br>
+[Felipe Saez](https://www.linkedin.com/in/felipe-saez-125711181/)<br>
 
-🤖**Data Science**
-Karina Condeixa [LinkedIn](https://www.linkedin.com/in/karinacondeixa/)
-Antoine Cloet [LinkedIn](https://www.linkedin.com/in/toinecloet)
+👩‍🎨**UX Design**<br>
+[Deniz Kocyigit](https://www.linkedin.com/in/deniz-k-/)<br>
+[Farida Elchuzade](https://www.linkedin.com/in/farida-elchuzade/)<br>
+[Manvitha Konkimalla](https://www.linkedin.com/in/manvitha-konkimalla/)<br>
 
-🧑‍🏫**Mentors**
-Alla Schriefer [LinkedIn]
-Larry D. Almeida [LinkedIn](https://www.linkedin.com/in/larrydalmeida/)
-Jasan Sangma [LinkedIn]
+🤖**Data Science**<br>
+[Karina Condeixa](https://www.linkedin.com/in/karinacondeixa/)<br>
+[Antoine Cloet](https://www.linkedin.com/in/toinecloet)<br>
+
+🧑‍🏫**Mentors**<br>
+[Alla Schriefer](https://www.linkedin.com/in/allaschriefer/)<br>
+[Larry D. Almeida](https://www.linkedin.com/in/larrydalmeida/)<br>
+Jasan Sangma
