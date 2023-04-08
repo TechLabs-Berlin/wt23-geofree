@@ -70,7 +70,7 @@ Demo:
 Authors
 🧑‍💻**Web Development**
 Joanna Kowalik [LinkedIn](https://www.linkedin.com/in/joanna-kowalik-b8162614a/)
-Felipe Saez [LinkedIn]
+Felipe Saez [LinkedIn](https://www.linkedin.com/in/felipe-saez-125711181/)
 
 👩‍🎨**UX Design**
 Deniz Kocyigit [LinkedIn]
