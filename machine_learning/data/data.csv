@@ -1,0 +1,11 @@
+﻿Customer ID,Age,Gender,Product Category,Purchase Amount,Previous Returns,Returned?
+1,25,Female,Clothing,50,0,0
+2,40,Male,Electronics,100,1,1
+3,30,Female,Beauty,20,0,0
+4,45,Male,Clothing,80,2,1
+5,35,Female,Electronics,120,0,0
+6,50,Male,Beauty,30,0,0
+7,28,Female,Electronics,70,1,1
+8,42,Male,Clothing,60,0,0
+9,37,Female,Beauty,90,0,1
+10,55,Male,Clothing,40,0,0

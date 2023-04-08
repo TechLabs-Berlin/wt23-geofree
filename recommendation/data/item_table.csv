@@ -1,0 +1,4 @@
+id,title,description,available,creation_date,latitude,longitude,condition,categories,views,likes,point
+1,"men's shoes","Men's running shoes, blue, size 42",1,2023-03-29,45.5199267,-73.5746113,good,Clothes,0,0,""
+2,"Old sofa","Old sofa, brown leather",1,2023-03-29,45.5199355,-73.5746078,acceptable,Furniture,0,0,""
+3,"running shoes","Men's running shoes, blue, size 42",1,2023-03-30,52.567184,13.4062661,good,Clothes,0,0,""

@@ -1,0 +1,5 @@
+id,title,description,available,timedate_creation,latitude,longitude,condition,categories,category_ml,views,likes,point
+1,test1,wewerwr,1,2023-04-03 17:01:03.428861,52.4481022,13.3847969,good,"Clothes,Plants,Kitchen",Clothes,0,0,"b'\x00\x01\xe6\x10\x00\x00Q4j\x19\x04\xc5*@\x01""\xb3i[9J@Q4j\x19\x04\xc5*@\x01""\xb3i[9J@|\x01\x00\x00\x00Q4j\x19\x04\xc5*@\x01""\xb3i[9J@\xfe'"
+2,test1,wewerwr,1,2023-04-03 17:01:21.380176,52.4481022,13.3847969,good,"Clothes,Kitchen,Plants",Clothes,0,0,"b'\x00\x01\xe6\x10\x00\x00Q4j\x19\x04\xc5*@\x01""\xb3i[9J@Q4j\x19\x04\xc5*@\x01""\xb3i[9J@|\x01\x00\x00\x00Q4j\x19\x04\xc5*@\x01""\xb3i[9J@\xfe'"
+3,test2,wewerwr,1,2023-04-03 17:01:32.759260,52.4481022,13.3847969,good,"Kitchen,Plants",Kitchen,0,0,"b'\x00\x01\xe6\x10\x00\x00Q4j\x19\x04\xc5*@\x01""\xb3i[9J@Q4j\x19\x04\xc5*@\x01""\xb3i[9J@|\x01\x00\x00\x00Q4j\x19\x04\xc5*@\x01""\xb3i[9J@\xfe'"
+4,test4,wewerwr,1,2023-04-03 17:01:41.241430,52.4481022,13.3847969,good,"Kitchen,Plants,Kids toys",Kitchen,0,0,"b'\x00\x01\xe6\x10\x00\x00Q4j\x19\x04\xc5*@\x01""\xb3i[9J@Q4j\x19\x04\xc5*@\x01""\xb3i[9J@|\x01\x00\x00\x00Q4j\x19\x04\xc5*@\x01""\xb3i[9J@\xfe'"
