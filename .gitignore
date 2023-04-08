@@ -8,6 +8,7 @@ venv
 
 # folder
 temp/
+data/
 sandbox/
 
 # MicrosoftOffice.gitignore
@@ -27,5 +28,3 @@ Backup of *.doc*
 
 # PowerPoint temporary
 ~$*.ppt*
-
-
