@@ -140,23 +140,29 @@ _Api view of the url that gets all the objects posted in the DB with their respe
 ## UX Design
 
 **Timeline**: 3 months
+
 **Tools**: Figma, Miro, Canva
+
 **Our role**: UX Research, UX Design, UI Design
 
-###Our roles and work distribution
+### Our roles and work distribution
 
 **Deniz Kocyigit**
 
-    UX Research, Competitive Analysis, 5 Interviews, User Personas, Updated User Flow, Affinity Diagram, Branding, Logo, Sketches, Wireframes, UI Design, Prototype, Usability testing.
+UX Research, Competitive Analysis, 5 Interviews, User Personas, Updated User Flow, Affinity Diagram, Branding, Logo, Sketches, Wireframes, UI Design, Prototype, Usability testing.
 
 **Farida Elchuzade**
 
 UX Research, Competitive Analysis, 5 Interviews, Affinity Diagram, Branding, Sketches, Wireframes, UI Design, Prototype, Usability testing.
 
 **Manvitha Konkimalla**
+
 UX Research, Competitive Analysis, 5 Interviews,User stories, User Flow, Affinity Diagram, Branding, Sketches, Wireframes, UI Design, Prototype, Usability testing.
 
-**Our design process**:
+### Our design process:
+![design process](https://raw.githubusercontent.com/TechLabs-Berlin/wt23-geofree/main/UX%20files/Design%20process.png "design process")
+
+
 
 As a team of 3 UX Designers we started off the project with a team and mentors meeting to brainstorm, discuss and to better understand the problem we are looking into. The first thing we did was to lay out the problem, discuss the research process, divide responsibilities and create a timeline.
 
@@ -184,11 +190,11 @@ Next stage involved creating a user flow, sketching and wireframing all the deta
 ### Wireframe
 
 **see all wireframes**
-![Wireframes](https://github.com/TechLabs-Berlin/wt23-geofree/tree/main/UX%20files/Wireframes" All Wireframes")
+![Wireframes](https://github.com/TechLabs-Berlin/wt23-geofree/tree/main/UX%20files/Wireframes "All Wireframes")
 
 ### UI Mockup (Link to Figma)
 
-![Mockup](https://raw.githubusercontent.com/TechLabs-Berlin/wt23-geofree/main/UX%20files/MockUp.png" Mockups")
+![Mockup](https://raw.githubusercontent.com/TechLabs-Berlin/wt23-geofree/main/UX%20files/MockUp.png "Mockups")
 
 **Figma file:**
 [Figma file](https://www.figma.com/file/15g4U2HhBDixWFGIPixypH/FINAL?node-id=0%3A1&t=C7eEU61wTLqLWv9v-1)
