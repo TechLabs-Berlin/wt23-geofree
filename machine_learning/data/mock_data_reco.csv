@@ -1,0 +1,101 @@
+id,title,description,available,timedate_creation,latitude,longitude,condition,categories,category_ml,views,likes,point
+1,"['kitchen_utensils', 'kids']",bug,0,2023-03-20,68.0484815,-124.938022,poor,kids,kitchen_utensils,492,11,y
+2,"['clothes', 'kids', 'other']",bug,0,2023-03-29,65.399551,-40.654505,acceptable,kitchen_utensils,clothes,1735,13,x
+3,['clothes'],yeyyyy,0,2023-03-15,-37.636782,-141.559272,like_new,clothes,clothes,56,2,y
+4,['kitchen_utensils'],yeyyyy,0,2023-03-17,-51.730042,-176.819172,poor,kitchen_utensils,kitchen_utensils,1099,17,x
+5,"['kitchen_utensils', 'kids']",bug,0,2023-03-27,52.544785,-97.566392,acceptable,furniture,kitchen_utensils,1669,17,y
+6,"['kitchen_utensils', 'kids']",uhuuuu,0,2023-03-26,16.1604875,-179.464382,acceptable,kids,kitchen_utensils,1944,1,x
+7,['furniture'],anything,1,2023-04-03,7.6686225,136.022117,acceptable,kitchen_utensils,furniture,1589,18,x
+8,['kids'],anything,1,2023-03-31,-63.8536565,-92.790227,like_new,kids,kids,974,5,y
+9,"['clothes', 'kids', 'other']",anything,0,2023-03-21,22.321999,173.85251,acceptable,other,clothes,1719,15,x
+10,['furniture'],yeyyyy,1,2023-03-24,15.226308,-69.312336,poor,clothes,furniture,10,2,y
+11,"['kitchen_utensils', 'kids']",today is the presentation day,0,2023-03-20,-46.427677,79.71023,good,furniture,kitchen_utensils,442,18,y
+12,['kitchen_utensils'],what day is today?,0,2023-03-11,9.7258945,60.334905,poor,kitchen_utensils,kitchen_utensils,540,24,y
+13,['kids'],solving the problem,1,2023-03-25,59.1759165,-156.331215,like_new,kitchen_utensils,kids,1974,24,y
+14,['other'],yeyyyy,0,2023-03-11,-58.701493,-63.295236,poor,furniture,other,1763,13,y
+15,['clothes'],whaterver,0,2023-03-10,63.3531305,49.978901,like_new,kitchen_utensils,clothes,736,24,y
+16,['other'],uhuuuu,1,2023-04-01,59.065639,-25.905383,like_new,kids,other,1443,13,y
+17,['other'],we are the second team to present,0,2023-03-18,39.8326405,113.964312,like_new,other,other,810,17,x
+18,['clothes'],whaterver,0,2023-03-11,51.2885345,149.646988,like_new,clothes,clothes,1885,12,x
+19,"['furniture', 'clothes', 'kitchen_utensils']",today is the presentation day,1,2023-04-04,76.046103,83.236785,like_new,kids,furniture,786,5,x
+20,['clothes'],we are the second team to present,1,2023-03-10,48.4053255,-0.449842,poor,kids,clothes,1731,6,y
+21,['kitchen_utensils'],we are the second team to present,1,2023-03-20,87.5792105,-94.402878,like_new,kids,kitchen_utensils,812,0,y
+22,"['kitchen_utensils', 'kids']",bug,1,2023-03-19,86.996529,-23.712297,poor,furniture,kitchen_utensils,144,19,x
+23,['kitchen_utensils'],anything,0,2023-03-12,84.858685,-98.005735,like_new,clothes,kitchen_utensils,545,1,x
+24,['kitchen_utensils'],uhuuuu,0,2023-03-15,-86.3972235,59.429786,acceptable,clothes,kitchen_utensils,387,15,y
+25,"['furniture', 'clothes', 'kitchen_utensils']",bug,0,2023-03-08,89.6405945,138.366586,poor,furniture,furniture,1081,7,x
+26,['other'],uhuuuu,1,2023-03-21,71.3631035,-85.967099,poor,kids,other,1910,17,x
+27,['furniture'],bug,0,2023-04-03,-19.4258905,-2.12948,poor,furniture,furniture,1544,18,x
+28,['other'],what day is today?,1,2023-03-14,43.4281365,-149.441089,poor,kids,other,510,6,x
+29,"['furniture', 'clothes', 'kitchen_utensils']",hellooo,1,2023-03-19,-6.9757765,-86.224855,poor,clothes,furniture,1929,17,x
+30,"['kitchen_utensils', 'kids']",solving the problem,1,2023-03-27,78.1723185,143.557256,like_new,other,kitchen_utensils,1214,2,y
+31,['kids'],today is the presentation day,0,2023-03-07,-85.491171,71.200582,like_new,furniture,kids,1928,11,y
+32,"['kitchen_utensils', 'kids']",yeyyyy,1,2023-03-23,-13.4236685,-176.435203,poor,kitchen_utensils,kitchen_utensils,942,24,x
+33,"['clothes', 'kids', 'other']",hellooo,1,2023-04-02,-78.694817,152.61991,like_new,kitchen_utensils,clothes,494,9,y
+34,['other'],testing,1,2023-03-18,-85.527886,91.956573,poor,kids,other,896,20,y
+35,"['clothes', 'kids', 'other']",yeyyyy,0,2023-03-06,-74.8719645,-37.641443,like_new,other,clothes,507,12,y
+36,['other'],whaterver,0,2023-03-21,-82.3912575,101.120283,poor,clothes,other,812,9,y
+37,['clothes'],what day is today?,1,2023-03-28,47.411668,-47.753368,like_new,furniture,clothes,783,9,y
+38,['kids'],uhuuuu,0,2023-03-09,53.3148135,-60.539694,poor,kids,kids,339,7,x
+39,['clothes'],solving the problem,1,2023-03-21,-87.9325955,154.515727,like_new,other,clothes,455,1,x
+40,"['kitchen_utensils', 'kids']",testing,1,2023-03-30,-57.919309,-8.417683,poor,clothes,kitchen_utensils,1313,16,x
+41,"['kitchen_utensils', 'kids']",solving the problem,1,2023-03-28,32.7081515,63.963837,like_new,furniture,kitchen_utensils,669,12,x
+42,"['furniture', 'clothes', 'kitchen_utensils']",yeyyyy,1,2023-03-25,-6.8839335,50.160085,poor,furniture,furniture,1958,16,x
+43,['kitchen_utensils'],testing,1,2023-03-23,-49.561488,72.583309,poor,furniture,kitchen_utensils,1525,11,y
+44,['furniture'],we are the second team to present,1,2023-03-12,-57.5673895,-98.461791,like_new,kitchen_utensils,furniture,1125,20,x
+45,['clothes'],today is the presentation day,0,2023-03-24,59.1835865,-179.399582,like_new,kids,clothes,1031,0,y
+46,['clothes'],testing,0,2023-03-07,38.3056525,154.500924,like_new,kids,clothes,964,5,x
+47,['furniture'],anything,1,2023-03-27,41.2431745,-84.233235,good,other,furniture,40,5,x
+48,"['clothes', 'kids', 'other']",anything,0,2023-03-06,-67.285988,-129.034469,acceptable,kids,clothes,1935,7,x
+49,"['furniture', 'clothes', 'kitchen_utensils']",testing,1,2023-03-15,-89.068733,30.991489,good,kids,furniture,1092,8,x
+50,"['kitchen_utensils', 'kids']",today is the presentation day,0,2023-03-21,36.526665,-90.425161,like_new,kids,kitchen_utensils,1708,12,y
+51,['clothes'],bug,0,2023-03-15,18.786269,102.635098,good,other,clothes,1494,17,y
+52,"['kitchen_utensils', 'kids']",hellooo,1,2023-03-30,61.3109365,14.17949,acceptable,kids,kitchen_utensils,1439,16,y
+53,"['kitchen_utensils', 'kids']",solving the problem,0,2023-03-12,-19.830125,-1.57322,acceptable,kitchen_utensils,kitchen_utensils,523,24,x
+54,['kitchen_utensils'],today is the presentation day,0,2023-03-11,58.745134,-31.861037,good,kitchen_utensils,kitchen_utensils,1870,5,y
+55,"['kitchen_utensils', 'kids']",we are the second team to present,0,2023-03-16,-32.7460795,-85.274691,acceptable,kitchen_utensils,kitchen_utensils,177,7,y
+56,['kids'],yeyyyy,0,2023-03-24,44.88377,107.64837,acceptable,furniture,kids,1752,6,y
+57,"['kitchen_utensils', 'kids']",testing,0,2023-03-25,75.459905,-79.03814,like_new,other,kitchen_utensils,1610,4,x
+58,['clothes'],uhuuuu,0,2023-04-01,-65.2595435,115.477197,acceptable,clothes,clothes,907,24,y
+59,"['clothes', 'kids', 'other']",whaterver,0,2023-03-29,79.996279,-156.418424,poor,clothes,clothes,758,17,y
+60,['kitchen_utensils'],testing,0,2023-03-17,63.61055,-41.683222,poor,other,kitchen_utensils,27,1,y
+61,['kids'],what day is today?,1,2023-03-28,-87.0412425,152.93878,poor,kitchen_utensils,kids,901,1,x
+62,['kitchen_utensils'],whaterver,1,2023-03-09,-6.869703,40.676426,like_new,furniture,kitchen_utensils,145,1,x
+63,"['kitchen_utensils', 'kids']",bug,0,2023-03-17,71.5616195,119.449056,poor,furniture,kitchen_utensils,1874,6,y
+64,['other'],testing,0,2023-03-14,-67.793486,-126.817243,like_new,other,other,526,20,y
+65,"['kitchen_utensils', 'kids']",yeyyyy,1,2023-03-23,-57.2603885,52.141904,poor,kitchen_utensils,kitchen_utensils,584,20,x
+66,"['furniture', 'clothes', 'kitchen_utensils']",whaterver,0,2023-03-16,-71.14177,-38.592428,poor,furniture,furniture,1749,1,y
+67,['clothes'],solving the problem,0,2023-03-27,-74.462441,2.720989,like_new,other,clothes,88,1,x
+68,"['kitchen_utensils', 'kids']",yeyyyy,0,2023-04-01,22.184553,-94.540284,poor,furniture,kitchen_utensils,376,11,x
+69,"['kitchen_utensils', 'kids']",today is the presentation day,0,2023-03-11,12.2172745,83.988698,poor,other,kitchen_utensils,1738,20,y
+70,"['furniture', 'clothes', 'kitchen_utensils']",everything,1,2023-04-03,50.528155,151.881036,acceptable,furniture,furniture,1848,5,x
+71,['kitchen_utensils'],whaterver,1,2023-03-12,4.621896,-34.653831,good,other,kitchen_utensils,1902,16,y
+72,['other'],anything,1,2023-03-15,41.0405885,-147.953852,poor,kitchen_utensils,other,280,24,y
+73,['clothes'],whaterver,0,2023-03-24,62.5510025,114.879022,like_new,clothes,clothes,802,15,x
+74,"['clothes', 'kids', 'other']",today is the presentation day,0,2023-03-24,-55.1302165,-31.936807,like_new,kitchen_utensils,clothes,1911,0,y
+75,['kids'],we are the second team to present,1,2023-03-18,2.458624,-44.420475,poor,kitchen_utensils,kids,954,15,x
+76,"['clothes', 'kids', 'other']",we are the second team to present,1,2023-03-23,-53.9976925,-46.952779,like_new,other,clothes,1181,3,y
+77,['other'],whaterver,0,2023-03-09,42.234069,-8.145228,poor,other,other,1821,6,x
+78,['kids'],everything,0,2023-03-11,-61.3431045,-179.588994,acceptable,other,kids,286,3,x
+79,['other'],yeyyyy,1,2023-03-27,20.134422,135.784865,acceptable,kitchen_utensils,other,459,5,y
+80,"['furniture', 'clothes', 'kitchen_utensils']",bug,1,2023-03-30,-50.577446,171.866743,good,clothes,furniture,1013,13,x
+81,['other'],yeyyyy,0,2023-03-11,-78.8400695,30.596222,like_new,other,other,519,2,y
+82,"['kitchen_utensils', 'kids']",today is the presentation day,1,2023-03-15,-39.5364965,-14.354568,acceptable,kitchen_utensils,kitchen_utensils,586,17,y
+83,['kitchen_utensils'],bug,1,2023-03-22,8.252681,175.134705,like_new,clothes,kitchen_utensils,1825,15,x
+84,"['kitchen_utensils', 'kids']",today is the presentation day,0,2023-03-11,89.4714855,-14.098666,poor,other,kitchen_utensils,180,17,x
+85,['clothes'],testing,0,2023-03-19,-59.6434675,19.088574,acceptable,other,clothes,446,20,y
+86,"['kitchen_utensils', 'kids']",hellooo,1,2023-03-23,-73.697005,-178.201541,good,kids,kitchen_utensils,282,0,x
+87,"['kitchen_utensils', 'kids']",uhuuuu,0,2023-03-07,31.5242565,-77.416129,poor,furniture,kitchen_utensils,1048,20,x
+88,['other'],bug,1,2023-03-21,-19.085223,50.64255,poor,furniture,other,111,17,y
+89,['furniture'],anything,0,2023-03-27,-65.611902,161.970383,poor,furniture,furniture,1409,13,y
+90,['kitchen_utensils'],we are the second team to present,0,2023-03-26,-67.024827,-76.286511,like_new,other,kitchen_utensils,1547,19,x
+91,['kids'],testing,1,2023-03-24,61.628119,-15.336154,poor,kids,kids,172,11,y
+92,"['kitchen_utensils', 'kids']",bug,1,2023-03-18,76.0092355,160.491079,poor,kitchen_utensils,kitchen_utensils,27,17,y
+93,['furniture'],yeyyyy,1,2023-03-18,-74.358967,-176.987263,like_new,other,furniture,151,24,y
+94,['kitchen_utensils'],uhuuuu,1,2023-03-31,11.903811,64.485566,acceptable,clothes,kitchen_utensils,1541,20,x
+95,['furniture'],anything,0,2023-03-31,88.701221,36.559816,acceptable,kids,furniture,622,4,y
+96,"['furniture', 'clothes', 'kitchen_utensils']",anything,1,2023-03-19,24.790508,-160.56451,good,furniture,furniture,424,1,y
+97,['kids'],yeyyyy,1,2023-03-25,-1.4593645,-178.297719,like_new,clothes,kids,1033,7,x
+98,['kids'],yeyyyy,1,2023-03-11,-27.863938,60.044685,acceptable,clothes,kids,1387,1,y
+99,"['furniture', 'clothes', 'kitchen_utensils']",today is the presentation day,0,2023-03-22,12.026104,105.171754,acceptable,other,furniture,883,15,y
+100,['clothes'],uhuuuu,1,2023-04-03,67.846677,144.207093,good,clothes,clothes,986,2,x

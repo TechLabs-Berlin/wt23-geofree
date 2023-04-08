@@ -1,12 +1,15 @@
 # system files
 .DS_Store
+.DS_Store?
 .ipynb_checkpoints
 venv
 .venv
+.vscode
 
 # folder
 temp/
 data/
+sandbox/
 
 # MicrosoftOffice.gitignore
 *.tmp
