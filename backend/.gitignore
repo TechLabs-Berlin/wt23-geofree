@@ -30,6 +30,5 @@ Backup of *.doc*
 ~$*.ppt*
 
 # temp requirements Python env
-requirements.txt
 node_modules
 .env.local
