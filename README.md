@@ -2,7 +2,7 @@
 
 ## Summary
 
-🗺️*"map app of freebies"*
+🗺️"map app of freebies"
 
 Geofree is a platform designed to facilitate the donation and collection of items left in the streets of Berlin. Geofree is based on the Berliner culture of preserving and re-using everyday objects found on the sidewalk, and its mission is to reduce waste and clutter.
 
@@ -23,7 +23,8 @@ With Geofree, users can easily discover and collect donated items, help reduce w
 
 Backend currently deployed in PythonAnywhere.com
 GET all objects url: [item list](https://geofree.pythonanywhere.com/api/item-list/)
-POST Item url: [post item](https://geofree.pythonanywhere.com/api/item-create/ )
+POST Item url: [post item](https://geofree.pythonanywhere.com/api/item-create/)
+
 **Please find in the file “urls.py” in the “geofree_api” folder 
  all the url paths availables**
 
@@ -63,9 +64,7 @@ To start app:
 
 ## Demo Video
 
-Demo:
-
-<iframe width="560" height="315" src="https://www.youtube.com/embed/R4wCXSiiUEk" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+[Demo](https://www.youtube.com/embed/R4wCXSiiUEk)
 
 Authors
 🧑‍💻**Web Development**
