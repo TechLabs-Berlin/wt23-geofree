@@ -6,7 +6,7 @@
 
 Geofree is a platform designed to facilitate the donation and collection of items left in the streets of Berlin. Geofree is based on the Berliner culture of preserving and re-using everyday objects found on the sidewalk, and its mission is to reduce waste and clutter.
 
-Geofree accomplishes this through following features: a map view with marked locations of donated items, search and browse functions, and a page allowing item upload. The website also includes an item recommendation system, which suggests items to users based on their chosen categories and the ranking of posts' date, views, and likes. Additionally, users can provide feedback by flagging items as unavailable.
+Geofree accomplishes this through these features: a map view with marked locations of donated items, search and browse functions, and a page allowing item upload. The website also includes an item recommendation system, which suggests items to users based on their chosen categories and the ranking of posts' date, views, and likes. Additionally, users can provide feedback by flagging items as unavailable.
 
 With Geofree, users can easily discover and collect donated items, help reduce waste of useful items and keep the streets of Berlin clean.
 
@@ -28,7 +28,8 @@ Backend currently deployed in PythonAnywhere.com
 GET all objects url: [item list](https://geofree.pythonanywhere.com/api/item-list/)
 POST Item url: [post item](https://geofree.pythonanywhere.com/api/item-create/)
 
-**Please find in the file “urls.py” in the “geofree_api” folder all the url paths availables**
+**Please find in the file “urls.py” in the “geofree_api” folder
+all the url paths availables**
 
 To install backend environment locally:
 (After cloning the GEOFREE repository):
