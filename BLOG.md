@@ -17,11 +17,17 @@ Geofree is a web app that allows users to post objects that they no longer need 
 ## Team Members
 
 Joanna Kowalik | Web Developer
+
 Felipe Saez | Web Developer
+
 Deniz Kocyigit | User Experience Designer
+
 Farida Elchuzade | User Experience Designer
+
 Manvitha Konkimalla | User Experience Designer
+
 Karina Condeixa | Data Scientist
+
 Antoine Cloet | Data Scientist
 
 Geofree is a web app that allows users to post objects that they no longer need and want to give away. Those in need of free items can search the app for desired objects or browse through free items in their area.
@@ -171,6 +177,7 @@ To better understand the problem people face when leave free items in the street
 We continued our research by looking and analyzing similar apps. Competitive analysis helped us to think about critical features our web app would need. On the analysis stage, we used all our research to create personas, empathy map and an affinity diagram. This allowed us to represent the pain points of the users and note down important information for building the webapp.
 
 **Some snapshots of similar app analysis**
+
 [Competitive Analysis link](https://github.com/TechLabs-Berlin/wt23-geofree/blob/main/UX%20files/CompetitiveAnalysis.pdf)
 
 Next stage involved creating a user flow, sketching and wireframing all the details on Figma. Wireframes gave an idea to the rest of the team on how to proceed with product development.
@@ -191,8 +198,7 @@ Next stage involved creating a user flow, sketching and wireframing all the deta
 
 ![Wireframes](https://raw.githubusercontent.com/TechLabs-Berlin/wt23-geofree/main/UX%20files/Wireframes/Wireframes2.png "wireframes")
 
-**see all wireframes**
-![Wireframes](https://github.com/TechLabs-Berlin/wt23-geofree/tree/main/UX%20files/Wireframes "All Wireframes")
+**See all [Wireframes](https://github.com/TechLabs-Berlin/wt23-geofree/tree/main/UX%20files/Wireframes "All Wireframes")**
 
 ### UI Mockup (Link to Figma)
 
@@ -207,7 +213,7 @@ As UX team we had our challenges. This was our first time designing as a UX Desi
 
 ### Prototype
 
-[Prototype](https://www.figma.com/proto/15g4U2HhBDixWFGIPixypH/FINAL?page-id=0%3A1&node-id=606-14501&viewport=-1000%2C2633%2C0.07&scaling=min-zoom&starting-point-node-id=606%3A14501)
+[Prototype link](https://www.figma.com/proto/15g4U2HhBDixWFGIPixypH/FINAL?page-id=0%3A1&node-id=606-14501&viewport=-1000%2C2633%2C0.07&scaling=min-zoom&starting-point-node-id=606%3A14501)
 
 ### Usability Testing:
 
@@ -223,63 +229,61 @@ After conducting usability testing and receiving user feedback, we found that us
 
 ## Data Science
 #### by [Karina Condeixa](https://github.com/KC2016) | Toine Cloet
-**Tech stack**: Python, Anaconda, JupyterNotebook, Numpy, Pandas, Matplotlib, Seaborn, Scikit-learn and  SQLite.
-&nbsp;
+**Tech stack**: Python, Anaconda, JupyterNotebook, Numpy, Pandas, Matplotlib, Seaborn, ntkl, Scikit-learn and SQLite.
 
 ### Data Project: understanding the domain
 
 Aming to support a better understanding about the domain and identify patterns that support creating data-driven design-features for the Geofree app. 
-Preliminar searches on app and websites was done. We browse the websites and apps of in [FreeYourStuff](https://www.free-your-stuff.com/de/berlin) and in [ebay-kleinanzeigen](https://www.ebay-kleinanzeigen.de/stadt /berlin/).
+Preliminar searches on app and websites was done. We browse the websites and apps of in [FreeYourStuff](https://www.free-your-stuff.com/de/berlin) and in [ebay-kleinanzeigen](https://www.ebay-kleinanzeigen.de/stadt/berlin/).
 
 Both data science techies took up the challenge of collecting, filtering, cleaning, sorting and analysing different data around GeoFree and its mission of connecting free stuff on the streets with people that could have a use for the stuff! 
 
-#### Analysis of Ordnungsamt data 
+### Analysis of Ordnungsamt data 
 **This analysis used data freely available on [Berlin Open Data](https://daten.berlin.de/datensaetze/ordnungsamt-online) as API by [Karina Condeixa](https://github.com/KC2016)**
 
 
-The category "Sperrmüll abgelagert" refers to objects placed on the street that are causing inconvenience to passers-by or to the proper functioning of the city and this subset was used for data analysis and visualisation.
+The category "Sperrmüll abgelagert" refers to objects placed on the street that are causing inconvenience to passers-by or to the proper use of public space in the city; and this subset was used for data analysis and visualisation.
 
 Therefore, a sample of the raw dataset with 614 rows and 8 columns was used for our model is shown below. As seen, the columns “bezirk”, “erstellungsDatum”, “status” and ‘”sachverhalt” (“districts”, “creation_date”, “status” and  “item”, respectively, for free translation) are the most indicative to give us insights.
 
-![ordnungsamt_subset](ds_guidelines/images/ ordnungsamt_subset
-.png)
+![ordnungsamt_subset](ds_guidelines/images/kc_ordnungsamt_subset.png)
 
 #### 1 Natural language analysis
 
 An analysis of the text from "situation description"  in the  "Sachverhalt" column found the items with higher occurrences, considering the original text in German and the translation in English to reduce inconsistencies that occurred because of English compound words.
 
-I dealt with the text into lines and words: removed numbers and characters, transformed to lowercase, tokenize words, removed stopwords from ntkl package and many others manually. Besides counting repeated words, wordclouds for English and German languages were built to visualise the most repeated words and check differences between the two languages.
+I dealt with the text into lines and words: removed numbers and characters, transformed to lowercase, tokenize words, removed stopwords from ntkl package and a hand-crafted word list. Besides counting repeated words, wordclouds for English and German languages were built to visualise the most repeated words and check differences between the two languages.
 
-The most cited items in English were: [mattress, furniture, chair, closet, couch, sofa, table, carpet, board, wardrobe, shelf, cabinet, frame, desk, cupboard, stroller, suitcase]
+The most cited items in the dataset translated to English were: `mattress`, `furniture`, `chair`, `closet`, `couch`, `sofa`, `table`, `carpet`, `board`, `wardrobe`, `shelf`, `cabinet`,`frame`, `desk`, `cupboard`, `stroller` and `suitcase`.
 
-The most cited items in German were: [Einkaufswagen, Matratze, Kuhlschrank, Stuhle, Fahrrad, Tische, Sessel]
+The most cited items in the original dataset in German were: `Einkaufswagen`, `Matratze`, `Kuhlschrank`, `Stuhle`, `Fahrrad`, `Tische` and `Sessel`.
 
-![wordclouds](ds_guidelines/images/wordclouds.png)
+![wordclouds](ds_guidelines/images/kc_wordclouds.png)
 
 #### 2 Occurrences "in process" and "done"
-The proportions of occurrences in progress and performed by district and by year were compared in a bar graph and a line graph respectively. An inconsistence was seen in the line graph with occurrences  in the future months until the end of 2023.
+The proportions of occurrences in progress and performed by district and by year were compared in a bar graph and a line graph respectively. An inconsistency was seen in the line graph with occurrences in the future months until the end of 2023.
 
-![graphs_of_occurrences_per_district_and_per_years_considering_status](ds_guidelines/images/ kc_district_years.png)
+![graphs_of_occurrences_per_district_and_per_years_considering_status](ds_guidelines/images/kc_district_years.png)
 
 #### 3 Seasonality 
-Timeseries data with more granularities were done to give an overview about seasonality. Graphs of occurrences by months confirmed an inconsistency in post dates from this dataset.
+Time-series data with more granularities were done to give an overview of seasonality. Graphs of occurrences by months confirmed an inconsistency in post-dates from this dataset.
 
-![graphs_of_occurrences_in_the_months_of_2022_and_2023_considering_status](ds_guidelines/images/ kc_months_2022_2023.png)
+![graphs_of_occurrences_in_the_months_of_2022_and_2023_considering_status](ds_guidelines/images/kc_months_2022_2023.png)
 
 #### 4 The main insights from this analysis were:
 
 - Most of the complaints were from Neukölln, 80% of the solved complaints and 18% of the unresolved ones. The numbers of occurrences in other districts are insignificant.
 - The data shows a few occurrences in 2022 and a majority in 2023.
--  A massive peak of occurrences was shown in September 2022, but we don't enough data that indicates a seasonality.
+-  A massive peak of occurrences was shown in September 2022, but we don't have enough data that indicates a seasonality.
 - Hundreds of occurrences in the 'erstellungsDatum'(creation date) column after the day of the analysis showed errors in data for this column.
 
 
-#### Web scraping 
+### Web scraping 
 **from the website [FreeYourStuff](https://www.free-your-stuff.com/de/berlin) by [Toine Cloet](https://github.com/ToineCoderMan).**
 
 As part of the functionalities for TechLabs, web scraping is a part of a data scientist’s go to skills when you do not have a list of data readily available. We scripted code to scrape from our most relevant similar website, http://www.freeyourstuff.com/berlin. First we asked the web designer if we could simply obtain his dataset, but he never replied. Our Python Beautiful Soup script was our plan B, and it worked well on the first page. However, the website counts more than 100 pages, and looping through those pages and saving the results into 1 XLS file proved to be more challenging. In the end, the functionality works and produces an XLS file with the zip code and the status of the post in the database.
 
- #### 1: Data collection
+ #### 1 Data collection
 There was no collection of data prior to the web-scraping functionality, since the act of web scraping is designed to provide output data from the target website http://www.free-your-stuff.com/berlin (FYS).
 However, various techniques were tried:
 
@@ -304,8 +308,8 @@ The source code of the website was examined in order to locate the classes where
 
 ![WS3](data_project/images/WS3.png)
 
-#### 2: Data processing 
-2.1: importing necessary classes and assigning variables: 
+#### 2 Data processing 
+2.1 importing necessary classes and assigning variables: 
 
 ```import requests
 import pandas as pd
@@ -320,7 +324,7 @@ postcodes = []
 item_type = []
 ```
 
-2.2: Assigning the website in variable and letting BeautifulSoup read the website
+2.2 Assigning the website in variable and letting BeautifulSoup read the website
 Note> the {pagenr} at the end of the URL is to accommodate multi-page scraping, since the website generates its page-individual URL with the page number at the end of the URL
 
 ```
@@ -329,7 +333,7 @@ url = f"https://www.free-your-stuff.com/de/berlin?page={pagenr}"
    soup = BeautifulSoup(r.text, "html.parser")
 ```
 
-2.3: Finding all the relevant classes for GIVE/NEED and PLZ on the page:
+2.3 Finding all the relevant classes for GIVE/NEED and PLZ on the page:
 
 ```
 for h3 in soup.find_all("div", class_="location"):
@@ -340,13 +344,13 @@ for h3 in soup.find_all("div", class_="location"):
        item_type.append(h3.get_text(strip=True))
 ```
 
-2.4: Create a function for the page scraping>
+2.4 Create a function for the page scraping>
 
 ```
 def getResults(pagenr):
 ```
 
-2.5: Create a loop to repeat the function for the amount of pages of the website>
+2.5 Create a loop to repeat the function for the amount of pages of the website>
 Note: here we limited the loop functionality to 100 pages, since any more data makes the scraping and exporting very slow
 
 ```
@@ -355,7 +359,7 @@ for x in range(1,100):
    getResults(x)
 ```
 
-2.6: Convert, clean and export: 
+2.6 Convert, clean and export: 
 A dataframe is created from the scraped data. Since the PLZ data included more string than just the 5 PLZ digits, it had to be cleaned. Finally, the dataframe is exported as an excel file. The Fin functionality prints a confirmation statement when the export of the file is completed.
 
 ```
@@ -371,7 +375,7 @@ df.to_excel("DataFrameScrapingFYSBERLIN-final.xlsx")
 print(fin)
 ```
 
-#### 3: Implementation and testing
+#### 3 Implementation and testing
 
 Next, the file is read in order to be visualized using PGEOCODE and Plotly.express in Python
 
@@ -407,45 +411,47 @@ fig.show()
 ```
 ![WS5](data_project/images/WS5.png)
 
-#### 4: Further improvement for future reference
+#### 4 Further improvement for future reference
 The date stamp of every item was layered deeper in the HTML of the website, we could only scrape the sentence “Posted less than xx hours ago”. This was abandoned for the sake of less relevance. If we would have more time to dive into selenium automation, the time stamp would have possibly also been able to be scraped.
 
 ### Machine Learning
-The team presented two proposals of recommendation systems for GeoFree; one based on rankings and another based on similarity of different parameters within the advertisement database. Although both are working, the rankings recommendation was implemented in the demo app version. Also, a classification RandomForestClassification was performed.
+The team presented two proposals of recommendation systems for GeoFree. A recommendation system based on rankings of variables related to novelty, popularity and about the item condition, and another based on similarity of different parameters within the advertisement database. Although both are working, the rankings recommendation was implemented in the demo app version. In addition, a RandomForestClassification classification was performed to identify items posted with outdated status (available or taken).
  
-#### Recommendation system based on rankings 
+### Recommendation system based on rankings 
 **by [Karina Condeixa](https://github.com/KC2016)**
-[Link for the files in the server](https://www.pythonanywhere.com/%C3%A5%C3%A7/geofree/files/home/geofree/m_l)
+
+[Link for the server](https://www.pythonanywhere.com/%C3%A5%C3%A7/geofree/files/home/geofree/m_l)
  
 Geofree is not a user-based app that is not provided of login feature and doesn’t gather much information about items. So, this solution used events from this app to suggest items based on features of novelty, popularity and item’s condition. 
  
 
 In a nutshell, the data flow for this recommendation is shown below:
 
-![data_flow](ds_guidelines/images/ kc_dataflow.png)
+![data_flow](ds_guidelines/images/kc_dataflow.png)
 
- #### 1: Data collection
-The table item-list from backend was imported from the backend's SQLite db to python (Jupyter Notebook) and queries using sqlite3. Inputs of users were extracted from the [API in pythoneverywhere](https://geofree.pythonanywhere.com/api/get-categories/) using urllib.parse and requests to get the request of a list of categories that represents input from users when searching items.
+ #### 1 Data collection
+The table item-list from backend was imported from the backend's SQLite db to python (Jupyter Notebook) and queries using sqlite3 were done. Inputs of users were extracted from the [API from pythoneverywhere](https://geofree.pythonanywhere.com/api/get-categories/) using urllib.parse and requests to get the request of a list of categories that represents input from users when searching items.
 
 The image below shows a visualisations of the data retrieved from the database:
 
-![dataset_imported_from_SQLite_DB](ds_guidelines/images/ kc_itemlistdf.png)
+![dataset_imported_from_SQLite_DB](ds_guidelines/images/kc_itemlistdf.png)
 
-#### 2: Data processing 
+#### 2 Data processing 
 Data processing took place in the following order:
 
 #### 2.1 Select columns with the necessary features
-The features selected were "id", "available", "timedate_creation", "latitude", "longitude", "condition", "categories", "views"and "likes".
+The features selected were `id`, `available`, `timedate_creation`, `latitude`, `longitude`, `condition`, `categories`, `views` and `likes`.
 
 #### 2.2 Encode categorical column
-The column "condition"  was encoded to from 1 to 4 instead of "like_new", "good", "acceptable", "poor", respectively to be ranked.
+The column `condition`  was encoded from 1 to 4 instead of `like_new`, `good`, `acceptable`, `poor`, respectively to be ranked.
+![encoded_dataset](ds_guidelines/images/kc_encode_reco.png)
 
-![encoded_dataset](ds_guidelines/images/ kc_encode_reco.png)
 #### 2.3  Filter by items' avavailability and smaller distance user-item
 available = 1 and distance <= the distance chosen by the user in the search.
-The distances between items and users who search items are gotten using Cosine similarity.
+The distances between items and users who search items are gotten using Cosine similarity; this was calculated together with the backend.
+
 #### 2.4 Ranking the features 
-The features were ranked as following: post_creation (descending), number of likes (ascending), number of views (descending) and condition (ascending) and limited to tree items recommended.
+The features were ranked as post_creation (descending), number of likes (ascending), number of views (descending) and condition (ascending) and limited to three items recommended.
 
 ```
    ranking_df_filtered = ranking_df.copy()
@@ -463,12 +469,15 @@ The features were ranked as following: post_creation (descending), number of lik
     # save only the ids
     ranked_id = ranking_sorted['id'] # limit to the 1st, 2nd and 3rd results.
 ```
-Late decisions from UX/UI/WD made after the development of the recommendation system changed the input of users to indefinite numbers of categories and instead of only one also the maximum distance to the item. To solve the issue of multiple categories, only the first category in the search is used as input to filter.
-#### 3: Implementation to the app and testing
+Late UX/UI/WD decisions made after the recommender system was developed changed user input to an indefinite number of categories rather than just one. As the system did not foresee multiple entries in categories, I created a condition to resolve this inconsistency; I used only the first category selected in the user's search as input for the filter in the recommendation system.
+
+#### 3 Implementation to the app and testing
+
 #### 3.1 Functions and packaging
-A function for data collection and processing was done. And the python packaging was done with the help of the backend guy (Felipe).  @api_view decorators are used in Django REST framework to specify the allowed HTTP methods for the view function and to handle the request and response data in a RESTful way.
+A function for data collection and processing was done. And the Python packaging was done with the help of the backend guy (Felipe).  @api_view decorators are used in Django REST framework to specify the allowed HTTP methods for the view function and to handle the request and response data in a RESTful way.
+
 #### 3.2 Challenges in dealing with exceptions
-In the implementation we faced bugs because we had a small list of items and that was not enough to return three items. These errors can occur in the beginning of use of the app. In response too this issue I added loopings check the number of ranked item_ids and when the rankings result in less of three items available from the chosen category, the system recommends random items. This is the snippet of code embedded in the function, which returns create random recommendations in these cases and return three item_id:
+In the implementation, we faced bugs because we had a small list of items and that was not enough to return three items. These errors can occur at the beginning of the use of the app. In response to this issue, I added loopings to check the number of ranked item_ids and when the rankings result in less than three items available from the chosen category, the system recommends random items. This is the snippet of code embedded in the function, which returns create random recommendations in these cases and returns three item_id:
 
 ```
 # if the length of the list is 0, return 3 random ids
@@ -501,14 +510,14 @@ id_3 = str(id_3)
    
 return id_1, id_2, id_3  
 ```
+
 #### 3.3 Testing
-A mock dataset with 100 of records was done to test the function. I used the  following parameters:
+A mock dataset with 100 records was done to test the function. I used the  following parameters:
 A maximum number of views by 2001.
 A random number of likes between 0 and 20.
 Time creation for posts with a limit of the previous 30 days.
 Random latitude and longitude points, timedate_creation, and geographical points using the Faker package.
-Random title, description, available, condition, categories, number of views and likes  The titles regard to input from user with category of items. The user can user multiple categories, so I used numpy with list of lists using the random package.
-
+Random `title`, `description`, `available`, `condition`, `categories`, number of `views` and `likes`  The titles regard to input from the user with category of items. The user can select multiple categories in the search, so I used numpy with lists of lists using the random package.
 
 Lists with some examples of values were created as presented below.
 
@@ -520,7 +529,7 @@ condition = ['poor', 'acceptable', 'good', 'like_new']
 available = ['1', '0'] 
 num_likes_reco = [0,1,2,3,4,5,6,7,8,9,10,11,12,13,24,15,16,17,18,19,20]
 ```
-The function got as described bellow:
+The function got as described below:
 ```
 def get_random_title():
     random_title = np.random.choice(title)
@@ -552,55 +561,52 @@ def data_recommendation(num_reco_records):
     return item 
 ```
 
-Later, I added id, category_ml (a column existing in db but has no function anymore), ensured that timedate_creation was in the correct data type, and formatted as it is in db.
+Later, I added `id`, `category_ml` (a column existing in the database but has no function anymore), ensured that `timedate_creation` was in the correct data type, and formatted it as it is in the database.
 
 ```
 reco_df['category_ml'] = reco_df['title'].apply(lambda x: x[0])
-
 reco_df['id'] = reco_df.index +1  # add item_id
 reco_series = reco_df['id']  # storage in a variable to use later
-
-
 reco_df['timedate_creation'] = pd.to_datetime(reco_df['timedate_creation'])
-
 reco_df['timedate_creation'] = reco_df['timedate_creation'].dt.strftime('%Y-%m-%d %H:%M:%S.%f')[:-3]
 ```
 
-
 We can see below a view of the data frame created.
 
-![mock_dataset_to_test_recommendations ](ds_guidelines/images/ kc_mock_data_reco.png)
+![mock_dataset_to_test_recommendations](ds_guidelines/images/kc_mock_data_reco.png)
 
 The backend did tests by his side.
 
 #### 3.4 Performance Metrics 
-To define performance metrics for recommender system for Geofree is tricky because this app is not user-based.  So, I can't use Mean Reciplocal Rank, for example, because this app doesn't record information about which used liked some item. 
+Defining performance metrics for the recommender system for Geofree is tricky because this app is not user-based.  Therefore, I can't use Mean Reciprocal Rank, for example, because this app doesn't record information about which users liked some items. 
 
-That said, I could use KPIs(key performance indicators) and A/B testing to measure the performance of the recommendation system. I cite some examples of KPIs bellow:
+That said, I could use KPIs(key performance indicators) and A/B testing to measure the performance of the recommendation system.  I cite some examples of KPIs below:
 
-- Customer satisfaction rate (CSR)
+**Customer satisfaction rate (CSR)**
 
 `CSR = (Number of Satisfied Customers/Total number of customers) * 100`
 
-- Average transactions (AVT)
+**Average transactions (AVT)**
 
 `AVT = Total revenue / Number of transactions (taken items)`
+
 Where the number of transactions is the number of items selected as taken by the users. 
 
-- Number of repeat customers (NRC)
+**Number of repeat customers (NRC)**
 
 `NRC = (Number of Unique Customers*Number of Donations)/Total Number of Visits`
 
-This metric only can be applied when login were implemented to Geofree.
+This metric can only be applied when login is implemented in Geofree.
 
 
 ### Recommendation system based on similarity
+**by Toine Cloet**
 
 This recommendation system was set up to produce a total of 5 relevant additional advertisements for a user currently browsing or searching for items in the Geofree app. These recommendations would pop up in the screen to increase user activity and to suggest user-relevant items, based a 3-tier priority model as suggested in the model below: 
 
 1) Matching with items that the user searched recently
-2) Searching for items closest to the user
-3) Searching for items that were recently posted in Geofree
+3) Searching for items closest to the user
+4) Searching for items that were recently posted in Geofree
 
 ![ML1](data_project/images/ML1.png)
 
@@ -700,10 +706,12 @@ Browsing through similar websites(FreeYourStuff Berlin and E-Bay, I noticed many
  To give Geofree a good transaction metric that avoids keeping outdated items in the app, and spending resources on data maintenance, I propose the creation of a feature that classifies available/taken items and subsequently triggers the removal of unavailable items from the app. 
 
 For this, a RandomForestClassification is performed.  At first, a feature created by the designers is used to get initial data and train the model. My idea is to implement machine learning ML when it reaches good statistical metrics.
+
 #### 1 Mock dataset
-Creating fake datasets while the add was being developed was a tiring and painful process. As there were uncertainties regarding many features of the app and there was no standard for naming columns like the backend database, many versions and modifications had to be made to the mock datasets. After going back and forth on design features that affected the data I needed to work with, I decided to leave code commented out and not delete it. It might look messy, but it avoided re-working.
+Creating fake datasets while the app was being developed was a tiring and painful process. As there were uncertainties regarding many features of the app and there was no standard for naming columns like the backend database, many versions and modifications had to be made to the mock datasets. After going back and forth on design features that affected the data I needed to work with, I decided to leave the code commented out and not delete it. It might look messy, but it avoided reworking.
+
 #### 1.1 Dataset for the Classification ML model
-Generally speaking, The dataset had 5000 records and was made under the folling parameters:
+Generally speaking, the dataset had 5000 records and was made under the following parameters:
 ```
 maximun_n_views = 2001
 pct_of_likes_over_views = 20
@@ -754,7 +762,7 @@ def new_data(n_records_new):
 #### 2 EDA for Random Forest Classification¶
 
 An exploratory analysis collect data on the following features from Geofree: 
-category condition, post's age, distance item-user, views, likes and Item availability (the target)  and performs, and:
+category condition, post's age (today - data posted), item-user distance, views, likes and Item availability (the target) and performance, and:
 
 - Checks the variables and statistics
 - Visualise the frequency of the categorical variables
@@ -764,35 +772,36 @@ category condition, post's age, distance item-user, views, likes and Item availa
 
 The main remarks about the EDA are:
 
-- Only the column n_likes presented outliers.
+- Only column `n_likes` presented outliers.
 
-![outliers_in_number_of_likes ](ds_guidelines/images/ kc_outliers.png)
+![outliers_in_number_of_likes ](ds_guidelines/images/kc_outliers.png)
 
-- A correlation between the number of likes and the number of views was expected, once it was added when I created the dataset when the n_likes column was based on a random percentage of the n_views column.
+- A correlation between the number of likes and the number of views was expected, once it was added when I created the dataset when the `n_likes` column was based on a random percentage of the `n_views` column.
 
-![correlation_between_variables ](ds_guidelines/images/ kc_rorrelations.png)
+![correlation_between_variables ](ds_guidelines/images/kc_correlation.png)
 
-- The column item available is the one I am going to predict, is not unbalanced. I was shown 2560 items available and 2440 not available.
+- The column item available is the one I am going to predict, it was not unbalanced. It was shown 2560 items were available and 2440 not available.
 - Since our dataset was randomly created, so I am not interpreting the distributions.
 
 #### 3 Random Forest Classification and metrics used
+
 #### 3.1 Processing Data
-Postcodes are variables with many categories. So, I dropped it. The same for id.
-The categorical variables available, category and conditions were encoded to numbers.
+Postcodes are variables with many categories. So, I dropped it. And droppen id too.
+The categorical variables `available`, `category` and `conditions` were encoded to numbers.
+
 #### 3.2 RandomForestClassification: iterations
+A couple of iterations were made, splitting the database into 70-30 and 80-20 and varying `n_estimators`, `max_features`,  `max_depth` and  `max_sample`. The Accuracy, F1-score, Precision and Recall got deficient. 
 
-A couple of iterations were made, splitting the database in 70-30 and 80-20 and varying 'n_estimators', 'max_features',  'max_depth' and  'max_sample'. The Accuracy, F1 score, 
-Precision and  Recall got deficient. 
 #### 3.3  Hyperparameter tuning
+A  tuning of hyperparameters for the classifier was made looking to have the best performance. It shows the highest F1-score and Recall. But still, the metrics were weak (between 45% and 50%).
 
-A  tuning of hyperparameters for the classifier was made looking to have the best performance. It shows the highest F1score and Recall. But still, the metrics were weak (between 45% and 50%).
 #### 3.4 Feature relevance
 A randomizedSearchCV supported the most interesting accomplishment of the model, for now. It shows an order of importance among the columns: `distance`, `n_views`, `n_likes`, `item_available_timer`, `item_category`, `item_condition`, in descending order.
 
 #### 3.5 Applying the ML model to new data
-To test the model, the new_data dataset was applied. We can below a sample of the results.
+To test the model, a mock `new_data` dataset was applied. We can below a sample of the results.
 
-![dataset_with_predicted_data ](ds_guidelines/images/ kc_predicteddata.png)
+![dataset_with_predicted_data ](ds_guidelines/images/kc_predicteddata.png)
 
 #### 3.6 Suggestions for further improvement:
 To improve the performance of the model, besides trying the default parameters, I could: 
@@ -801,7 +810,7 @@ To improve the performance of the model, besides trying the default parameters, 
 - Compare alternative models using Pycaret
 - Implement the ML model into Geofree. The system design for this is illustrated below
 
-![system_design_final ](ds_guidelines/images/ kc_system_design_final.png)
+![system_design_final ](ds_guidelines/images/kc_system_design_final.png)
 
 ### Conclusion
 
