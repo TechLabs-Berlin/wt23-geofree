@@ -290,37 +290,120 @@ This technique was abandoned since Selenium required a lot of extra time to mast
 
 First the necessary elements for web-scraping were explored. From the listings on the Berlin dedicated page, several details were relevant:
 
+![WS1](data_project/images/WS1.png)
+
 1. The Zip-code of the item (5-digit PLZ in Germany)
 2. The type of advertisement (GIVE or NEED), since users can post either items to give or can post items they would like to have.
 3. A third item would be the time-stamp. The problem here is that in the source code of the website, the time stamp is hidden in the web element itself. Without scripting automation like with Selenium, this is not easily reproducible. The text here is derived from the actual time stamp and will only say “vor 2 Wochen” for example, which means so much as “has been online for X amount of weeks”. This was abandoned in the dataset.
 
 The source code of the website was examined in order to locate the classes where the necessary information is stored: 
 
+![WS2](data_project/images/WS2.png)
+
+![WS3](data_project/images/WS3.png)
+
 #### 2: Data processing 
 2.1: importing necessary classes and assigning variables: 
+
+```import requests
+import pandas as pd
+from bs4 import BeautifulSoup
+import fin
+
+questionlist = []
+
+headers = {"User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/15.0 Safari/605.1.15"}
+
+postcodes = []
+item_type = []
+```
 
 2.2: Assigning the website in variable and letting BeautifulSoup read the website
 Note> the {pagenr} at the end of the URL is to accommodate multi-page scraping, since the website generates its page-individual URL with the page number at the end of the URL
 
+```
+url = f"https://www.free-your-stuff.com/de/berlin?page={pagenr}"
+   r = requests.get(url, headers=headers)
+   soup = BeautifulSoup(r.text, "html.parser")
+```
+
 2.3: Finding all the relevant classes for GIVE/NEED and PLZ on the page:
 
+```
+for h3 in soup.find_all("div", class_="location"):
+       postcodes.append(h3.get_text(strip=True))
+
+
+   for h3 in soup.find_all("div", class_="product-type"):
+       item_type.append(h3.get_text(strip=True))
+```
+
 2.4: Create a function for the page scraping>
+
+```
+def getResults(pagenr):
+```
 
 2.5: Create a loop to repeat the function for the amount of pages of the website>
 Note: here we limited the loop functionality to 100 pages, since any more data makes the scraping and exporting very slow
 
+```
+#take 100 pages, else too slow
+for x in range(1,100):
+   getResults(x)
+```
+
 2.6: Convert, clean and export: 
 A dataframe is created from the scraped data. Since the PLZ data included more string than just the 5 PLZ digits, it had to be cleaned. Finally, the dataframe is exported as an excel file. The Fin functionality prints a confirmation statement when the export of the file is completed.
+
+```
+df = pd.DataFrame()
+df["PLZ"] = postcodes
+df["PLZ"] = df["PLZ"].str.replace(" Berlin","")
+df["Type"] = item_type
+#df.head(20)
+df.to_excel("DataFrameScrapingFYSBERLIN-final.xlsx")
+```
+![WS4](data_project/images/WS4.png)
+```
+print(fin)
+```
 
 #### 3: Implementation and testing
 
 Next, the file is read in order to be visualized using PGEOCODE and Plotly.express in Python
 
+```
+import pgeocode
+import plotly.express as px
+import pandas as pd
+import geopandas
+```
+
 The PGEOCODE package contains zipcode data from different countries all over the globe, and will be specified for Germany specifically (Berlin-level was not available). We read our output file data into a variable.
+
+```
+nomi = pgeocode.Nominatim("de")
+#post_df = pd.read_csv("./postcodes_berlin.csv", sep=";")
+post_df = pd.read_csv("./DataFrameScrapingFYSBERLIN-final.csv", sep=";")
+```
 
 We read the latitude and longitude data from PGEOCODE and match the postcode data with the geolocational data of PGEOCODE to assign a map pointer for all the items in our database, based on postcode
 
+```
+post_df["latitude"] = post_df["PLZ"].apply(lambda x: nomi.query_postal_code(x)[9])
+post_df["longitude"] = post_df["PLZ"].apply(lambda x: nomi.query_postal_code(x)[10]
+```
+
 Finally, we display the item locations on a map using plotly, which automatically assigns the geolocational data on a Germany map. By zooming to level 9, the map loads in Berlin
+
+```
+fig = px.scatter_mapbox(post_df, lat="latitude", lon="longitude", zoom=9, height=300)
+fig.update_layout(mapbox_style="open-street-map")
+fig.update_layout(margin={"r":0,"t":0,"b":0})
+fig.show()
+```
+![WS5](data_project/images/WS5.png)
 
 #### 4: Further improvement for future reference
 The date stamp of every item was layered deeper in the HTML of the website, we could only scrape the sentence “Posted less than xx hours ago”. This was abandoned for the sake of less relevance. If we would have more time to dive into selenium automation, the time stamp would have possibly also been able to be scraped.
@@ -513,18 +596,22 @@ This metric only can be applied when login were implemented to Geofree.
 
 This recommendation system was set up to produce a total of 5 relevant additional advertisements for a user currently browsing or searching for items in the Geofree app. These recommendations would pop up in the screen to increase user activity and to suggest user-relevant items, based a 3-tier priority model as suggested in the model below: 
 
-Matching with items that the user searched recently
-Searching for items closest to the user
-Searching for items that were recently posted in Geofree
+1) Matching with items that the user searched recently
+2) Searching for items closest to the user
+3) Searching for items that were recently posted in Geofree
+
+![ML1](data_project/images/ML1.png)
 
  #### 1: Data collection
 
 Since at the time of design there were no items in the Geofree database, a mockup dataset was produced using http://www.mockaroo.com with 1000 records. The columns represent the item categories that were used for Geofree item posts at the time of creation>
 
+![ML2](data_project/images/ML2.png)
+
 The first tier is the most complex, as it will be searching for relevance based on item description within the entire database of Geofree, and returning items that show most similarity with the item that the user has recently viewed. The Python libraries Pairwise and TF / IDF can accomplish this. 
-TF = term frequency. Provides count of how many times a word is mentioned in a document / total amount of words in document. 
+1) TF = term frequency. Provides count of how many times a word is mentioned in a document / total amount of words in document. 
  
-IDF = Inverse document frequency. This calculates how significant this word is in the overview. IDF will look for the importance of words in all item descriptions in the dataset.
+2) IDF = Inverse document frequency. This calculates how significant this word is in the overview. IDF will look for the importance of words in all item descriptions in the dataset.
 
 By creating a matrix model of the text in our item descriptions, Python can cross-reference the individual words for reference and output a ranking where the most relevant ranking (best matching the description field of the item last searched by the user) will be suggested first, in a top-5 output ranking. 
 The second and third tier can be implemented by setting an IF-statement in the code which gives preference over items that are within a certain distance of the user. For example if the user is within a distance of less than 500 metres from an item relevant to their recent search, the variable distance_km (which compares geolocation of item with the user’s geolocation) can be called from the Geofree backend, and the IF-statement can prioritise items in the suggestion output this way. At the time of creation, this distance variable was not test-ready and therefore not implemented for this code. One critical condition here is that the user has agreed to AND enabled location sharing services on their device.  
@@ -533,16 +620,68 @@ The final search tier is based on the timestamp of posting, and can be created i
 
 #### 2: Data processing 
 First, relevant libraries are imported. 
-
+``` 
+import pandas as pd
+import numpy as np
+from sklearn.feature_extraction.text import TfidfVectorizer
+from sklearn.metrics.pairwise import linear_kernel\
+#import mock dataset with fields corresponding to GeoFree backend database
+#df_geofree = pd.read_csv("MOCK_DATA_ML1000.csv")
+```
 Next the Mockup database is read and stored in variables.
+```
+#import mock dataset with fields corresponding to GeoFree backend database
+#df_geofree = pd.read_csv("MOCK_DATA_ML1000.csv")
+df_geofree = pd.read_csv("MOCK_DATA_ML1000_test.csv")
+#df_geofree.head(50)
 
+df_geofree ["description"]
+
+tfidf = TfidfVectorizer(stop_words="english")
+
+#vector space model, basic tfid matrix
+tfidf_matrix = tfidf.fit_transform(df_geofree["description"])
+```
 Now the variables are used to created a reference matrix to find the matching descriptions with output of the item titles.
+```
+#create reference of each description with other descriptions
+cosine_sim = linear_kernel(tfidf_matrix, tfidf_matrix)
 
+#output should be the link to the other description, remove duplicates if similar items are posted
+the_output = pd.Series(df_geofree.index, index=df_geofree["title"]).drop_duplicates()
+#the_output
+```
 Finally we create a function to index the result of the matrix comparison. The final scores are sorted from best matching to least matching. The 2nd until the 6th best match are now returned, since we are looking for 5 recommendations and the 1st recommendation turned out to be the same item that we put in, deeming it irrelevant.
+
+```#Algorithm function
+def get_the_recommendation(title, cosine_sim = cosine_sim):
+  
+   idx = the_output[title]
+   #add the index of the recommended return
+   sim_scores = enumerate(cosine_sim[idx])
+   #sort the answers with closest match first
+   sim_scores = sorted(sim_scores, key=lambda x: x[1], reverse=True)
+   #we only need 5 GeoFree recommendations, so only return top 5. Disregard first one as this is always the original item title
+   sim_scores = sim_scores[1:6]
+  
+   #loop through the answer descriptions and return index and score
+   #for y in sim_scores:
+   #    print(y)
+  
+   sim_index = [i[0] for i in sim_scores]
+
+   #return item title
+
+    print(f"Since you looked at {title}, you might be interested in the following items:")
+   print("")
+   print(df_geofree["title"].iloc[sim_index])
+```
 
 #### 3: Implementation to the app and testing
 
 When testing the function get_the_recommendation() we receive the output below:
+
+![ML3](data_project/images/ML3.png)
 
 The index of the item as well as the item title are returned. In the backend of Geofree, the index number is enough to process the recommendation on-screen. For testing purposes we have left the title in the dataset. 
 
