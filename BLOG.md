@@ -189,6 +189,8 @@ Next stage involved creating a user flow, sketching and wireframing all the deta
 
 ### Wireframe
 
+![Wireframes](https://raw.githubusercontent.com/TechLabs-Berlin/wt23-geofree/main/UX%20files/Wireframes/Wireframes2.png "wireframes")
+
 **see all wireframes**
 ![Wireframes](https://github.com/TechLabs-Berlin/wt23-geofree/tree/main/UX%20files/Wireframes "All Wireframes")
 
