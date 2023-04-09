@@ -33,9 +33,7 @@ POST Item url: [post item](https://geofree.pythonanywhere.com/api/item-create/)
 **Please find in the file `urls.py` in the `geofree_api` folder
 all the url paths available**
 
-To install backend environment locally:
-(After cloning the Geofree repository):
-Commands:
+Commands to install the backend environment locally (after cloning the Geofree repository):
 
 `cd backend`
 
