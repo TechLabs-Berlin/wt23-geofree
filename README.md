@@ -25,7 +25,9 @@ With Geofree, users can easily discover and collect donated items, help reduce w
 ### Backend
 
 Backend currently deployed in PythonAnywhere.com
+
 GET all objects url: [item list](https://geofree.pythonanywhere.com/api/item-list/)
+
 POST Item url: [post item](https://geofree.pythonanywhere.com/api/item-create/)
 
 **Please find in the file “urls.py” in the “geofree_api” folder
