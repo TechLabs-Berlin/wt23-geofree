@@ -30,7 +30,7 @@ GET all objects url: [item list](https://geofree.pythonanywhere.com/api/item-lis
 
 POST Item url: [post item](https://geofree.pythonanywhere.com/api/item-create/)
 
-**Please find in the file “urls.py” in the “geofree_api” folder
+**Please find in the file `urls.py` in the `geofree_api` folder
 all the url paths availables**
 
 To install backend environment locally:
