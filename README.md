@@ -22,7 +22,7 @@ With Geofree, users can easily discover and collect donated items, help reduce w
 
 ## Setup
 
-**Backend**
+### Backend
 
 Backend currently deployed in PythonAnywhere.com
 GET all objects url: [item list](https://geofree.pythonanywhere.com/api/item-list/)
@@ -43,7 +43,7 @@ Commands:
 
 `python manage.py runserver`
 
-**Frontend**
+### Frontend
 
 To install and set up the library, run:
 `npm install`
