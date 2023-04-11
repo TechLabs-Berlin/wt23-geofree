@@ -233,12 +233,12 @@ After conducting usability testing and receiving user feedback, we found that us
 
 ### Data Project: understanding the domain
 
-Aming to support a better understanding about the domain and identify patterns that support creating data-driven design-features for the Geofree app. 
+Aming to support a better understanding about the domain and identify patterns that support creating data-driven design-features for the Geofree app.
 Preliminar searches on app and websites was done. We browse the websites and apps of in [FreeYourStuff](https://www.free-your-stuff.com/de/berlin) and in [ebay-kleinanzeigen](https://www.ebay-kleinanzeigen.de/stadt/berlin/).
 
-Both data science techies took up the challenge of collecting, filtering, cleaning, sorting and analysing different data around GeoFree and its mission of connecting free stuff on the streets with people that could have a use for the stuff! 
+Both data science techies took up the challenge of collecting, filtering, cleaning, sorting and analysing different data around GeoFree and its mission of connecting free stuff on the streets with people that could have a use for the stuff!
 
-### Analysis of Ordnungsamt data 
+### Analysis of Ordnungsamt data
 **This analysis used data freely available on [Berlin Open Data](https://daten.berlin.de/datensaetze/ordnungsamt-online) as API by [Karina Condeixa](https://github.com/KC2016)**
 
 
@@ -265,7 +265,7 @@ The proportions of occurrences in progress and performed by district and by year
 
 ![graphs_of_occurrences_per_district_and_per_years_considering_status](ds_guidelines/images/kc_district_years.png)
 
-#### 3 Seasonality 
+#### 3 Seasonality
 Time-series data with more granularities were done to give an overview of seasonality. Graphs of occurrences by months confirmed an inconsistency in post-dates from this dataset.
 
 ![graphs_of_occurrences_in_the_months_of_2022_and_2023_considering_status](ds_guidelines/images/kc_months_2022_2023.png)
@@ -278,7 +278,7 @@ Time-series data with more granularities were done to give an overview of season
 - Hundreds of occurrences in the 'erstellungsDatum'(creation date) column after the day of the analysis showed errors in data for this column.
 
 
-### Web scraping 
+### Web scraping
 **from the website [FreeYourStuff](https://www.free-your-stuff.com/de/berlin) by [Toine Cloet](https://github.com/ToineCoderMan).**
 
 As part of the functionalities for TechLabs, web scraping is a part of a data scientist’s go to skills when you do not have a list of data readily available. We scripted code to scrape from our most relevant similar website, http://www.freeyourstuff.com/berlin. First we asked the web designer if we could simply obtain his dataset, but he never replied. Our Python Beautiful Soup script was our plan B, and it worked well on the first page. However, the website counts more than 100 pages, and looping through those pages and saving the results into 1 XLS file proved to be more challenging. In the end, the functionality works and produces an XLS file with the zip code and the status of the post in the database.
@@ -289,27 +289,27 @@ However, various techniques were tried:
 
 Scraping based on downloading the HTML from the website
 This was however abandoned because of complexity of pulling HTML documents from a website
-Scraping with Python BeautifulSoup package. 
+Scraping with Python BeautifulSoup package.
 This package was explored to read through website elements
 Using Selenium to automate scripting through Python Google plugin
 This technique was abandoned since Selenium required a lot of extra time to master, and the Google Python plugin diminished the GPU speed an RAM of the computer, crashing often or generally running very slowly
 
 First the necessary elements for web-scraping were explored. From the listings on the Berlin dedicated page, several details were relevant:
 
-![WS1](data_project/images/WS1.png)
+![WS1](ds_guidelines/images/WS1.png)
 
 1. The Zip-code of the item (5-digit PLZ in Germany)
 2. The type of advertisement (GIVE or NEED), since users can post either items to give or can post items they would like to have.
 3. A third item would be the time-stamp. The problem here is that in the source code of the website, the time stamp is hidden in the web element itself. Without scripting automation like with Selenium, this is not easily reproducible. The text here is derived from the actual time stamp and will only say “vor 2 Wochen” for example, which means so much as “has been online for X amount of weeks”. This was abandoned in the dataset.
 
-The source code of the website was examined in order to locate the classes where the necessary information is stored: 
+The source code of the website was examined in order to locate the classes where the necessary information is stored:
 
-![WS2](data_project/images/WS2.png)
+![WS2](ds_guidelines/images/WS2.png)
 
-![WS3](data_project/images/WS3.png)
+![WS3](ds_guidelines/images/WS3.png)
 
-#### 2 Data processing 
-2.1 importing necessary classes and assigning variables: 
+#### 2 Data processing
+2.1 importing necessary classes and assigning variables:
 
 ```import requests
 import pandas as pd
@@ -359,7 +359,7 @@ for x in range(1,100):
    getResults(x)
 ```
 
-2.6 Convert, clean and export: 
+2.6 Convert, clean and export:
 A dataframe is created from the scraped data. Since the PLZ data included more string than just the 5 PLZ digits, it had to be cleaned. Finally, the dataframe is exported as an excel file. The Fin functionality prints a confirmation statement when the export of the file is completed.
 
 ```
@@ -370,7 +370,7 @@ df["Type"] = item_type
 #df.head(20)
 df.to_excel("DataFrameScrapingFYSBERLIN-final.xlsx")
 ```
-![WS4](data_project/images/WS4.png)
+![WS4](ds_guidelines/images/WS4.png)
 ```
 print(fin)
 ```
@@ -409,21 +409,21 @@ fig.update_layout(mapbox_style="open-street-map")
 fig.update_layout(margin={"r":0,"t":0,"b":0})
 fig.show()
 ```
-![WS5](data_project/images/WS5.png)
+![WS5](ds_guidelines/images/WS5.png)
 
 #### 4 Further improvement for future reference
 The date stamp of every item was layered deeper in the HTML of the website, we could only scrape the sentence “Posted less than xx hours ago”. This was abandoned for the sake of less relevance. If we would have more time to dive into selenium automation, the time stamp would have possibly also been able to be scraped.
 
 ### Machine Learning
 The team presented two proposals of recommendation systems for GeoFree. A recommendation system based on rankings of variables related to novelty, popularity and about the item condition, and another based on similarity of different parameters within the advertisement database. Although both are working, the rankings recommendation was implemented in the demo app version. In addition, a RandomForestClassification classification was performed to identify items posted with outdated status (available or taken).
- 
-### Recommendation system based on rankings 
+
+### Recommendation system based on rankings
 **by [Karina Condeixa](https://github.com/KC2016)**
 
 [Link for the server](https://www.pythonanywhere.com/%C3%A5%C3%A7/geofree/files/home/geofree/m_l)
- 
-Geofree is not a user-based app that is not provided of login feature and doesn’t gather much information about items. So, this solution used events from this app to suggest items based on features of novelty, popularity and item’s condition. 
- 
+
+Geofree is not a user-based app that is not provided of login feature and doesn’t gather much information about items. So, this solution used events from this app to suggest items based on features of novelty, popularity and item’s condition.
+
 
 In a nutshell, the data flow for this recommendation is shown below:
 
@@ -436,7 +436,7 @@ The image below shows a visualisations of the data retrieved from the database:
 
 ![dataset_imported_from_SQLite_DB](ds_guidelines/images/kc_itemlistdf.png)
 
-#### 2 Data processing 
+#### 2 Data processing
 Data processing took place in the following order:
 
 #### 2.1 Select columns with the necessary features
@@ -450,7 +450,7 @@ The column `condition`  was encoded from 1 to 4 instead of `like_new`, `good`, `
 available = 1 and distance <= the distance chosen by the user in the search.
 The distances between items and users who search items are gotten using Cosine similarity; this was calculated together with the backend.
 
-#### 2.4 Ranking the features 
+#### 2.4 Ranking the features
 The features were ranked as post_creation (descending), number of likes (ascending), number of views (descending) and condition (ascending) and limited to three items recommended.
 
 ```
@@ -481,13 +481,13 @@ In the implementation, we faced bugs because we had a small list of items and th
 
 ```
 # if the length of the list is 0, return 3 random ids
-if len(ranked_id) == 0: 
+if len(ranked_id) == 0:
     id_1 = random.choice(ranking_df['id'])
     id_2 = random.choice(ranking_df['id'])
     id_3 = random.choice(ranking_df['id'])
-    
+
 # if the length of the list is 1, return the id in the list as id_1  and random ids for id_2 and id_3
-elif len(ranked_id) == 1: 
+elif len(ranked_id) == 1:
     id_1 = list[0]
     id_2 = random.choice(ranking_df['id'])
     id_3 = random.choice(ranking_df['id'])
@@ -498,17 +498,17 @@ elif len(ranked_id) == 2:
     id_2 = list[1]
     id_3 = random.choice(ranking_df['id'])
 
-# if the length of the list is 3 or more, return the ids in the list as id_1, id_2, and id_3  
+# if the length of the list is 3 or more, return the ids in the list as id_1, id_2, and id_3
 else:
     id_1 = list[0]
     id_2 = list[1]
     id_3 = list[3]
-    
+
 id_1 = str(id_1)
 id_2 = str(id_2)
 id_3 = str(id_3)
-   
-return id_1, id_2, id_3  
+
+return id_1, id_2, id_3
 ```
 
 #### 3.3 Testing
@@ -524,9 +524,9 @@ Lists with some examples of values were created as presented below.
 ```
 title = ['Furniture',  'Clothes', 'All', ['Plants', 'Kitchen', 'Kids toys'], 'All', ['Kitchen', 'Kids toys'], ['Furniture',  'Clothes',  'Kitchen'], ['Kitchen', 'Kids toys'], ['Clothes', 'Kids toys', 'Plants'], 'All']
 description = ['anything', 'everything', 'whaterver', 'hellooo', 'testing', 'bug', 'solving the problem', 'what day is today?', 'today is the presentation day', 'we are the second team to present', 'uhuuuu', 'yeyyyy']
-category = ['furniture',  'clothes',  'kitchen_utensils', 'kids', 'other'] 
-condition = ['poor', 'acceptable', 'good', 'like_new'] 
-available = ['1', '0'] 
+category = ['furniture',  'clothes',  'kitchen_utensils', 'kids', 'other']
+condition = ['poor', 'acceptable', 'good', 'like_new']
+available = ['1', '0']
 num_likes_reco = [0,1,2,3,4,5,6,7,8,9,10,11,12,13,24,15,16,17,18,19,20]
 ```
 The function got as described below:
@@ -539,16 +539,16 @@ def get_random_title():
         return [random_title]
 get_random_title()
 
-def data_recommendation(num_reco_records): 
-  
-    # dictionary 
-    item ={} 
-    for i in range(0, num_reco_records): 
+def data_recommendation(num_reco_records):
+
+    # dictionary
+    item ={}
+    for i in range(0, num_reco_records):
         item[i] = {}
         fake = Faker()
-        item[i]['title']= get_random_title()  
-        item[i]['description']= np.random.choice(description) 
-        item[i]['available'] = np.random.choice(available) 
+        item[i]['title']= get_random_title()
+        item[i]['description']= np.random.choice(description)
+        item[i]['available'] = np.random.choice(available)
         item[i]['condition'] = np.random.choice(condition)
         item[i]['timedate_creation'] = fake.date_between_dates(limit,'now')
         item[i]['latitude'] = float(fake.latitude())
@@ -557,8 +557,8 @@ def data_recommendation(num_reco_records):
         item[i]['views'] = np.random.choice(n_views)
         item[i]['likes'] = np.random.choice(num_likes_reco) # not dependent from view, only to test reco
         item[i]['point'] =  [f"SRID=4326;POINT ({fake.longitude()} {fake.latitude()})"]
-    
-    return item 
+
+    return item
 ```
 
 Later, I added `id`, `category_ml` (a column existing in the database but has no function anymore), ensured that `timedate_creation` was in the correct data type, and formatted it as it is in the database.
@@ -577,8 +577,8 @@ We can see below a view of the data frame created.
 
 The backend did tests by his side.
 
-#### 3.4 Performance Metrics 
-Defining performance metrics for the recommender system for Geofree is tricky because this app is not user-based.  Therefore, I can't use Mean Reciprocal Rank, for example, because this app doesn't record information about which users liked some items. 
+#### 3.4 Performance Metrics
+Defining performance metrics for the recommender system for Geofree is tricky because this app is not user-based.  Therefore, I can't use Mean Reciprocal Rank, for example, because this app doesn't record information about which users liked some items.
 
 That said, I could use KPIs(key performance indicators) and A/B testing to measure the performance of the recommendation system.  I cite some examples of KPIs below:
 
@@ -590,7 +590,7 @@ That said, I could use KPIs(key performance indicators) and A/B testing to measu
 
 `AVT = Total revenue / Number of transactions (taken items)`
 
-Where the number of transactions is the number of items selected as taken by the users. 
+Where the number of transactions is the number of items selected as taken by the users.
 
 **Number of repeat customers (NRC)**
 
@@ -602,33 +602,33 @@ This metric can only be applied when login is implemented in Geofree.
 ### Recommendation system based on similarity
 **by Toine Cloet**
 
-This recommendation system was set up to produce a total of 5 relevant additional advertisements for a user currently browsing or searching for items in the Geofree app. These recommendations would pop up in the screen to increase user activity and to suggest user-relevant items, based a 3-tier priority model as suggested in the model below: 
+This recommendation system was set up to produce a total of 5 relevant additional advertisements for a user currently browsing or searching for items in the Geofree app. These recommendations would pop up in the screen to increase user activity and to suggest user-relevant items, based a 3-tier priority model as suggested in the model below:
 
 1) Matching with items that the user searched recently
 3) Searching for items closest to the user
 4) Searching for items that were recently posted in Geofree
 
-![ML1](data_project/images/ML1.png)
+![ML1](ds_guidelines/images/ML1.png)
 
  #### 1: Data collection
 
 Since at the time of design there were no items in the Geofree database, a mockup dataset was produced using http://www.mockaroo.com with 1000 records. The columns represent the item categories that were used for Geofree item posts at the time of creation>
 
-![ML2](data_project/images/ML2.png)
+![ML2](ds_guidelines/images/ML2.png)
 
-The first tier is the most complex, as it will be searching for relevance based on item description within the entire database of Geofree, and returning items that show most similarity with the item that the user has recently viewed. The Python libraries Pairwise and TF / IDF can accomplish this. 
-1) TF = term frequency. Provides count of how many times a word is mentioned in a document / total amount of words in document. 
- 
+The first tier is the most complex, as it will be searching for relevance based on item description within the entire database of Geofree, and returning items that show most similarity with the item that the user has recently viewed. The Python libraries Pairwise and TF / IDF can accomplish this.
+1) TF = term frequency. Provides count of how many times a word is mentioned in a document / total amount of words in document.
+
 2) IDF = Inverse document frequency. This calculates how significant this word is in the overview. IDF will look for the importance of words in all item descriptions in the dataset.
 
-By creating a matrix model of the text in our item descriptions, Python can cross-reference the individual words for reference and output a ranking where the most relevant ranking (best matching the description field of the item last searched by the user) will be suggested first, in a top-5 output ranking. 
-The second and third tier can be implemented by setting an IF-statement in the code which gives preference over items that are within a certain distance of the user. For example if the user is within a distance of less than 500 metres from an item relevant to their recent search, the variable distance_km (which compares geolocation of item with the user’s geolocation) can be called from the Geofree backend, and the IF-statement can prioritise items in the suggestion output this way. At the time of creation, this distance variable was not test-ready and therefore not implemented for this code. One critical condition here is that the user has agreed to AND enabled location sharing services on their device.  
+By creating a matrix model of the text in our item descriptions, Python can cross-reference the individual words for reference and output a ranking where the most relevant ranking (best matching the description field of the item last searched by the user) will be suggested first, in a top-5 output ranking.
+The second and third tier can be implemented by setting an IF-statement in the code which gives preference over items that are within a certain distance of the user. For example if the user is within a distance of less than 500 metres from an item relevant to their recent search, the variable distance_km (which compares geolocation of item with the user’s geolocation) can be called from the Geofree backend, and the IF-statement can prioritise items in the suggestion output this way. At the time of creation, this distance variable was not test-ready and therefore not implemented for this code. One critical condition here is that the user has agreed to AND enabled location sharing services on their device.
 
 The final search tier is based on the timestamp of posting, and can be created in a similar way as tier 2 by adding an IF-statement for relevant items that have been posted recently. This would enable the user to receive suggestions for newly posted items relevant to their search interests. The item-age variable stores the time of posting of items and can be called for this from the Geofree backend. Since this was not set up by the time of testing, it was not implemented for this code.
 
-#### 2: Data processing 
-First, relevant libraries are imported. 
-``` 
+#### 2: Data processing
+First, relevant libraries are imported.
+```
 import pandas as pd
 import numpy as np
 from sklearn.feature_extraction.text import TfidfVectorizer
@@ -663,7 +663,7 @@ Finally we create a function to index the result of the matrix comparison. The f
 
 ```#Algorithm function
 def get_the_recommendation(title, cosine_sim = cosine_sim):
-  
+
    idx = the_output[title]
    #add the index of the recommended return
    sim_scores = enumerate(cosine_sim[idx])
@@ -671,11 +671,11 @@ def get_the_recommendation(title, cosine_sim = cosine_sim):
    sim_scores = sorted(sim_scores, key=lambda x: x[1], reverse=True)
    #we only need 5 GeoFree recommendations, so only return top 5. Disregard first one as this is always the original item title
    sim_scores = sim_scores[1:6]
-  
+
    #loop through the answer descriptions and return index and score
    #for y in sim_scores:
    #    print(y)
-  
+
    sim_index = [i[0] for i in sim_scores]
 
    #return item title
@@ -689,11 +689,11 @@ def get_the_recommendation(title, cosine_sim = cosine_sim):
 
 When testing the function get_the_recommendation() we receive the output below:
 
-![ML3](data_project/images/ML3.png)
+![ML3](ds_guidelines/images/ML3.png)
 
-The index of the item as well as the item title are returned. In the backend of Geofree, the index number is enough to process the recommendation on-screen. For testing purposes we have left the title in the dataset. 
+The index of the item as well as the item title are returned. In the backend of Geofree, the index number is enough to process the recommendation on-screen. For testing purposes we have left the title in the dataset.
 
-We tested the output first with the Mock dataset, but could not really test it for relevance. Therefore, the test set was slightly adapted where we entered the text Test1, TestFinal with space (which had spaces in the item title to see if this is returned by the function) and Test3. For Test1, Test3 and TestFinal we respectively changed the item text as well, entering the word Lawnmower in different styles (Lawnmower, Lawnmowerman, Lawn mower), to see if the algorithm picked up on this. The output perfectly finds the words and assigns them a higher output rating as can be seen in the screenshot above. This code was tested in the backend of Geofree as well. 
+We tested the output first with the Mock dataset, but could not really test it for relevance. Therefore, the test set was slightly adapted where we entered the text Test1, TestFinal with space (which had spaces in the item title to see if this is returned by the function) and Test3. For Test1, Test3 and TestFinal we respectively changed the item text as well, entering the word Lawnmower in different styles (Lawnmower, Lawnmowerman, Lawn mower), to see if the algorithm picked up on this. The output perfectly finds the words and assigns them a higher output rating as can be seen in the screenshot above. This code was tested in the backend of Geofree as well.
 
 #### 4: Further improvement for future reference
 One setback of the function is the input text, the function runs on item title and must get the exact title of the item last viewed in order to produce a relevant result. A future improvement would be to allow for the input to also be keywords rather than only item title. Also more experimenting with UX Design considering customer preference for suggestions (perhaps performing user satisfaction surveys on happiness with overall suggestions) could provide Geofree with more relevant and user-specific suggestions, to keep the streets even more clean of stuff.
@@ -703,7 +703,7 @@ One setback of the function is the input text, the function runs on item title a
 
 Browsing through similar websites(FreeYourStuff Berlin and E-Bay, I noticed many old posts offering items or searching for items, which are probably outdated. It is noticed that many users do not remove posts and neither do these websites.
 
- To give Geofree a good transaction metric that avoids keeping outdated items in the app, and spending resources on data maintenance, I propose the creation of a feature that classifies available/taken items and subsequently triggers the removal of unavailable items from the app. 
+ To give Geofree a good transaction metric that avoids keeping outdated items in the app, and spending resources on data maintenance, I propose the creation of a feature that classifies available/taken items and subsequently triggers the removal of unavailable items from the app.
 
 For this, a RandomForestClassification is performed.  At first, a feature created by the designers is used to get initial data and train the model. My idea is to implement machine learning ML when it reaches good statistical metrics.
 
@@ -720,23 +720,23 @@ n_records = 5000
 limit = '-30d'  # limit of 30 days of item in the app
 maximun_n_hours_avalilable = 100
 
-category = ['furniture',  'clothes',  'kitchen_utensils', 'kids', 'other'] 
-condition = ['poor', 'acceptable', 'good', 'like_new'] 
-available = ['1', '0']  
+category = ['furniture',  'clothes',  'kitchen_utensils', 'kids', 'other']
+condition = ['poor', 'acceptable', 'good', 'like_new']
+available = ['1', '0']
 
 ```
 #### 1.2 Dataset for testing this ML model
-A small dataset with 15 records was done. 
+A small dataset with 15 records was done.
 
 ```
-def new_data(n_records_new): 
-      # dictionary 
-    new_data ={} 
-    for i in range(0, n_records_new): 
+def new_data(n_records_new):
+      # dictionary
+    new_data ={}
+    for i in range(0, n_records_new):
         new_data[i] = {}
 #         item[i]['item_status'] = 1
         new_data[i]['item_category'] = np.random.choice(category)
-#         new_data[i]['item_id'] = np.random.choice(range(1, n_records_new))  
+#         new_data[i]['item_id'] = np.random.choice(range(1, n_records_new))
         new_data[i]['item_condition'] = np.random.choice(condition)
 #         item[i]['item_available_timer'] = np.random.choice(n_hours_avalilable) # in 30 days
 #         datetime_iteration1 = fake.date_between_dates(limit,'now')
@@ -746,22 +746,22 @@ def new_data(n_records_new):
 #             item[i]['item_timer'] = datetime_iteration2
 #         else:
 #             item[i]['item_timer'] = datetime_iteration2
-#             item[i]['item_timer'] = datetime_iteration1 
+#             item[i]['item_timer'] = datetime_iteration1
 #         new_data[i]['item_postcode'] = np.random.choice(postcodes_berlin_series)
             new_data[i]['item_available_timer'] = np.random.choice(n_hours_avalilable)
 #         item[i]['item_timer'] = (date.today()) - fake.date_between_dates(limit,'now')  # in days, can be improved to hours
         new_data[i]['distance'] = np.random.choice(distance)
-        
+
  # This date shold be later than the post
         new_data[i]['n_views'] = np.random.choice(n_views)
         new_data[i]['n_likes'] = int(new_data[i]['n_views'] * (np.random.choice(pct_likes)))
         new_data[i]['item_available'] = np.random.choice(available)
-      
+
     return new_data
 ```
 #### 2 EDA for Random Forest Classification¶
 
-An exploratory analysis collect data on the following features from Geofree: 
+An exploratory analysis collect data on the following features from Geofree:
 category condition, post's age (today - data posted), item-user distance, views, likes and Item availability (the target) and performance, and:
 
 - Checks the variables and statistics
@@ -790,7 +790,7 @@ Postcodes are variables with many categories. So, I dropped it. And droppen id t
 The categorical variables `available`, `category` and `conditions` were encoded to numbers.
 
 #### 3.2 RandomForestClassification: iterations
-A couple of iterations were made, splitting the database into 70-30 and 80-20 and varying `n_estimators`, `max_features`,  `max_depth` and  `max_sample`. The Accuracy, F1-score, Precision and Recall got deficient. 
+A couple of iterations were made, splitting the database into 70-30 and 80-20 and varying `n_estimators`, `max_features`,  `max_depth` and  `max_sample`. The Accuracy, F1-score, Precision and Recall got deficient.
 
 #### 3.3  Hyperparameter tuning
 A  tuning of hyperparameters for the classifier was made looking to have the best performance. It shows the highest F1-score and Recall. But still, the metrics were weak (between 45% and 50%).
@@ -804,7 +804,7 @@ To test the model, a mock `new_data` dataset was applied. We can below a sample 
 ![dataset_with_predicted_data ](ds_guidelines/images/kc_predicteddata.png)
 
 #### 3.6 Suggestions for further improvement:
-To improve the performance of the model, besides trying the default parameters, I could: 
+To improve the performance of the model, besides trying the default parameters, I could:
 - Check the metrics Cross-validation and AUC-ROC
 - Use also gridsearch to improve the metrics
 - Compare alternative models using Pycaret
