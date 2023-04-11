@@ -48,18 +48,6 @@ Commands to install the backend environment locally (after cloning the Geofree r
 To install and set up the library, run:
 `npm install`
 
-To install Material UI library:
-`npm install @mui/material @emotion/react @emotion/styled`
-
-To install Google Maps API:
-`npm i -S @react-google-maps/api`
-
-To install Multiselect React Dropdown:
-`npm install multiselect-react-dropdown`
-
-To install Carousel Slider:
-`npm install slick-carousel`
-
 To start app:
 `npm start`
 
