@@ -53,7 +53,15 @@ To start app:
 
 ## Prototype
 
-[Prototype](https://www.figma.com/file/15g4U2HhBDixWFGIPixypH/FINAL?node-id=606-14366&t=gnUCmsLLfOKCgdAr-0)
+[Prototype](https://superlative-blancmange-aaefdc.netlify.app/)
+
+## Presentation
+
+[Presentation](https://docs.google.com/presentation/d/1VwYUhVtbJZ7heB0PnzejBJIXkHxdc3mLjVNx-_it_l4/edit#slide=id.g228f66fc022_0_0)
+
+## UX Prototype
+
+[UX Prototype](https://www.figma.com/file/15g4U2HhBDixWFGIPixypH/FINAL?node-id=606-14366&t=gnUCmsLLfOKCgdAr-0)
 
 ## Demo Video
 
